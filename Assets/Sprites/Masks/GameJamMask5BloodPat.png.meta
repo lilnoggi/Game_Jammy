@@ -1,0 +1,1781 @@
+fileFormatVersion: 2
+guid: e87a95b39ec6bf04a817a36bb787365e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4105563580430267606
+    second: GameJamMask5BloodPat_0
+  - first:
+      213: 7975307499928693623
+    second: GameJamMask5BloodPat_1
+  - first:
+      213: 4749058588469717600
+    second: GameJamMask5BloodPat_2
+  - first:
+      213: -2428387105337917412
+    second: GameJamMask5BloodPat_3
+  - first:
+      213: -5529821259782609078
+    second: GameJamMask5BloodPat_4
+  - first:
+      213: 6742077704857131266
+    second: GameJamMask5BloodPat_5
+  - first:
+      213: -7610518397725024466
+    second: GameJamMask5BloodPat_6
+  - first:
+      213: -4949510360770087853
+    second: GameJamMask5BloodPat_7
+  - first:
+      213: 6156918930093251253
+    second: GameJamMask5BloodPat_8
+  - first:
+      213: 3961214548111720296
+    second: GameJamMask5BloodPat_9
+  - first:
+      213: -7471706768651387901
+    second: GameJamMask5BloodPat_10
+  - first:
+      213: -6999506537847331712
+    second: GameJamMask5BloodPat_11
+  - first:
+      213: -1075111737148940892
+    second: GameJamMask5BloodPat_12
+  - first:
+      213: -3382730937506989821
+    second: GameJamMask5BloodPat_13
+  - first:
+      213: -3121506371963611490
+    second: GameJamMask5BloodPat_14
+  - first:
+      213: 6845641854065981728
+    second: GameJamMask5BloodPat_15
+  - first:
+      213: 8195832092496746153
+    second: GameJamMask5BloodPat_16
+  - first:
+      213: 4304773089766266409
+    second: GameJamMask5BloodPat_17
+  - first:
+      213: -964674235287250172
+    second: GameJamMask5BloodPat_18
+  - first:
+      213: -2459064370578894976
+    second: GameJamMask5BloodPat_19
+  - first:
+      213: 3971883543560214754
+    second: GameJamMask5BloodPat_20
+  - first:
+      213: 2457691184156309656
+    second: GameJamMask5BloodPat_21
+  - first:
+      213: -2516986402279788974
+    second: GameJamMask5BloodPat_22
+  - first:
+      213: -9102688569480808218
+    second: GameJamMask5BloodPat_23
+  - first:
+      213: -5293459586923308497
+    second: GameJamMask5BloodPat_24
+  - first:
+      213: 534573135267733518
+    second: GameJamMask5BloodPat_25
+  - first:
+      213: 9180287871616779614
+    second: GameJamMask5BloodPat_26
+  - first:
+      213: -7466546018856671453
+    second: GameJamMask5BloodPat_27
+  - first:
+      213: 6492580203310504157
+    second: GameJamMask5BloodPat_28
+  - first:
+      213: 6855065923991637307
+    second: GameJamMask5BloodPat_29
+  - first:
+      213: 1028569402216990903
+    second: GameJamMask5BloodPat_30
+  - first:
+      213: 3592664862080079981
+    second: GameJamMask5BloodPat_31
+  - first:
+      213: 4211242430714465383
+    second: GameJamMask5BloodPat_32
+  - first:
+      213: 1440381193182116752
+    second: GameJamMask5BloodPat_33
+  - first:
+      213: -3572654871230807553
+    second: GameJamMask5BloodPat_34
+  - first:
+      213: -4070051664102001814
+    second: GameJamMask5BloodPat_35
+  - first:
+      213: 427913046206313864
+    second: GameJamMask5BloodPat_36
+  - first:
+      213: 7140273021863489528
+    second: GameJamMask5BloodPat_37
+  - first:
+      213: 6131358832782245551
+    second: GameJamMask5BloodPat_38
+  - first:
+      213: 210100719192402869
+    second: GameJamMask5BloodPat_39
+  - first:
+      213: -6483866220082194627
+    second: GameJamMask5BloodPat_40
+  - first:
+      213: -6549207777940415198
+    second: GameJamMask5BloodPat_41
+  - first:
+      213: 3263993657799219142
+    second: GameJamMask5BloodPat_42
+  - first:
+      213: -3116656822585829269
+    second: GameJamMask5BloodPat_43
+  - first:
+      213: 5484941777023695356
+    second: GameJamMask5BloodPat_44
+  - first:
+      213: 6160547839803197170
+    second: GameJamMask5BloodPat_45
+  - first:
+      213: 5970949958913884332
+    second: GameJamMask5BloodPat_46
+  - first:
+      213: -5661375986964644003
+    second: GameJamMask5BloodPat_47
+  - first:
+      213: -4626275777724956701
+    second: GameJamMask5BloodPat_48
+  - first:
+      213: -7524315537681427023
+    second: GameJamMask5BloodPat_49
+  - first:
+      213: -857827246475287074
+    second: GameJamMask5BloodPat_50
+  - first:
+      213: -4523929683909639997
+    second: GameJamMask5BloodPat_51
+  - first:
+      213: 6282035435244647942
+    second: GameJamMask5BloodPat_52
+  - first:
+      213: 3308628903494081440
+    second: GameJamMask5BloodPat_53
+  - first:
+      213: 3159384190443393206
+    second: GameJamMask5BloodPat_54
+  - first:
+      213: -788384504287463288
+    second: GameJamMask5BloodPat_55
+  - first:
+      213: -8725919300382962609
+    second: GameJamMask5BloodPat_56
+  - first:
+      213: -1398900773258236574
+    second: GameJamMask5BloodPat_57
+  - first:
+      213: 6129421805232722453
+    second: GameJamMask5BloodPat_58
+  - first:
+      213: -4381208503874936502
+    second: GameJamMask5BloodPat_59
+  - first:
+      213: -318240401772740449
+    second: GameJamMask5BloodPat_60
+  - first:
+      213: 4826938864993158147
+    second: GameJamMask5BloodPat_61
+  - first:
+      213: 2667400583841098047
+    second: GameJamMask5BloodPat_62
+  - first:
+      213: -3934812806747123232
+    second: GameJamMask5BloodPat_63
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_0
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 452
+        width: 281
+        height: 342
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2b4ca10dab1607c0800000000000000
+      internalID: -4105563580430267606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_1
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 728
+        width: 69
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77b22cb8aebfdae60800000000000000
+      internalID: 7975307499928693623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_2
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 772
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06a6147ef9b08e140800000000000000
+      internalID: 4749058588469717600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_3
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 773
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c10c1393bc2ac4ed0800000000000000
+      internalID: -2428387105337917412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_4
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 781
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a47214bccd02243b0800000000000000
+      internalID: -5529821259782609078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_5
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 750
+        width: 24
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 209171693fba09d50800000000000000
+      internalID: 6742077704857131266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_6
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 779
+        width: 19
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2f560be6d1026690800000000000000
+      internalID: -7610518397725024466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_7
+      rect:
+        serializedVersion: 2
+        x: 897
+        y: 770
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 354fe2eec8ecf4bb0800000000000000
+      internalID: -4949510360770087853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_8
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 760
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ba161b6525c17550800000000000000
+      internalID: 6156918930093251253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_9
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 750
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86ffe43e4af09f630800000000000000
+      internalID: 3961214548111720296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_10
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 786
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30cf6acd74a2f4890800000000000000
+      internalID: -7471706768651387901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_11
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 783
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 084e59883e1ccde90800000000000000
+      internalID: -6999506537847331712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_12
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 765
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ad526d329f6411f0800000000000000
+      internalID: -1075111737148940892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_13
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 752
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 309fb2382202e01d0800000000000000
+      internalID: -3382730937506989821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_14
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 772
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e969dfe3e7e2ea4d0800000000000000
+      internalID: -3121506371963611490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_15
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 749
+        width: 29
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 029362b1ffa900f50800000000000000
+      internalID: 6845641854065981728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_16
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 757
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a6d3006dd17db170800000000000000
+      internalID: 8195832092496746153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_17
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 740
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 926dd264150adbb30800000000000000
+      internalID: 4304773089766266409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_18
+      rect:
+        serializedVersion: 2
+        x: 961
+        y: 718
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40b5bb1e4e9cc92f0800000000000000
+      internalID: -964674235287250172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_19
+      rect:
+        serializedVersion: 2
+        x: 985
+        y: 714
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08f43dfcbf5afddd0800000000000000
+      internalID: -2459064370578894976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_20
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 700
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e85027f907fe1730800000000000000
+      internalID: 3971883543560214754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_21
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 703
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 898fe3f4c197b1220800000000000000
+      internalID: 2457691184156309656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_22
+      rect:
+        serializedVersion: 2
+        x: 985
+        y: 706
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25eef93e33ed11dd0800000000000000
+      internalID: -2516986402279788974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_23
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 672
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e8761369f0cca180800000000000000
+      internalID: -9102688569480808218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_24
+      rect:
+        serializedVersion: 2
+        x: 961
+        y: 688
+        width: 16
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2adc883d8ad986b0800000000000000
+      internalID: -5293459586923308497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_25
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 692
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e00a91a2f6f2b6700800000000000000
+      internalID: 534573135267733518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_26
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 665
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e558b831e2fe66f70800000000000000
+      internalID: 9180287871616779614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_27
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 675
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 327e0fe84ff716890800000000000000
+      internalID: -7466546018856671453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_28
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 644
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd85e06bb474a1a50800000000000000
+      internalID: 6492580203310504157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_29
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 623
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3d086f5326122f50800000000000000
+      internalID: 6855065923991637307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_30
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 632
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b8caf5fb66364e00800000000000000
+      internalID: 1028569402216990903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_31
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 610
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d689f4548a5bbd130800000000000000
+      internalID: 3592664862080079981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_32
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 614
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76cc9c9bda6517a30800000000000000
+      internalID: 4211242430714465383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_33
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 599
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09bf5c050134df310800000000000000
+      internalID: 1440381193182116752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_34
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 600
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff10837c2516b6ec0800000000000000
+      internalID: -3572654871230807553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_35
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 602
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6376b753954487c0800000000000000
+      internalID: -4070051664102001814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_36
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 596
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 885f1e9f5a040f500800000000000000
+      internalID: 427913046206313864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_37
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 594
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ff6a7b8b78571360800000000000000
+      internalID: 7140273021863489528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_38
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 589
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fae70728f56f61550800000000000000
+      internalID: 6131358832782245551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_39
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 518
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bb648ead7d6ae200800000000000000
+      internalID: 210100719192402869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_40
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 516
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3798dc960ea406a0800000000000000
+      internalID: -6483866220082194627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_41
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 517
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22dd2a3a93a8c15a0800000000000000
+      internalID: -6549207777940415198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_42
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 514
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c7104a30f80c4d20800000000000000
+      internalID: 3263993657799219142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_43
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 486
+        width: 22
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6859f2f1296fb4d0800000000000000
+      internalID: -3116656822585829269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_44
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 499
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf972395c7d6e1c40800000000000000
+      internalID: 5484941777023695356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_45
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 507
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f6054dce99ae7550800000000000000
+      internalID: 6160547839803197170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_46
+      rect:
+        serializedVersion: 2
+        x: 739
+        y: 510
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca002b82a531dd250800000000000000
+      internalID: 5970949958913884332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_47
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 502
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5fbb0df880ce61b0800000000000000
+      internalID: -5661375986964644003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_48
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 498
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3efb5b3f0ba2ccfb0800000000000000
+      internalID: -4626275777724956701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_49
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 486
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b5db8e42e2449790800000000000000
+      internalID: -7524315537681427023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_50
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 494
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed5603f0aa26814f0800000000000000
+      internalID: -857827246475287074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_51
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 499
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c088b9dbe5c731c0800000000000000
+      internalID: -4523929683909639997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_52
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 489
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6067c28d1f54e2750800000000000000
+      internalID: 6282035435244647942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_53
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 479
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0abda56357c9aed20800000000000000
+      internalID: 3308628903494081440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_54
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 489
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b01d5c9e2368db20800000000000000
+      internalID: 3159384190443393206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_55
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 478
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 888f58b68781f05f0800000000000000
+      internalID: -788384504287463288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_56
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 481
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4cc2f1d0ae47e680800000000000000
+      internalID: -8725919300382962609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_57
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 467
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26d6ced882b169ce0800000000000000
+      internalID: -1398900773258236574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_58
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 469
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5121e6328a4101550800000000000000
+      internalID: 6129421805232722453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_59
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 459
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a412d9f0412d233c0800000000000000
+      internalID: -4381208503874936502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_60
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 470
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f90882b6a02659bf0800000000000000
+      internalID: -318240401772740449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_61
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 462
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 304c170d25bbcf240800000000000000
+      internalID: 4826938864993158147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_62
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 459
+        width: 24
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f39a481d2b2840520800000000000000
+      internalID: 2667400583841098047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameJamMask5BloodPat_63
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 453
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e11e2c899cb469c0800000000000000
+      internalID: -3934812806747123232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3c71cb10195727a448fd6719fb7a4d6c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GameJamMask5BloodPat_0: -4105563580430267606
+      GameJamMask5BloodPat_1: 7975307499928693623
+      GameJamMask5BloodPat_10: -7471706768651387901
+      GameJamMask5BloodPat_11: -6999506537847331712
+      GameJamMask5BloodPat_12: -1075111737148940892
+      GameJamMask5BloodPat_13: -3382730937506989821
+      GameJamMask5BloodPat_14: -3121506371963611490
+      GameJamMask5BloodPat_15: 6845641854065981728
+      GameJamMask5BloodPat_16: 8195832092496746153
+      GameJamMask5BloodPat_17: 4304773089766266409
+      GameJamMask5BloodPat_18: -964674235287250172
+      GameJamMask5BloodPat_19: -2459064370578894976
+      GameJamMask5BloodPat_2: 4749058588469717600
+      GameJamMask5BloodPat_20: 3971883543560214754
+      GameJamMask5BloodPat_21: 2457691184156309656
+      GameJamMask5BloodPat_22: -2516986402279788974
+      GameJamMask5BloodPat_23: -9102688569480808218
+      GameJamMask5BloodPat_24: -5293459586923308497
+      GameJamMask5BloodPat_25: 534573135267733518
+      GameJamMask5BloodPat_26: 9180287871616779614
+      GameJamMask5BloodPat_27: -7466546018856671453
+      GameJamMask5BloodPat_28: 6492580203310504157
+      GameJamMask5BloodPat_29: 6855065923991637307
+      GameJamMask5BloodPat_3: -2428387105337917412
+      GameJamMask5BloodPat_30: 1028569402216990903
+      GameJamMask5BloodPat_31: 3592664862080079981
+      GameJamMask5BloodPat_32: 4211242430714465383
+      GameJamMask5BloodPat_33: 1440381193182116752
+      GameJamMask5BloodPat_34: -3572654871230807553
+      GameJamMask5BloodPat_35: -4070051664102001814
+      GameJamMask5BloodPat_36: 427913046206313864
+      GameJamMask5BloodPat_37: 7140273021863489528
+      GameJamMask5BloodPat_38: 6131358832782245551
+      GameJamMask5BloodPat_39: 210100719192402869
+      GameJamMask5BloodPat_4: -5529821259782609078
+      GameJamMask5BloodPat_40: -6483866220082194627
+      GameJamMask5BloodPat_41: -6549207777940415198
+      GameJamMask5BloodPat_42: 3263993657799219142
+      GameJamMask5BloodPat_43: -3116656822585829269
+      GameJamMask5BloodPat_44: 5484941777023695356
+      GameJamMask5BloodPat_45: 6160547839803197170
+      GameJamMask5BloodPat_46: 5970949958913884332
+      GameJamMask5BloodPat_47: -5661375986964644003
+      GameJamMask5BloodPat_48: -4626275777724956701
+      GameJamMask5BloodPat_49: -7524315537681427023
+      GameJamMask5BloodPat_5: 6742077704857131266
+      GameJamMask5BloodPat_50: -857827246475287074
+      GameJamMask5BloodPat_51: -4523929683909639997
+      GameJamMask5BloodPat_52: 6282035435244647942
+      GameJamMask5BloodPat_53: 3308628903494081440
+      GameJamMask5BloodPat_54: 3159384190443393206
+      GameJamMask5BloodPat_55: -788384504287463288
+      GameJamMask5BloodPat_56: -8725919300382962609
+      GameJamMask5BloodPat_57: -1398900773258236574
+      GameJamMask5BloodPat_58: 6129421805232722453
+      GameJamMask5BloodPat_59: -4381208503874936502
+      GameJamMask5BloodPat_6: -7610518397725024466
+      GameJamMask5BloodPat_60: -318240401772740449
+      GameJamMask5BloodPat_61: 4826938864993158147
+      GameJamMask5BloodPat_62: 2667400583841098047
+      GameJamMask5BloodPat_63: -3934812806747123232
+      GameJamMask5BloodPat_7: -4949510360770087853
+      GameJamMask5BloodPat_8: 6156918930093251253
+      GameJamMask5BloodPat_9: 3961214548111720296
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

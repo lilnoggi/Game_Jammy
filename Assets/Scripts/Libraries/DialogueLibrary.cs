@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;  -- i had issues with this fsr
 
-// ============================================== //
+ 
+
 /*
         This class serves as a centralized repository for dialogue-related constants
         and configurations used throughout the game. It should work as a stand-alone, 
