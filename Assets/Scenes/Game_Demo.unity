@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCManager
   refugeePrefab: {fileID: 8747339934524797907, guid: 1e689bf4367c4c146bf331b304457394, type: 3}
+  refugeeMaskPrefab: {fileID: 4522781557713576391, guid: fa15cce97fdf4e14da1e43366d5af32a, type: 3}
   spawnRight: {fileID: 307411384}
   standPoint: {fileID: 1443851675}
   exitLeft: {fileID: 940535747}
@@ -1178,7 +1179,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66145119}
         m_TargetAssemblyTypeName: NPCManager, Assembly-CSharp
         m_MethodName: ApproveRefugee
         m_Mode: 1
@@ -1311,7 +1312,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66145119}
         m_TargetAssemblyTypeName: NPCManager, Assembly-CSharp
         m_MethodName: RejectRefugee
         m_Mode: 1
