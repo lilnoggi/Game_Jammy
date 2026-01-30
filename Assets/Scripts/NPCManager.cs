@@ -9,6 +9,8 @@ public class NPCManager : MonoBehaviour
     public Transform exitLeft;
 
     private Refugee currentRefugee;
+    public MaskData[] possibleMasks;
+
 
     void Start()
     {
@@ -17,15 +19,16 @@ public class NPCManager : MonoBehaviour
 
     void SpawnRefugee()
     {
-        GameObject obj = Instantiate(
-            refugeePrefab,
-            spawnRight.position,
-            Quaternion.identity
-        );
-
+        GameObject obj = Instantiate(refugeePrefab,spawnRight.position,Quaternion.identity);
         currentRefugee = obj.GetComponent<Refugee>();
+
+        // Assign random mask
+        MaskData randomMask = possibleMasks[Random.Range(0, possibleMasks.Length)];
+        currentRefugee.SetMask(randomMask);
+
         currentRefugee.MoveTo(standPoint.position);
     }
+
 
     public void ApproveRefugee()
     {

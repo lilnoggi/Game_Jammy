@@ -4,6 +4,10 @@ public class Refugee : MonoBehaviour
 {
     public float moveSpeed = 2f;
 
+    [Header("Mask")]
+    public SpriteRenderer maskRenderer;
+    public MaskData currentMask;
+
     private Vector3 targetPosition;
     private bool isMoving = false;
 
@@ -28,5 +32,11 @@ public class Refugee : MonoBehaviour
     {
         targetPosition = target;
         isMoving = true;
+    }
+
+    public void SetMask(MaskData mask)
+    {
+        currentMask = mask;
+        maskRenderer.sprite = mask.sprite;
     }
 }

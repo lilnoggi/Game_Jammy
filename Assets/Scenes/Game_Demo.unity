@@ -705,6 +705,14 @@ MonoBehaviour:
   spawnRight: {fileID: 307411384}
   standPoint: {fileID: 1443851675}
   exitLeft: {fileID: 940535747}
+  possibleMasks:
+  - {fileID: 11400000, guid: 8c73e6c818fca944bbb4a7a5be59a31d, type: 2}
+  - {fileID: 11400000, guid: 639cdaa8b71d4984ebf921172b427a95, type: 2}
+  - {fileID: 11400000, guid: 8b15c7f7039a5ed4f9df25f2b0dc46ea, type: 2}
+  - {fileID: 11400000, guid: f80d189df4247924db95ad01096bffb9, type: 2}
+  - {fileID: 11400000, guid: f1f2adaf0226bcc4b86adddaf1650452, type: 2}
+  - {fileID: 11400000, guid: ebffa76dc12eb674eaabd8ec9f6d466d, type: 2}
+  - {fileID: 11400000, guid: 1c67e18843f16674bbb8ed5747a64f09, type: 2}
 --- !u!1 &1443851674
 GameObject:
   m_ObjectHideFlags: 0
