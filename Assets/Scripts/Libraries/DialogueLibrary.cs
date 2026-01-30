@@ -13,8 +13,8 @@ using UnityEngine.UI;
         It's very basic, but it'll get the job done and I'll try comment it properly xd
         so you guys can alter it if need be.
     
-        I'm making this so it saves memory, cause all the dialogue is gonna be made only
-        once and called when needed, instead of making new objects every time :D
+        I'm making this so it saves memory, cause all the dialogue is gonna be made only 
+        for as long as its needed, and then deleted :D
 
         If we get to making dialogue better, then I'll alter this, but for now im gonna
         keep it simple and aim to just make it one function lomao.
