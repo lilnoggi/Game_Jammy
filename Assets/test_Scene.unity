@@ -274,6 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueLibrary
   fonte: {fileID: 11400000, guid: ccf2cfe5940f91945bfa6b40b557aaca, type: 2}
   typing_sound: {fileID: 8300000, guid: b27e3e8ba527dae41ab9ecda7d32fd61, type: 3}
+  d_data: {fileID: 11400000, guid: 2e58925f994a679478eed6cbbf91cdf0, type: 2}
 --- !u!114 &84663156
 MonoBehaviour:
   m_ObjectHideFlags: 0

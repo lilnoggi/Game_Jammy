@@ -37,31 +37,39 @@ public class DialogueLibrary : MonoBehaviour
 
     public TMP_FontAsset fonte;
     public AudioClip typing_sound;
-    
+    public DialogueData d_data;
+    [SerializeField] private Canvas ui_canvas;
     private void Start()
     {
 
         
 
-        StartCoroutine(CreateDialogue("hello i am dialogue box","the dialogue box lol", 5,fonte));
+        //StartCoroutine(CreateDialogue(d_data,5));
 
 
     }
-    public IEnumerator CreateDialogue(string dialogueText,string nameText, float timer, TMP_FontAsset font)
+    public IEnumerator CreateDialogue(DialogueData dia_data, float timer)
     {
+
+        string nameText = dia_data.GetRandomName();
+        string dialogueText = dia_data.GetRandomWords();
+
+
+
         //=========== INSTANTIATION ===========//
         // Create Panel & Apply explorer components.
         GameObject d_Panel = new GameObject("DialoguePanel");               // creates the panel object
         RectTransform d_p_Rect = d_Panel.AddComponent<RectTransform>();     // gives it a transform
-        d_Panel.AddComponent<CanvasRenderer>();                             // gives it the canvas renderer component idk what it does but every ui thing has it
+        d_Panel.AddComponent<SpriteRenderer>();                             // gives it the canvas renderer component idk what it does but every ui thing has it
+        d_Panel.GetComponent<SpriteRenderer>().sortingOrder = 15;
         Image d_p_Image = d_Panel.AddComponent<Image>();                    // gives it the image, no actual image, but gives it a color32 value thingymabob
         d_Panel.layer = LayerMask.NameToLayer("UI");                        // sets the layer to UI
-        d_Panel.transform.SetParent(FindFirstObjectByType<Canvas>().transform); // makes sure the panel's in the main canvas
+        d_Panel.transform.SetParent(ui_canvas.transform); // makes sure the panel's in the main canvas
         d_p_Rect.localScale = new Vector3(9.5f, 2.5f, 1f);                  // scales it down, the Z value is 1 since it's a 2D game
         d_p_Rect.sizeDelta = new Vector2(55, 65);                           // sets the size of the panel
         d_p_Rect.anchoredPosition = new Vector2(0f, -175f);                 // positions it at the bottom center of the screen
         d_p_Image.color = new Color32(0, 0, 0, 200);                        // Color32 is RGBA, the A is Alpha, which is opacity. 255 is opaque, 0 is invisible
-                            
+
 
         // Create Text & Apply explorer components to it
         GameObject d_Text = new GameObject("DialogueText");                 // creates the text object
@@ -77,7 +85,7 @@ public class DialogueLibrary : MonoBehaviour
         d_t_Text.fontSize = 5;                                              // sets the font size
         d_t_Text.alignment = TextAlignmentOptions.TopLeft;                  // centers the text
         d_t_Text.color = Color.white;                                       // sets the text color to white
-        d_t_Text.font = font;                                               // Loads a TMP_FontAsset from Resources folder
+        d_t_Text.font = fonte;                                               // Loads a TMP_FontAsset from Resources folder
         d_t_Text.textWrappingMode = TextWrappingModes.Normal;               // enables word wrapping
 
         // Create Text but its the name of the character
@@ -93,8 +101,8 @@ public class DialogueLibrary : MonoBehaviour
         n_t_Text.text = nameText;                                           // sets the text to the dialogueText parameter -- DONT USE we have typewriter effect :)
         n_t_Text.fontSize = 7;                                              // sets the font size
         n_t_Text.alignment = TextAlignmentOptions.TopLeft;                  // centers the text
-        n_t_Text.color = new Color32(125,125,125,255);                      // sets the text color to a bit gray
-        n_t_Text.font = font; // Loads a TMP_FontAsset from Resources folder
+        n_t_Text.color = Color.wheat;                      // sets the text color to a bit gray
+        n_t_Text.font = fonte; // Loads a TMP_FontAsset from Resources folder
         n_t_Text.textWrappingMode = TextWrappingModes.Normal;               // enables word wrapping
 
 
@@ -118,13 +126,13 @@ public class DialogueLibrary : MonoBehaviour
         foreach (char letter in dialogueText.ToCharArray())                 // for each character in the dialogueText string
         {
             d_t_Text.text += letter;                                        // adds the character to the text component
-            AudioSource.PlayClipAtPoint(typing_sound, Camera.main.transform.position, 0.15f); // plays the typing sound at the camera's position
+            AudioSource.PlayClipAtPoint(typing_sound, Camera.main.transform.position, 0.05f); // plays the typing sound at the camera's position
             yield return new WaitForSeconds(0.07f);                         // just waits .07 seconds before adding the next character
         }
         
         
         yield return new WaitForSeconds(timer);                             // waits for the timer duration
-        //Destroy(d_Panel);                                                 // destroys the panel and text child object
+        Destroy(d_Panel);                                                 // destroys the panel and text child object
 
     }
 }

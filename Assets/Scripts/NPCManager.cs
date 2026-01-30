@@ -11,11 +11,14 @@ public class NPCManager : MonoBehaviour
 
     public Refugee currentRefugee;
     public MaskData[] possibleMasks;
-
+    public DialogueData[] possibleDialogues;
 
     void Start()
     {
         SpawnRefugee();
+
+        
+
     }
 
     void SpawnRefugee()
@@ -25,7 +28,7 @@ public class NPCManager : MonoBehaviour
         currentRefugee = ref_obj.GetComponent<Refugee>();
 
         currentRefugee.MoveTo(standPoint.position);
-
+        StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(possibleDialogues[Random.Range(0, possibleDialogues.Length)], 5f));
 
         /* DEPRECATED / OLD
         GameObject obj = Instantiate(refugeePrefab,spawnRight.position,Quaternion.identity);

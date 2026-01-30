@@ -30,7 +30,7 @@ public class SpriteRandomizerLibrary : MonoBehaviour
     private void Start()
     {
 
-    
+        hasBarcode = false;
     //InstantiateRandomMask(mask_prefab,FindFirstObjectByType<Canvas>().gameObject, new Vector3(0,0,0));  // test call
     }
     public GameObject InstantiateRandomMask(GameObject prefab, GameObject parent, Vector3 position)
