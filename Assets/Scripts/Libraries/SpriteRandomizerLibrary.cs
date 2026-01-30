@@ -33,10 +33,10 @@ public class SpriteRandomizerLibrary : MonoBehaviour
     
     //InstantiateRandomMask(mask_prefab,FindFirstObjectByType<Canvas>().gameObject, new Vector3(0,0,0));  // test call
     }
-    public GameObject InstantiateRandomMask(GameObject prefab, GameObject parent, Vector3 position )
+    public GameObject InstantiateRandomMask(GameObject prefab, GameObject parent, Vector3 position)
     {
         // ========== INSTANTIATION LOGIC =========== //
-        GameObject inst_mask = Instantiate(prefab,position, Quaternion.identity);           // Instantiates a new mask, modify later for position and wtv
+        GameObject inst_mask = Instantiate(prefab, position, Quaternion.identity);           // Instantiates a new mask, modify later for position and wtv
         inst_mask.transform.SetParent(parent.transform);                                     // makes sure the mask is a child of the main canvas 
 
 
@@ -60,31 +60,40 @@ public class SpriteRandomizerLibrary : MonoBehaviour
 
 
 
-            if (spriteRenderer.CompareTag("Barcode") && hasBarcode == false)           // checks if the sprite renderer is tagged as "Barcode" and if hasBarcode is false
+            if (spriteRenderer.CompareTag("Barcode") && hasBarcode == false)                 // checks if the sprite renderer is tagged as "Barcode" and if hasBarcode is false
             {
                 hasBarcode = true;                                                           // sets hasBarcode to true, so that the next iterations don't sset any other barcodes visible
                 spriteRenderer.enabled = true;                                               // disables the barcode sprite renderer
                 continue;                                                                    // skips to the next iteration of the loop
 
-            } else if (spriteRenderer.tag == "Barcode" && hasBarcode == true)                // if a barcode is checked again but one has already been made visible;
+            }
+            else if (spriteRenderer.CompareTag("Barcode") && hasBarcode == true)                // if a barcode is checked again but one has already been made visible;
             {
                 spriteRenderer.enabled = false;                                              // disables the barcode sprite renderer since one is already visible
                 continue;                                                                    // skips to the next iteration of the loop
+
             }
+            else if (spriteRenderer.CompareTag("Crack") && !spriteRenderer.enabled)
+            {
+                spriteRenderer.GetComponent<SpriteMask>().enabled = false;
+                continue;
 
+            }
+            else if (spriteRenderer.CompareTag("Crack") && spriteRenderer.enabled)
+            {
+                spriteRenderer.GetComponent<SpriteMask>().enabled = true;
+                spriteRenderer.enabled = false;
+                continue;
+            }
+        }
+            inst_mask.GetComponent<SpriteRenderer>().enabled = true;                             // makes sure the main sprite (mask) is always on
 
-                                                
+            return inst_mask;
         }
 
-        inst_mask.GetComponent<SpriteRenderer>().enabled = true;                             // makes sure the main sprite (mask) is always on
+        // ========== UTILITIES =========== //
 
-        return inst_mask;
+
+
+
     }
-
-    // ========== UTILITIES =========== //
-
-
-
-
-
-}
