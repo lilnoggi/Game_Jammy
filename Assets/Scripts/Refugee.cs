@@ -7,6 +7,7 @@ public class Refugee : MonoBehaviour
     [Header("Mask")]
     public SpriteRenderer maskRenderer;
     public MaskData currentMask;
+    public Transform maskTransform;
 
     private Vector3 targetPosition;
     private bool isMoving = false;

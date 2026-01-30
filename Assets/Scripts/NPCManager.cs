@@ -9,7 +9,7 @@ public class NPCManager : MonoBehaviour
     public Transform standPoint;
     public Transform exitLeft;
 
-    private Refugee currentRefugee;
+    public Refugee currentRefugee;
     public MaskData[] possibleMasks;
 
 
