@@ -1,16 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public Slider volume_slider;
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeVolume()
     {
-        
+        AudioListener.volume = volume_slider.value;
     }
 }
