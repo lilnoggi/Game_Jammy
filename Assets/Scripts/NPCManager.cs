@@ -15,16 +15,16 @@ public class NPCManager : MonoBehaviour
 
     void Start()
     {
-        SpawnRefugee();
+        SpawnRefugee(.8f);
 
         
 
     }
 
-    void SpawnRefugee()
+    void SpawnRefugee(float mask_rarity)
     {
         GameObject ref_obj = Instantiate(refugeePrefab, spawnRight.position, Quaternion.identity);
-        GameObject ref_mask = GetComponent<SpriteRandomizerLibrary>().InstantiateRandomMask(refugeeMaskPrefab, ref_obj, (spawnRight.position + new Vector3(0,.50f,0)));
+        GameObject ref_mask = GetComponent<SpriteRandomizerLibrary>().InstantiateRandomMask(refugeeMaskPrefab, ref_obj, (spawnRight.position + new Vector3(.012f,1.65f,0)), mask_rarity);
         currentRefugee = ref_obj.GetComponent<Refugee>();
 
         currentRefugee.MoveTo(standPoint.position);
@@ -55,7 +55,7 @@ public class NPCManager : MonoBehaviour
         Destroy(currentRefugee.gameObject, 2f);
         currentRefugee = null;
 
-        Invoke(nameof(SpawnRefugee), 1.5f);
+        SpawnRefugee(.8f);
     }
 
     public void RejectRefugee()
@@ -66,6 +66,6 @@ public class NPCManager : MonoBehaviour
         Destroy(currentRefugee.gameObject, 2f);
         currentRefugee = null;
 
-        Invoke(nameof(SpawnRefugee), 1.5f);
+        SpawnRefugee(.8f);
     }
 }

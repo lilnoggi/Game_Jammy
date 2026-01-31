@@ -9,6 +9,7 @@ TagManager:
   - Crack
   - Frown
   - MainCanvas
+  - Smudge
   layers:
   - Default
   - TransparentFX

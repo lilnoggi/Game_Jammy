@@ -269,7 +269,7 @@ Transform:
   m_GameObject: {fileID: 1880548139973024093}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.62, y: -1.07, z: 0}
+  m_LocalPosition: {x: -1.62, y: -1, z: 0}
   m_LocalScale: {x: 0.71084124, y: 0.71084124, z: 0.71084124}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 3891143110433417353}
   - component: {fileID: 4272876042261913272}
   m_Layer: 0
-  m_Name: GameJamBarcodeSmudge_0
+  m_Name: Smudge
   m_TagString: Barcode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -661,8 +661,8 @@ Transform:
   m_GameObject: {fileID: 4522781557713576391}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14351, y: -0.077276, z: 0}
-  m_LocalScale: {x: 0.14909014, y: 0.14909014, z: 0.14909014}
+  m_LocalPosition: {x: -0.11215, y: 1.0276, z: 0}
+  m_LocalScale: {x: 0.4308165, y: 0.39026916, z: 0.40547445}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4112980023271684114}
