@@ -13,6 +13,7 @@ public class NPCManager : MonoBehaviour
     public MaskData[] possibleMasks;
     public DialogueData[] possibleDialogues;
 
+
     void Start()
     {
         SpawnRefugee(.8f);
