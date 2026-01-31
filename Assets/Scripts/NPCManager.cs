@@ -16,9 +16,6 @@ public class NPCManager : MonoBehaviour
     void Start()
     {
         SpawnRefugee(.8f);
-
-        
-
     }
 
     void SpawnRefugee(float mask_rarity)
