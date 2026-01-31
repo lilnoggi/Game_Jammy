@@ -58,8 +58,8 @@ public class ZoomController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * moveSmooth);
 
         // lock UI buttons while zoomed
-        if (approveButton != null) approveButton.interactable = !isZoomed;
-        if (rejectButton != null) rejectButton.interactable = !isZoomed;
+        //if (approveButton != null) approveButton.interactable = !isZoomed;
+        //if (rejectButton != null) rejectButton.interactable = !isZoomed;
     }
 
 

@@ -37,7 +37,7 @@ public class NPCManager : MonoBehaviour
         currentRefugee = ref_obj.GetComponent<Refugee>();
         currentRefugee.MoveTo(standPoint.position);
         
-        StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(possibleDialogues[Random.Range(0, possibleDialogues.Length)], 5f));
+        StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(possibleDialogues[Random.Range(0, possibleDialogues.Length)], 2f));
 
         /* DEPRECATED / OLD
         GameObject obj = Instantiate(refugeePrefab,spawnRight.position,Quaternion.identity);
