@@ -1,4 +1,5 @@
 using Unity.VectorGraphics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,20 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         AudioSource.PlayClipAtPoint(menu_ambiance, Camera.main.transform.position, 0.05f);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0)){
+            PlayClickSound();                                       // plays click sound on mouse click
+        }
+    }
+
+
+    // ========== OTHER FUNCTIONS ========== //
+    public void PlayClickSound()
+    {
+        AudioSource.PlayClipAtPoint(click_sound, Camera.main.transform.position, 0.05f);
     }
 
 
@@ -30,8 +45,9 @@ public class MainMenuManager : MonoBehaviour
                 SceneManager.LoadScene("mm_Credits");                // loads scene
     }
     public void BackButton() 
-    {           Debug.Log("Back Button Pressed");               // js debug
-                SceneManager.LoadScene("mm_MainMenu");             // loads scene
+    {           
+                Debug.Log("Back Button Pressed");               // js debug
+                SceneManager.LoadScene("mm_Main");             // loads scene
     }
     public void QuitButton()
     {
