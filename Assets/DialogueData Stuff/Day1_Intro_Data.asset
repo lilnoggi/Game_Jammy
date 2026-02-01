@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0b678d054e0484c979bf6ee4d14f73, type: 3}
+  m_Name: Day1_Intro_Data
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  c_name:
+  - MANAGEMENT
+  c_words:
+  - Good morning, Unit 774. Systems online. Vital signs... adequate.
+  - "Welcome to your new station. Please, ignore the fog in your head. We\u2019ve
+    scrubbed your previous memories for your own benefit. Personal history is just...
+    clutter, don't you think? And a quiet mind is a productive mind."
+  - Take a moment to settle in. This booth is your home now. You may look around,
+    get comfortable... but do keep your eyes forward. Idle curiosity is not a billable
+    hour.
+  - You have been honoured with the role of Border Entry. Look out the window. The
+    world out there is messy. Chaotic. Filthy. But in here? We value order. We value
+    harmony.
+  - 'Your instructions are simple: Ensure every applicant meets our high community
+    standards. Focus on their faces. We are looking for a uniform, pristine appearance.
+    The Mask is their promise of assimilation.'
+  - If they are cracked, chipped, or... visually unpleasant? They do not belong in
+    our Utopia. We only have room for the flawless.
+  - However, today we have an exception...
+  - We are running low so please, allow everyone to enjoy our precious Utopia!
+  - Do your job well, 774. Rejection is protection. We are ready to... process our
+    new guests.
+  - Please, open the shutters when you are ready to serve the Utopia.
