@@ -9,67 +9,68 @@ public static class GameRules
     // static class so it can be called from anywhere without needing to instantiate it / GetComponent
     public static bool CheckIfRefugeeIsValid(Refugee refugee, int currentDay)
     {
-        // --- ABSOLUTE RULES (Apply every single day) ---
+        // ==========================================================
+        // DAY 1: THE FEEDING (Tutorial / Easy Mode)
+        // ==========================================================
+        // Rule: Let everyone in. The billionaires are hungry.
+        if (currentDay == 1)
+        {
+            return true; // Auto-pass everyone
+        }
 
-        // 1. Blood is immediate rejection.
+        // ==========================================================
+        // ABSOLUTE RULES (Apply from Day 2 onwards)
+        // ==========================================================
+
+        // RULE: NO BLOOD
+        // This is visible to the naked eye, so it applies immediately from Day 2.
         if (refugee.isBloody)
         {
-            Debug.Log("Rule Check: Refugee rejected due to BLOOD.");
+            Debug.Log("Rule Check: Rejected due to BLOOD.");
             return false;
         }
 
-        // 2. Smudged barcodes are invalid (cannot be scanned/processed).
-        if (refugee.isSmudged)
+        // ==========================================================
+        // DAY 3+: SCANNER RULES (Cost 15 Merits to buy tool)
+        // ==========================================================
+        // New Rule: No Smudged Barcodes. 
+        if (currentDay >= 3)
         {
-            Debug.Log("Rule Check: Refugee rejected due to SMUDGE");
-            return false;
+            // If the barcode is smudged, they are invalid.
+            // (Player needs the Scanner to see this)
+            if (refugee.isSmudged)
+            {
+                Debug.Log("Rule Check: Rejected due to SMUDGED BARCODE.");
+                return false;
+            }
+
+            // Optional: You could also check if they are missing a barcode entirely
+            if (!refugee.hasBarcode)
+            {
+                Debug.Log("Rule Check: Rejected due to MISSING BARCODE.");
+                return false;
+            }
         }
 
-        // --- DAILY RULES (Get harder as days progress) ---
-
-        switch (currentDay)
+        // ==========================================================
+        // DAY 4+: MAGNIFIER RULES (Cost 5 Merits to buy tool)
+        // ==========================================================
+        // New Rule: No Cracks.
+        if (currentDay >= 4)
         {
-            case 1:
-                // DAY 1: No Cracks allowed.
-                if (refugee.isCracked)
-                {
-                    Debug.Log("Rule Check: Day 1 - Rejected due to CRACK.");
-                    return false;
-                }
-                break;
-
-            case 2:
-                // DAY 2: No Cracks AND Must have Barcode.
-                if (refugee.isCracked) return false;
-
-                if (!refugee.hasBarcode)
-                {
-                    Debug.Log("Rule Check: Day 2 - Rejected due to MISSING BARCODE.");
-                    return false;
-                }
-                break;
-
-            case 3:
-                // Day 3: No Cracks, Must have Barcode, NO SADNESS.
-                if (refugee.isCracked) return false;
-                if (!refugee.hasBarcode) return false;
-
-                if (refugee.isSad)
-                {
-                    Debug.Log("Rule Check: Day 3 - Rejected due to SADNESS.");
-                    return false;
-                }
-                break;
-
-            default:
-                // If past day 3, default to the hardest rules
-                if (refugee.isCracked || !refugee.hasBarcode || refugee.isSad) return false;
-                break;
-
+            // If the mask is cracked, they are invalid.
+            // (Player needs the Magnifier to see this)
+            if (refugee.isCracked)
+            {
+                Debug.Log("Rule Check: Rejected due to CRACK.");
+                return false;
+            }
         }
 
-        // If we sruvived all the if-statements above, the Refugee is VALID.
-        Debug.Log("Rule Check: Refugee PASSED inspection.");
+        // ==========================================================
+        // FINAL VERDICT
+        // ==========================================================
+        // If they survived all the checks above, they are VALID.
         return true;
     }
 }

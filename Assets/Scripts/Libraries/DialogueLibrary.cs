@@ -35,26 +35,22 @@ using UnityEngine.UI;
 public class DialogueLibrary : MonoBehaviour
 {
 
-    public TMP_FontAsset fonte;
-    public AudioClip typing_sound;
+    [Header("Configuration")]
+    public GameObject dialoguePrefab;
+    public Canvas ui_canvas;
     public DialogueData d_data;
-    [SerializeField] private Canvas ui_canvas;
-    private void Start()
-    {
 
-        
+    [Header("Settings")]
+    public AudioClip typing_sound;
+    public float typingSpeed = 0.07f;
 
-        //StartCoroutine(CreateDialogue(d_data,5));
-
-
-    }
     public IEnumerator CreateDialogue(DialogueData dia_data, float timer)
     {
 
-        string nameText = dia_data.GetRandomName();
-        string dialogueText = dia_data.GetRandomWords();
+        string nameContent = dia_data.GetRandomName();
+        string bodyContent = dia_data.GetRandomWords();
 
-
+        /*
 
         //=========== INSTANTIATION ===========//
         // Create Panel & Apply explorer components.
@@ -132,7 +128,62 @@ public class DialogueLibrary : MonoBehaviour
         
         
         yield return new WaitForSeconds(timer);                             // waits for the timer duration
-        Destroy(d_Panel);                                                 // destroys the panel and text child object
+        Destroy(d_Panel);   
+        */// destroys the panel and text child object
 
+
+        // =========== INSTANTIATION VIA PREFAB ===========//
+        // Due to canvas sizing issues, we will use a prefab
+        // for the dialogue box instead of creating it via code.
+        // 1. Spawn inside the UI Canvas so it scales correctly
+        GameObject d_Instance = Instantiate(dialoguePrefab, ui_canvas.transform);
+
+        // 2. Get references to the panel and text components
+        DialoguePanel panelScript = d_Instance.GetComponent<DialoguePanel>();
+        RectTransform panelRect = d_Instance.GetComponent<RectTransform>();
+
+        if (panelScript == null)
+        {
+            Debug.LogError("DialoguePanel script not found on the dialogue prefab.");
+            yield break;
+        }
+
+        // 3. SETUP TEXT
+        // Set name immediately
+        panelScript.nameText.text = nameContent;
+        // Clear body text for typewriter effect
+        panelScript.bodyText.text = "";
+
+        // 4. ANIMATION: SLIDE UP
+        // FLORINS ANIMATION CODE
+        Vector3 finalPos = panelRect.anchoredPosition; // Placed in editor
+        Vector3 startPos = finalPos + new Vector3(0, -300f, 0); // Start 300 pixels lower
+
+        panelRect.anchoredPosition = startPos;
+
+        float elapsedTime = 0f;
+        float lerpDuration = 0.5f; // Faster lerp for better feel
+
+        while (elapsedTime < lerpDuration)                                  // starts a while loop for the thing bro just read it 
+        {
+            panelRect.anchoredPosition = Vector3.Lerp(startPos, finalPos, (elapsedTime / lerpDuration)); // lerps the position
+            elapsedTime += Time.deltaTime;                                  // increments the elapsed time with time since last frame (deltatime)
+            yield return null;                                              // waits for the next frame (needed cause its a coroutine)
+        }
+        panelRect.anchoredPosition = finalPos;                           // ensure it ends exactly at the target position
+
+        // 5. TYPEWRITER EFFECT
+        foreach (char letter in bodyContent.ToCharArray())                 // for each character in the dialogueText string
+        {
+            panelScript.bodyText.text += letter;                                        // adds the character to the text component
+
+            AudioSource.PlayClipAtPoint(typing_sound, Camera.main.transform.position, 0.05f); // plays the typing sound at the camera's position
+            
+            yield return new WaitForSeconds(typingSpeed);                         // just waits .07 seconds before adding the next character
+        }
+
+        // 6. WAITING PERIOD
+        yield return new WaitForSeconds(timer);                             // waits for the timer duration
+        Destroy(d_Instance);
     }
 }
