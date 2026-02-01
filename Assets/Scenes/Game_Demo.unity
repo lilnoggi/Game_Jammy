@@ -538,8 +538,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1c67e18843f16674bbb8ed5747a64f09, type: 2}
   possibleDialogues:
   - {fileID: 11400000, guid: 2e58925f994a679478eed6cbbf91cdf0, type: 2}
-  dialogueLibrary: {fileID: 0}
-  mistakeDialogue: {fileID: 0}
+  dialogueLibrary: {fileID: 66145122}
+  mistakeDialogue: {fileID: 11400000, guid: f59f5114b10f718418be671f0563feca, type: 2}
   audioSource: {fileID: 909901919}
   approveSound: {fileID: 8300000, guid: d4b8fc91cadd2734bae8fd439c07f7be, type: 3}
   grinderSFX: {fileID: 8300000, guid: 3f1fb72c3f192db48948152e9598e99f, type: 3}
@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb9d4e456e907249bcb7a80d8b5a06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayManager
-  workDayDuration: 150
+  workDayDuration: 10
   fadeImage: {fileID: 295935377}
   gameOverPanel: {fileID: 1143655704}
   magnifyingGlassButton: {fileID: 1458030231}
@@ -568,7 +568,7 @@ MonoBehaviour:
   startShiftButton: {fileID: 1178097423}
   summaryPanel: {fileID: 1999304313}
   summaryStatsText: {fileID: 35307617}
-  currentDay: 1
+  currentDay: 4
   dailyQuotas: 030000000500000007000000090000000c000000
   shiftStarted: 0
   dialogueLibrary: {fileID: 66145122}
@@ -1123,7 +1123,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1458030232}
+  - {fileID: 2106736156}
   m_Father: {fileID: 439428454}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4313,8 +4315,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 295935376}
-  - {fileID: 1458030232}
-  - {fileID: 2106736156}
   - {fileID: 439428454}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7690,11 +7690,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 802664359}
+  m_Father: {fileID: 239239677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -353.729}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -844, y: -428}
+  m_AnchoredPosition: {x: -106.011475, y: -1.8551025}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1458030233
@@ -10937,11 +10937,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 802664359}
+  m_Father: {fileID: 239239677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -353.729}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -652, y: -428}
+  m_AnchoredPosition: {x: 85.988525, y: -1.8551025}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &2106736157

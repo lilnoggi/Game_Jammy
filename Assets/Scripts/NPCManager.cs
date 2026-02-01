@@ -70,20 +70,7 @@ public class NPCManager : MonoBehaviour
     possibleDialogues[Random.Range(0, possibleDialogues.Length)],
     true));
 
-        /* DEPRECATED / OLD
-        GameObject obj = Instantiate(refugeePrefab,spawnRight.position,Quaternion.identity);
-        currentRefugee = obj.GetComponent<Refugee>();
-        GetComponent<SpriteRandomizerLibrary>().InstantiateRandomMask(refugeeMaskPrefab, obj,new Vector3(0,0,0));
-        refugeeMaskPrefab.gameObject.transform.position = new Vector3(0,0,0);
-        currentRefugee.MoveTo(standPoint.position);
-        */
-        /* DEPRECATED / OLD
-        // Assign random mask
-        MaskData randomMask = possibleMasks[Random.Range(0, possibleMasks.Length)];
-        currentRefugee.SetMask(randomMask);
 
-        currentRefugee.MoveTo(standPoint.position);
-        */
     }
 
 
@@ -117,16 +104,15 @@ public class NPCManager : MonoBehaviour
         }
         else
         {
-            // FAILURE: They were bad but you let them in D:
-            Debug.Log("DECISION: Incorrect! You let in a bad refugee... oops.");
-            // Subtract Score
-
+            // FAILURE (You let a bad one in)
+            Debug.Log("DECISION: Incorrect! Contamination!");
             if (errorSFX != null) audioSource.PlayOneShot(errorSFX);
 
-            StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(
-    possibleDialogues[Random.Range(0, possibleDialogues.Length)],
-    true
-));
+            // Use 'mistakeDialogue' and set isNPC to 'false' so it plays the full text.
+            if (mistakeDialogue != null)
+            {
+                StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(mistakeDialogue, true));
+            }
         }
 
         // Cleanup
@@ -156,24 +142,21 @@ public class NPCManager : MonoBehaviour
         // Inverse logic for rejection
         if (!isValid)
         {
-            // SUCCESS: They were bad and you rejected them.
-            Debug.Log("DECISION: Correct! You rejected a bad refugee.");
-            // Add score / Money here
-
+            // SUCCESS (You rejected a bad one)
+            Debug.Log("DECISION: Correct! Trash disposed.");
             if (callNextSFX != null) audioSource.PlayOneShot(approveSound);
         }
         else
         {
-            // FAILURE: They were good but you rejected them D:
-            Debug.Log("DECISION: Incorrect! You rejected a good refugee... oops.");
-            // Subtract Score
-
+            // FAILURE (You rejected a good one)
+            Debug.Log("DECISION: Incorrect! Waste of resources.");
             if (errorSFX != null) audioSource.PlayOneShot(errorSFX);
 
-            StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(
-    possibleDialogues[Random.Range(0, possibleDialogues.Length)],
-    true
-));
+            // Use 'mistakeDialogue' and set isNPC to 'false'.
+            if (mistakeDialogue != null)
+            {
+                StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(mistakeDialogue, true));
+            }
 
         }
 
