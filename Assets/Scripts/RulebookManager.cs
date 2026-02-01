@@ -85,6 +85,16 @@ public class RulebookManager : MonoBehaviour
                                            "- Barcode is SMUDGED\n" +
                                            "(Use ID Scanner)";
                     break;
+                case 5:
+                     // DAY 5: INVALID BARCODE (Blood + Cracks + Smudges + Invalid)
+                     todaysRulesText.text = "ENHANCED SECURITY:\n\n" +
+                                           "Reject applicant if:\n" +
+                                           "- Mask is BLOODY\n" +
+                                           "- Mask is CRACKED\n" +
+                                           "- Barcode is SMUDGED\n" +
+                                           "- ID is INVALID\n" +
+                                           "(Zero Tolerance Policy)";
+                    break;
                 default:
                     // DAY 5+: HARD MODE (All Rules Active)
                     todaysRulesText.text = "MAXIMUM SECURITY:\n\n" +

@@ -88,6 +88,8 @@ public class ScannerTool : MonoBehaviour
                 // YES: Turn Scanner ON (red light)
                 scannerCursorImage.sprite = scannerOnSprite;
 
+                //audioSource.PlayOneShot(scanBeepSFX);
+
                 // Show the barcode
                 ShowBarcode(refugee);
             }
@@ -109,25 +111,35 @@ public class ScannerTool : MonoBehaviour
 
     void ShowBarcode(Refugee refScript)
     {
-        // What does the text say ????
-        if (refScript.hasBarcode)
+        // Check if barcode exists
+        if (!refScript.hasBarcode)
         {
-            if (refScript.isSmudged)
-            {
-                barcodeText.text = "ERR: SMUDGED";
-                barcodeText.color = Color.red;
-            }
-            else
-            {
-                // Valid barcode
-                barcodeText.text = refScript.idNumber;
-                barcodeText.color = Color.green;
-            }
+            barcodeText.text = "NO TAG FOUND";
+            barcodeText.color = Color.red;
+            return;
+        }
+
+        // Check if Smudged
+        if (refScript.isSmudged)
+        {
+            barcodeText.text = "ERROR: SMUDGED";
+            barcodeText.color = Color.red;
+            return;
+        }
+
+        // Check Validity
+        if (refScript.isValidBarcode)
+        {
+            // VALID -> GREEN
+            barcodeText.text = "ID: " + refScript.idNumber;
+            barcodeText.color = Color.green;
         }
         else
         {
-            barcodeText.text = "NO TAG FOUND";
-            barcodeText.color = Color.yellow;
+            // INVALID -> RED
+            barcodeText.text = "ID: " + refScript.idNumber;
+            barcodeText.color = Color.red;
+
         }
     }
 }
