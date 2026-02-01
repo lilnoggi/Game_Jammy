@@ -18,7 +18,11 @@ public class NPCManager : MonoBehaviour
     public MaskData[] possibleMasks;
     public DialogueData[] possibleDialogues;
 
-    // AUDIO
+    [Header("Management Feedback")]
+    public DialogueLibrary dialogueLibrary;
+    public DialogueData mistakeDialogue;
+
+    [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip approveSound, grinderSFX, errorSFX, callNextSFX;
 
@@ -116,6 +120,8 @@ public class NPCManager : MonoBehaviour
             // Subtract Score
 
             if (errorSFX != null) audioSource.PlayOneShot(errorSFX);
+
+            StartCoroutine(dialogueLibrary.CreateDialogue(mistakeDialogue, 2.5f));
         }
 
         // Cleanup
@@ -158,6 +164,8 @@ public class NPCManager : MonoBehaviour
             // Subtract Score
 
             if (errorSFX != null) audioSource.PlayOneShot(errorSFX);
+
+            StartCoroutine(dialogueLibrary.CreateDialogue(mistakeDialogue, 2.5f));
 
         }
 

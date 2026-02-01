@@ -538,6 +538,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1c67e18843f16674bbb8ed5747a64f09, type: 2}
   possibleDialogues:
   - {fileID: 11400000, guid: 2e58925f994a679478eed6cbbf91cdf0, type: 2}
+  dialogueLibrary: {fileID: 0}
+  mistakeDialogue: {fileID: 0}
   audioSource: {fileID: 909901919}
   approveSound: {fileID: 8300000, guid: d4b8fc91cadd2734bae8fd439c07f7be, type: 3}
   grinderSFX: {fileID: 8300000, guid: 3f1fb72c3f192db48948152e9598e99f, type: 3}
@@ -560,11 +562,15 @@ MonoBehaviour:
   clockText: {fileID: 154653680}
   quotaText: {fileID: 1388866548}
   shutterController: {fileID: 1543535779}
+  startShiftButton: {fileID: 1178097423}
   summaryPanel: {fileID: 1999304313}
   summaryStatsText: {fileID: 35307617}
   currentDay: 1
   dailyQuotas: 030000000500000007000000090000000c000000
   shiftStarted: 0
+  dialogueLibrary: {fileID: 66145122}
+  dailyBriefings:
+  - {fileID: 11400000, guid: f82f1ea8fef5d364f98308cacdc2b4bf, type: 2}
 --- !u!4 &66145121
 Transform:
   m_ObjectHideFlags: 0
@@ -610,6 +616,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RulebookManager
   ruleBookPanel: {fileID: 615052657}
+  dayManager: {fileID: 66145120}
+  todaysRulesText: {fileID: 244556205}
   pageSpreads:
   - {fileID: 908769353}
   - {fileID: 1621554093}
@@ -620,8 +628,6 @@ MonoBehaviour:
   nextButton: {fileID: 113577696}
   prevButton: {fileID: 1241212535}
   exitButton: {fileID: 563666737}
-  todaysRulesText: {fileID: 244556205}
-  dayManager: {fileID: 66145120}
   audioSource: {fileID: 909901919}
   pageTurnSound: {fileID: 8300000, guid: a1699ed83df079c4b918fd5df0465146, type: 3}
 --- !u!114 &66145124
@@ -4127,14 +4133,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'ABSOLUTE RULES:
-
-    Reject if:
-
-    - A mask is BLOODY
-
-    - A barcode
-    is SMUDGED '
+  m_text: Follow our rules and you'll do just fine.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e4db07c7ef244a40903ffbcadd2fb42, type: 2}
   m_sharedMaterial: {fileID: -5666371740867054114, guid: 2e4db07c7ef244a40903ffbcadd2fb42, type: 2}
@@ -5877,7 +5876,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0012817, y: 0}
+  m_AnchoredPosition: {x: -0.0012817383, y: 0}
   m_SizeDelta: {x: 1820, y: 980}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &959071902
@@ -7026,7 +7025,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0012817, y: 0}
+  m_AnchoredPosition: {x: -0.0012817383, y: 0}
   m_SizeDelta: {x: 1820, y: 980}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1178097421

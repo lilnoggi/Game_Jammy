@@ -18,6 +18,7 @@ public class DayManager : MonoBehaviour
     public TextMeshProUGUI clockText;
     public TextMeshProUGUI quotaText;
     public ShutterController shutterController;
+    public Button startShiftButton; // Drag in inspector
 
     [Header("UI - Summary Screen")]
     public GameObject summaryPanel; // Drag in inspector
@@ -29,6 +30,10 @@ public class DayManager : MonoBehaviour
     private bool dayActive = true;
     public bool shiftStarted = false;
     private int currentQuota;
+
+    [Header("Dialogue Connections")]
+    public DialogueLibrary dialogueLibrary;
+    public DialogueData[] dailyBriefings;
 
     // === TRACKING STATS === //
     private int correctDecisions = 0;
@@ -238,10 +243,50 @@ public class DayManager : MonoBehaviour
         // --- GET TODAY'S QUOTA
         int quotaIndex = Mathf.Clamp(currentDay - 1, 0, dailyQuotas.Length - 1);
         currentQuota = dailyQuotas[quotaIndex];
-
         UpdateQuotaUI();
 
-        Debug.Log("Starting Day " + currentDay);
+        // === PLAY DAILY BRIEFING DIALOGUE === //
+        int briefingIndex = currentDay - 1;
+
+        if (dailyBriefings != null && briefingIndex < dailyBriefings.Length)
+        {
+            StartCoroutine(PlayDay1IntroSequence(dailyBriefings[briefingIndex]));
+        }
+        else
+        {
+            // Day 7+: You are on your own.
+            if (startShiftButton != null)
+            {
+                startShiftButton.gameObject.SetActive(true);
+                startShiftButton.interactable = true;
+            }
+        }
+            Debug.Log("Starting Day " + currentDay);
+    }
+
+    IEnumerator PlayDay1IntroSequence(DialogueData briefingData)
+    {
+        // Disable the button so they can't click it yet
+        if (startShiftButton != null)
+        {
+            startShiftButton.gameObject.SetActive(true);
+            startShiftButton.interactable = false;
+        }
+
+        // Wait for fade-in to finish
+        yield return new WaitForSeconds(1.5f);
+
+        // Play Intro Dialogue
+        if (dialogueLibrary != null && briefingData != null)
+        {
+            yield return StartCoroutine(dialogueLibrary.CreateDialogue(briefingData, 5f));
+        }
+
+        // Unlock button
+        if (startShiftButton != null)
+        {
+            startShiftButton.interactable = true;
+        }
     }
 
     IEnumerator Fade(float startAlpha, float endAlpha, float duration)
