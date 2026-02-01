@@ -19,9 +19,16 @@ public class Refugee : MonoBehaviour
     public bool hasBarcode;
     public bool isSmudged;
     public bool isBloody;
+    public string idNumber; // For scanner
 
     private Vector3 targetPosition;
     private bool isMoving = false;
+
+    void Start()
+    {
+        // Generate a random ID formatted like "ID: 123-45-A"
+        idNumber = $"ID: {Random.Range(100, 999)}-{Random.Range(10, 99)}-{(char)Random.Range('A', 'Z')}";
+    }
 
     void Update()
     {
