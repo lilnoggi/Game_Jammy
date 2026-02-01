@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb9d4e456e907249bcb7a80d8b5a06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayManager
-  workDayDuration: 10
+  workDayDuration: 150
   fadeImage: {fileID: 295935377}
   gameOverPanel: {fileID: 1143655704}
   magnifyingGlassButton: {fileID: 1458030231}
@@ -568,7 +568,7 @@ MonoBehaviour:
   startShiftButton: {fileID: 1178097423}
   summaryPanel: {fileID: 1999304313}
   summaryStatsText: {fileID: 35307617}
-  currentDay: 4
+  currentDay: 1
   dailyQuotas: 030000000500000007000000090000000c000000
   shiftStarted: 0
   dialogueLibrary: {fileID: 66145122}
