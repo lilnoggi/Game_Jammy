@@ -16,8 +16,8 @@ public class ScannerTool : MonoBehaviour
     public Sprite scannerOnSprite; // The red laser one
 
     [Header("Audio")]
-    //public AudioSource audioSource;
-    //public AudioClip scanBeepSFX;
+    public AudioSource audioSource;
+    public AudioClip scanBeepSFX;
 
     private Camera mainCam;
 

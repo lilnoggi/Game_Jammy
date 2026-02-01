@@ -17,6 +17,7 @@ public class DayManager : MonoBehaviour
     [Header("UI - DESK")]
     public TextMeshProUGUI clockText;
     public TextMeshProUGUI quotaText;
+    public ShutterController shutterController;
 
     [Header("UI - Summary Screen")]
     public GameObject summaryPanel; // Drag in inspector
@@ -118,6 +119,8 @@ public class DayManager : MonoBehaviour
     {
         dayActive = false;
 
+        if (shutterController != null) shutterController.CloseShutters();
+
         // Snap clock
         clockText.text = "4:00 PM";
 
@@ -218,6 +221,8 @@ public class DayManager : MonoBehaviour
         currentQuota = dailyQuotas[quotaIndex];
 
         UpdateQuotaUI();
+
+        if (shutterController != null) shutterController.OpenShutters();
 
         Debug.Log("Starting Day " + currentDay);
     }
