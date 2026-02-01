@@ -6440,7 +6440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShutterController
   movingShutterPart: {fileID: 792393873}
   closedPosition: {x: 0, y: 2.05, z: 0}
-  openPosition: {x: -0.0072, y: 0, z: 0}
+  openPosition: {x: -0.0072, y: 6.7, z: 0}
   animationDuration: 2
   audioSource: {fileID: 0}
   motorSound: {fileID: 8300000, guid: a81301bcbdde7cc48b5af8512295b3d4, type: 3}
