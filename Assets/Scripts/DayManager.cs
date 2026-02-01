@@ -27,6 +27,7 @@ public class DayManager : MonoBehaviour
     public int currentDay = 1;
     public int[] dailyQuotas = { 3, 5, 7, 9, 12 };
     private bool dayActive = true;
+    public bool shiftStarted = false;
     private int currentQuota;
 
     // === TRACKING STATS === //
@@ -42,7 +43,8 @@ public class DayManager : MonoBehaviour
 
     void Update()
     {
-        if (!dayActive) return;
+        // Timer only runs if the Day is Active AND the Shift has started
+        if (!dayActive || !shiftStarted) return;
 
         elapsedTime += Time.deltaTime;
 
@@ -55,6 +57,16 @@ public class DayManager : MonoBehaviour
         {
             StartCoroutine(EndDayRoutine());
         }
+    }
+
+    public void StartShift()
+    {
+        if (shiftStarted) return;
+
+        shiftStarted = true;
+
+        // Open the shutters
+        if (shutterController != null) shutterController.OpenShutters();
     }
 
     void UpdateClock(float hourFloat)
@@ -118,6 +130,7 @@ public class DayManager : MonoBehaviour
     IEnumerator EndDayRoutine()
     {
         dayActive = false;
+        shiftStarted = false;
 
         if (shutterController != null) shutterController.CloseShutters();
 
@@ -214,6 +227,12 @@ public class DayManager : MonoBehaviour
         wrongDecisions = 0;
         currentYield = 0;
 
+        // Reset States
+        dayActive = true;
+        shiftStarted = false; // <--- WAIT FOR PLAYER TO OPEN SHUTTERS
+
+        if (shutterController != null) shutterController.CloseShutters();
+
         clockText.text = "07:00 AM";
 
         // --- GET TODAY'S QUOTA
@@ -221,8 +240,6 @@ public class DayManager : MonoBehaviour
         currentQuota = dailyQuotas[quotaIndex];
 
         UpdateQuotaUI();
-
-        if (shutterController != null) shutterController.OpenShutters();
 
         Debug.Log("Starting Day " + currentDay);
     }

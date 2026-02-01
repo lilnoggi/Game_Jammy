@@ -34,6 +34,8 @@ public class NPCManager : MonoBehaviour
     // === NEW FUNC: Call next refugee === //
     public void OnCallNextPressed()
     {
+        if (!dayManager.shiftStarted) return; // No spawning if day is not active
+
         // 1. Don't do ANYTHING if someone is there
         if (isBoothOccupied || currentRefugee != null) return;
 
