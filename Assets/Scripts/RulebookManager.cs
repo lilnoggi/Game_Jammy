@@ -69,30 +69,30 @@ public class RulebookManager : MonoBehaviour
                                            "(Visual check only)";
                     break;
                 case 3:
-                    todaysRulesText.text = // DAY 3: SCANNER NEEDED
+                    // DAY 3: MAGNIFIER UNLOCK (Blood + Cracks)
+                    todaysRulesText.text = "QUALITY CONTROL:\n\n" +
+                                           "Reject applicant if:\n" +
+                                           "- Mask is BLOODY\n" +
+                                           "- Mask is CRACKED\n\n" +
+                                           "(Use Magnifying Glass)";
+                    break;
+                case 4:
+                    // DAY 4: SCANNER UNLOCK (Blood + Cracks + Smudges)
                     todaysRulesText.text = "SECURITY UPDATE:\n\n" +
                                            "Reject applicant if:\n" +
                                            "- Mask is BLOODY\n" +
-                                           "- Barcode is SMUDGED\n\n" +
-                                           "(Requires Scanner Tool)"; ;
-                    break;
-                case 4:
-                    // DAY 4: MAGNIFIER NEEDED
-                    todaysRulesText.text = "STRICT PROTOCOL:\n\n" +
-                                           "Reject applicant if:\n" +
-                                           "- Mask is BLOODY\n" +
+                                           "- Mask is CRACKED\n" +
                                            "- Barcode is SMUDGED\n" +
-                                           "- Mask is CRACKED\n\n" +
-                                           "(Requires Magnifier)";
+                                           "(Use ID Scanner)";
                     break;
                 default:
-                    // DAY 5+: HARD MODE
+                    // DAY 5+: HARD MODE (All Rules Active)
                     todaysRulesText.text = "MAXIMUM SECURITY:\n\n" +
                                            "Reject for ANY defect:\n" +
                                            "- BLOOD\n" +
-                                           "- SMUDGES\n" +
                                            "- CRACKS\n" +
-                                           "- SADNESS (If applicable)";
+                                           "- SMUDGED BARCODE\n" +
+                                           "(Zero Tolerance Policy)";
                     break;
             }
         }
