@@ -8,6 +8,8 @@ TagManager:
   - Barcode
   - Crack
   - Frown
+  - MainCanvas
+  - Smudge
   layers:
   - Default
   - TransparentFX

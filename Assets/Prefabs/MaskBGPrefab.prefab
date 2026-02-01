@@ -79,7 +79,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5394200991763157523, guid: c174b53020686b643956394c1265d8bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -171,7 +171,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6857565014428468166, guid: 2324591aa875935459394b6709f9f708, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -269,7 +269,7 @@ Transform:
   m_GameObject: {fileID: 1880548139973024093}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.62, y: -1.07, z: 0}
+  m_LocalPosition: {x: -1.62, y: -1, z: 0}
   m_LocalScale: {x: 0.71084124, y: 0.71084124, z: 0.71084124}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -322,7 +322,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: -1
   m_MaskInteraction: 2
   m_Sprite: {fileID: 5942710867017651311, guid: a067d37e6e0980a4b9aded4789f6d0aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 3891143110433417353}
   - component: {fileID: 4272876042261913272}
   m_Layer: 0
-  m_Name: GameJamBarcodeSmudge_0
+  m_Name: Smudge
   m_TagString: Barcode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -472,7 +472,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6440237562839330010, guid: ebb368dbc210b544e8f9c39ca36560b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -564,7 +564,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5668303786102961362, guid: b33941127513e244fb198868060ed299, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -645,6 +645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2912447589874318640}
   - component: {fileID: 7679627528561769088}
+  - component: {fileID: 3422932140316732474}
   m_Layer: 0
   m_Name: MaskBGPrefab
   m_TagString: Untagged
@@ -661,8 +662,8 @@ Transform:
   m_GameObject: {fileID: 4522781557713576391}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14351, y: -0.077276, z: 0}
-  m_LocalScale: {x: 0.14909014, y: 0.14909014, z: 0.14909014}
+  m_LocalPosition: {x: -0.11215, y: 1.0276, z: 0}
+  m_LocalScale: {x: 0.4308165, y: 0.39026916, z: 0.40547445}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4112980023271684114}
@@ -722,7 +723,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: -2
   m_MaskInteraction: 2
   m_Sprite: {fileID: -1300779482587844054, guid: 6560ef5c1aecab04b86498d94177af23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -734,6 +735,52 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!61 &3422932140316732474
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4522781557713576391}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.5, y: 5.61}
+    newSize: {x: 4.5, y: 5.61}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 4.5, y: 5.61}
+  m_EdgeRadius: 0
 --- !u!1 &4644280454128998773
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +860,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: -1
   m_MaskInteraction: 2
   m_Sprite: {fileID: -8996450859660601524, guid: 08b5278ef93fa324587b058ede4a2ffa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -904,7 +951,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: -1
   m_MaskInteraction: 2
   m_Sprite: {fileID: -4105563580430267606, guid: e87a95b39ec6bf04a817a36bb787365e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -995,7 +1042,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4775400552442215467, guid: 9230f92343622434980f96eae67c508a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -1,75 +1,136 @@
 using System.Collections;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.UIElements;  -- i had issues with this fsr
-
- 
-
-/*
-        This class serves as a centralized repository for dialogue-related constants
-        and configurations used throughout the game. It should work as a stand-alone, 
-        drag into a Game Master Actor and call and bam it works.
-
-        It's very basic, but it'll get the job done and I'll try comment it properly xd
-        so you guys can alter it if need be.
-    
-        I'm making this so it saves memory, cause all the dialogue is gonna be made only 
-        for as long as its needed, and then deleted :D
-
-        If we get to making dialogue better, then I'll alter this, but for now im gonna
-        keep it simple and aim to just make it one function lomao.
-
-        It'll follow the structure of
-        
-        Panel
-            Text
-
-          very basic ik but it's good enough   
-    */
-
-// =========== Dialogue Library Class =========== //
 
 public class DialogueLibrary : MonoBehaviour
 {
+    [Header("Configuration")]
+    public GameObject dialoguePrefab;
+    public Canvas ui_canvas;
 
-    private void Start()
+    [Header("Settings")]
+    public AudioClip typing_sound;
+    public float typingSpeed = 0.05f; // Made slightly faster default
+
+    // We changed the signature slightly to remove 'timer' because we now use clicking to advance
+    public IEnumerator CreateDialogue(DialogueData dia_data, bool isNPC = false)
     {
-        StartCoroutine(CreateDialogue("hello i am dialogue box", 5));
-    }
-    public IEnumerator CreateDialogue(string dialogueText, float timer)
-    {
-        //=========== INSTANTIATION ===========//
-        // Create Panel & Apply explorer components.
-        GameObject d_Panel = new GameObject("DialoguePanel");               // creates the panel object
-        RectTransform d_p_Rect = d_Panel.AddComponent<RectTransform>();     // gives it a transform
-        d_Panel.AddComponent<CanvasRenderer>();                             // gives it the canvas renderer component idk what it does but every ui thing has it
-        Image d_p_Image = d_Panel.AddComponent<Image>();                    // gives it the image, no actual image, but gives it a color32 value thingymabob
-        d_Panel.layer = LayerMask.NameToLayer("UI");                        // sets the layer to UI
-        d_Panel.transform.SetParent(FindFirstObjectByType<Canvas>().transform); // makes sure the panel's in the main canvas
-        d_p_Rect.localScale = new Vector3(9.5f, 2.5f, 1f);                  // scales it down, the Z value is 1 since it's a 2D game
-        d_p_Rect.anchoredPosition = new Vector2(0f, -350f);                 // positions it at the bottom center of the screen
-        d_p_Image.color = new Color32(0, 0, 0, 200);                        // Color32 is RGBA, the A is Alpha, which is opacity. 255 is opaque, 0 is invisible
+        // 1. Instantiate Prefab
+        GameObject d_Instance = Instantiate(dialoguePrefab, ui_canvas.transform);
+        DialoguePanel panelScript = d_Instance.GetComponent<DialoguePanel>();
+        RectTransform panelRect = d_Instance.GetComponent<RectTransform>();
 
-        // Create Text & Apply explorer components to it
-        GameObject d_Text = new GameObject("DialogueText");                 // creates the text object
-        RectTransform d_t_Rect = d_Text.AddComponent<RectTransform>();      // gives it a transform
-        d_Text.AddComponent<CanvasRenderer>();                              // gives it the canvas renderer component
-        Text d_t_Text = d_Text.AddComponent<Text>();                        // gives it the text component
-        d_Text.layer = LayerMask.NameToLayer("UI");                         // sets the layer to UI
-        d_Text.transform.SetParent(d_Panel.transform);                      // makes sure the text is a child of the panel
-        d_t_Rect.localScale = new Vector3(1f, 1f, 1f);                      // scales it to normal size
-        d_t_Rect.anchoredPosition = new Vector2(0f, 0f);                    // positions it at the center of the panel
-        d_t_Text.text = dialogueText;                                       // sets the text to the dialogueText parameter
-        d_t_Text.fontSize = 24;                                             // sets the font size
-        d_t_Text.alignment = TextAnchor.MiddleCenter;                          // centers the text
-        d_t_Text.color = Color.white;                                       // sets the text color to white
-        d_t_Text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // sets the font to Arial until we get a new one
-        d_t_Text.horizontalOverflow = HorizontalWrapMode.Wrap;              // makes the text wrap to the next line if it's too long
-        d_t_Text.verticalOverflow = VerticalWrapMode.Truncate;              // truncates the text if it's too long vertically
+        // 2. Setup Name (Uses the first name in the list, or "Management")
+        // If your data has multiple names, you can change this to loop too.
+        if (dia_data.c_name.Length > 0)
+            panelScript.nameText.text = dia_data.c_name[0];
 
-        yield return new WaitForSeconds(timer);                             // waits for the timer duration
-        Destroy(d_Panel); // destroys the panel and text child object
+        panelScript.bodyText.text = "";
 
+        // 3. Animation: Slide Up
+        Vector3 finalPos = panelRect.anchoredPosition;
+        Vector3 startPos = finalPos + new Vector3(0, -300f, 0);
+        panelRect.anchoredPosition = startPos;
+
+        float animTime = 0f;
+        while (animTime < 0.5f)
+        {
+            panelRect.anchoredPosition = Vector3.Lerp(startPos, finalPos, animTime / 0.5f);
+            animTime += Time.deltaTime;
+            yield return null;
+        }
+        panelRect.anchoredPosition = finalPos;
+
+        // ==========================================================
+        // DETERMINE WHAT TO PLAY
+        // ==========================================================
+        string[] sentencesToPlay;
+
+        if (isNPC)
+        {
+            // If NPC: Pick ONE random line from the list
+            string randomLine = dia_data.c_words[Random.Range(0, dia_data.c_words.Length)];
+            sentencesToPlay = new string[] { randomLine };
+        }
+        else
+        {
+            // IF MANAGEMENT: Play ALL lines in sequence
+            sentencesToPlay = dia_data.c_words;
+        }
+
+        // ==========================================================
+        // MAIN DIALOGUE LOOP (Iterates through ALL sentences)
+        // ==========================================================
+
+        // Loop through every sentence in the c_words array
+        foreach (string sentence in sentencesToPlay)
+            {
+                panelScript.bodyText.text = ""; // Clear previous sentence
+                bool hasSkipped = false;
+
+                // --- TYPEWRITER LOOP ---
+                foreach (char letter in sentence.ToCharArray())
+                {
+                    // CHECK FOR SKIP INPUT (Left Mouse Click)
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        panelScript.bodyText.text = sentence; // Show full text instantly
+                        hasSkipped = true;
+                        break; // Break out of the 'foreach char' loop
+                    }
+
+                    panelScript.bodyText.text += letter;
+
+                    // Audio
+                    if (typing_sound != null)
+                        AudioSource.PlayClipAtPoint(typing_sound, Camera.main.transform.position, 0.05f);
+
+                    float waitTimer = 0f;
+                    while (waitTimer < typingSpeed)
+                    {
+                        waitTimer += Time.deltaTime;
+
+                        // CHECK FOR SKIP INPUT (Left Mouse Click)
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            panelScript.bodyText.text = sentence; // Show full text instantly
+                            hasSkipped = true;
+                            break;
+                        }
+                        yield return null;
+                    }
+                    if (hasSkipped) break; // Break out of the 'foreach char' loop
+                }
+
+                // If we skipped, we need a tiny delay so the same click doesn't skip the NEXT sentence too
+                if (hasSkipped) yield return null;
+
+                // --- WAIT FOR PLAYER TO CONTINUE ---
+                // Wait until the player clicks again to move to the next sentence
+                // (Or if a timer was provided, we could implement that, but clicking is better)
+                while (!Input.GetMouseButtonDown(0))
+                {
+                    yield return null;
+                }
+
+                // Frame buffer to prevent double-clicking
+                yield return null;
+            }
+
+        // ==========================================================
+        // CLOSING ANIMATION
+        // ==========================================================
+
+        // Slide down before destroying
+        animTime = 0f;
+        while (animTime < 0.3f)
+        {
+            panelRect.anchoredPosition = Vector3.Lerp(finalPos, startPos, animTime / 0.3f);
+            animTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(d_Instance);
     }
 }

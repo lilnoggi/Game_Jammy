@@ -9,8 +9,26 @@ public class Refugee : MonoBehaviour
     public MaskData currentMask;
     public Transform maskTransform;
 
+    // ========== GENERATED STATS =========== //
+    // These variables act as an "inventory" for the Refugee.
+    // The SpriteRandomiser fills these out, and the NPCManager reads them later
+    // to decide if the player made the right chocie.
+    [Header("Generated Stats")]
+    public bool isCracked;
+    public bool isSad;
+    public bool hasBarcode;
+    public bool isSmudged;
+    public bool isBloody;
+    public string idNumber; // For scanner
+
     private Vector3 targetPosition;
     private bool isMoving = false;
+
+    void Start()
+    {
+        // Generate a random ID formatted like "ID: 123-45-A"
+        idNumber = $"ID: {Random.Range(100, 999)}-{Random.Range(10, 99)}-{(char)Random.Range('A', 'Z')}";
+    }
 
     void Update()
     {
