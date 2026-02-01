@@ -55,13 +55,15 @@ public class NPCManager : MonoBehaviour
         isBoothOccupied = true; // Mark booth as occupied
 
         GameObject ref_obj = Instantiate(refugeePrefab, spawnRight.position, Quaternion.identity);
-        //GameObject ref_mask = GetComponent<SpriteRandomizerLibrary>().InstantiateRandomMask(refugeeMaskPrefab, ref_obj, (spawnRight.position + new Vector3(.012f,1.65f,0)), mask_rarity);
 
-        // Calculate the offset for the mask
-        Vector3 maskPos = spawnRight.position + new Vector3(.012f, 1.65f, 0);
+        // Pass the offset from SpriteRandomizerLibrary
+        Vector3 maskOffset = new Vector3(0.012f, 1f, 0f);
 
         // Create the mask using the Randomiser Library
-        GameObject ref_mask = GetComponent<SpriteRandomizerLibrary>().InstantiateRandomMask(refugeeMaskPrefab, ref_obj, maskPos, mask_rarity);
+        GetComponent<SpriteRandomizerLibrary>().InstantiateRandomMask(
+            refugeeMaskPrefab, 
+            ref_obj, 
+            maskOffset, mask_rarity);
 
         currentRefugee = ref_obj.GetComponent<Refugee>();
 
