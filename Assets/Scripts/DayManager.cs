@@ -124,6 +124,31 @@ public class DayManager : MonoBehaviour
         // Fade out
         yield return StartCoroutine(Fade(0f, 1f, 1.5f));
 
+        // --- CALCULATE PAY ---
+        int dailyWage = 15;
+        int foodCost = 3;
+        int totalEarned = dailyWage;
+
+        // --- CALCULATE BONUS ---
+        int bonus = 0;
+        int extraYield = currentYield - currentQuota;
+
+        if (extraYield >= 5)
+        {
+            bonus = (extraYield / 5) * 5;
+        }
+
+        totalEarned += bonus;
+
+        // Add wage
+        MoneyManager.AddMerits(totalEarned);
+
+        // Deduct Food
+        bool couldEat = MoneyManager.SpendMerits(foodCost);
+
+        // Construct the Summary Message
+        string foodStatus = couldEat ? "Rations: EATEN (-3)" : "Rations: SKIPPED (STARVING)";
+
         // --- SUMMARY UI --- //
         // 1. Show summary ui
         if (summaryPanel != null)
@@ -133,7 +158,15 @@ public class DayManager : MonoBehaviour
             string status = quotaMet ? "<color=green>QUOTA MET</color>" : "<color=red>QUOTA FAILED</color>";
             string message = quotaMet ? "Performance Adequate." : "Productivity Unsatisfactory.\nWARNING ISSUED.";
 
+            string bonusText = "";
+            if (bonus > 0) bonusText = $"\nOverproduction Bonus: +{bonus}";
+
             summaryStatsText.text = $"SHIFT COMPLETE\n\n" +
+                                    $"----------------\n" +
+                                    $"Base Wage: +{dailyWage}" +
+                                    $"{bonusText}\n" +
+                                    $"Food Status: +{foodStatus}\n" +
+                                    $"Merits: +{MoneyManager.currentMerits}\n" +
                                     $"----------------\n" +
                                     $"Quota: {currentQuota}\n" +
                                     $"Correct Processed: {correctDecisions}\n" +

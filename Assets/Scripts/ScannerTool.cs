@@ -52,6 +52,13 @@ public class ScannerTool : MonoBehaviour
     // Called by the Desk Button
     public void PickupScanner()
     {
+        if (!MoneyManager.hasScanner)
+        {
+            Debug.Log("You don't own the Scanner yet!");
+
+            return;
+        }
+
         isActive = true;
         scannerCursorImage.gameObject.SetActive(true);
         Cursor.visible = false;
