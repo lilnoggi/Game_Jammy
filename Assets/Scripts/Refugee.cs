@@ -9,6 +9,17 @@ public class Refugee : MonoBehaviour
     public MaskData currentMask;
     public Transform maskTransform;
 
+    // ========== GENERATED STATS =========== //
+    // These variables act as an "inventory" for the Refugee.
+    // The SpriteRandomiser fills these out, and the NPCManager reads them later
+    // to decide if the player made the right chocie.
+    [Header("Generated Stats")]
+    public bool isCracked;
+    public bool isSad;
+    public bool hasBarcode;
+    public bool isSmudged;
+    public bool isBloody;
+
     private Vector3 targetPosition;
     private bool isMoving = false;
 

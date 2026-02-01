@@ -80,7 +80,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1940738496428130850, guid: 34c726764027c9e4eac52413e5ce3a00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -108,3 +108,8 @@ MonoBehaviour:
   maskRenderer: {fileID: 0}
   currentMask: {fileID: 0}
   maskTransform: {fileID: 2912447589874318640, guid: fa15cce97fdf4e14da1e43366d5af32a, type: 3}
+  isCracked: 0
+  isSad: 0
+  hasBarcode: 0
+  isSmudged: 0
+  isBloody: 0

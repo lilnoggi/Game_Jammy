@@ -93,7 +93,7 @@ public class SpriteRandomizerLibrary : MonoBehaviour
                 continue;                                                                    // skips to the next iteration of the loop
 
             }
-            else if (spriteRenderer.CompareTag("Crack") && !spriteRenderer.enabled)          // if the sprite renderer is tagged as "Crack" but is disabled, turn spritemask off
+            else if (spriteRenderer.CompareTag("Crack") && !spriteRenderer.enabled)          // if the sprite renderer is tagged as "Crack" but is disabled, turn spritemask off 
             {
                 spriteRenderer.GetComponent<SpriteMask>().enabled = false;
                 continue;
@@ -120,12 +120,36 @@ public class SpriteRandomizerLibrary : MonoBehaviour
         }
             inst_mask.GetComponent<SpriteRenderer>().enabled = true;                         // makes sure the main sprite (mask) is always on
 
+        // ========== SET REFUGEE PROPERTIES =========== //
+        // After the randomization is done, set the properties on the Refugee script accordingly
+        // This way, the refugee script can know what kind of mask it has
+        // ============================================= //
+
+        // Get the Refugee script from the object
+        Refugee refugeeScript = parent.GetComponentInChildren<Refugee>();
+
+        if (refugeeScript != null)                                                        // if the refugee script is found 
+        {
+            // Take the boolean flags that were calculated during the randomisation loop.
+            // And save them into the Refugee's "Stats" variables.
+            refugeeScript.hasBarcode = hasBarcode;                                        // sets the refugee script's hasBarcode property to the local hasBarcode property
+            refugeeScript.isCracked = isCracked;                                          // sets the refugee script's isCracked property to the local isCracked property
+            refugeeScript.isSad = isSad;                                                  // sets the refugee script's isSad property to the local isSad property
+            refugeeScript.isSmudged = isSmudged;                                          // sets the refugee script's isSmudged property to the local isSmudged property
+            refugeeScript.isBloody = isBloody;
+
+            Debug.Log($"Stats Set! Cracked: {isCracked}, Sad: {isSad}, Barcode: {hasBarcode}, Smudged: {isSmudged}, Bloody: {isBloody}");
+
+            // Now the Refugee object "knows" what it is wearing :D
+        }
+        else
+        {
+            Debug.LogError("Could not find Refugee script on object!");
+        }
+
             return inst_mask;
         }
 
-        // ========== UTILITIES =========== //
-
-
-
+    // ========== UTILITIES =========== //
 
     }
