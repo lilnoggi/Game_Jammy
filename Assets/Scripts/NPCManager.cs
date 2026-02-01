@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class NPCManager : MonoBehaviour
 {
@@ -85,7 +86,7 @@ public class NPCManager : MonoBehaviour
         }
 
         // Cleanup
-        RemoveCurrentAndSpawnNew();
+        StartCoroutine(RemoveCurrentAndSpawnNew());
     }
 
     public void RejectRefugee()
@@ -119,15 +120,17 @@ public class NPCManager : MonoBehaviour
         }
 
         // Cleanup
-        RemoveCurrentAndSpawnNew();
+        StartCoroutine(RemoveCurrentAndSpawnNew());
     }
 
     // HELPER FUNCTION
-    void RemoveCurrentAndSpawnNew()
+    IEnumerator RemoveCurrentAndSpawnNew()
     {
         currentRefugee.MoveTo(exitLeft.position);
         Destroy(currentRefugee.gameObject, 2f);
         currentRefugee = null;
+
+        yield return new WaitForSeconds(2f);
 
         SpawnRefugee(.8f);
     }
