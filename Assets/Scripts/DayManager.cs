@@ -8,18 +8,25 @@ public class DayManager : MonoBehaviour
     [Header("Time Settings")]
     public float workDayDuration = 180f; // 3 minutes
     private float elapsedTime = 0f;
-
     private int startHour = 7;
     private int endHour = 16;
 
-    [Header("UI")]
+    [Header("UI - HUD")]
     public TextMeshProUGUI clockText;
     public Image fadeImage;
 
+    [Header("UI - Summary Screen")]
+    public GameObject summaryPanel; // Drag in inspector
+    public TextMeshProUGUI summaryStatsText; // Drag in inspector
+
     [Header("Day Info")]
     public int currentDay = 1;
-
     private bool dayActive = true;
+
+    // === TRACKING STATS === //
+    private int correctDecisions = 0;
+    private int wrongDecisions = 0;
+    private bool waitingForNextDay = false;
 
     void Update()
     {
@@ -50,6 +57,21 @@ public class DayManager : MonoBehaviour
         clockText.text = $"{displayHour:00}:{minutes:00} {amPm}";
     }
 
+    // === NEW FUNCTION: Called by NPC Manager === //
+    public void RegisterDecision(bool isCorrect)
+    {
+        if (isCorrect) correctDecisions++;
+        else wrongDecisions++;
+
+        Debug.Log($"Stats Updateed: {correctDecisions} correct, {wrongDecisions} wrong.");
+    }
+
+    // NEW FUNCTION: Button Event === //
+    public void OnContinueButtonPressed()
+    {
+        waitingForNextDay = false; // Breaks the loop in EndDayRoutine
+    }
+
     IEnumerator EndDayRoutine()
     {
         dayActive = false;
@@ -58,17 +80,41 @@ public class DayManager : MonoBehaviour
         clockText.text = "4:00 PM";
 
         // Fade out
-        yield return StartCoroutine(Fade(0f, 1f, 2.5f));
+        yield return StartCoroutine(Fade(0f, 1f, 1.5f));
 
-        // Small pause in darkness
-        yield return new WaitForSeconds(1f);
+        // --- SUMMARY UI --- //
+        // 1. Show summary ui
+        if (summaryPanel != null)
+        {
+            // Set the text
+            summaryStatsText.text = $"SHIFT COMPLETE\n\n" +
+                                    $"Correct Processed: {correctDecisions}\n" +
+                                    $"Mistakes Made: {wrongDecisions}\n\n" +
+                                    $"Day {currentDay} Concluded.";
+            summaryPanel.SetActive(true);
 
-        // Next day
+            // 2. Wait for player input
+            waitingForNextDay = true;
+            while (waitingForNextDay)
+            {
+                yield return null;  // Wait one frame, then check again
+            }
+
+            // Clicked continue...
+            summaryPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("No Summary Panel assigned in DayManager!");
+            yield return new WaitForSeconds(2f);
+        }
+
+        // 4. Start Next Day
         currentDay++;
         StartNewDay();
 
         // Fade back in
-        yield return StartCoroutine(Fade(1f, 0f, 2.5f));
+        yield return StartCoroutine(Fade(1f, 0f, 1.5f));
 
         dayActive = true;
     }
@@ -76,14 +122,17 @@ public class DayManager : MonoBehaviour
     void StartNewDay()
     {
         elapsedTime = 0f;
+
+        // RESET STATS FOR NEW DAY
+        correctDecisions = 0;
+        wrongDecisions = 0;
+
         clockText.text = "07:00 AM";
 
         Debug.Log("Starting Day " + currentDay);
 
         // Later:
-        // Update rules
         // Reset quota
-        // Spawn first refugee
     }
 
     IEnumerator Fade(float startAlpha, float endAlpha, float duration)

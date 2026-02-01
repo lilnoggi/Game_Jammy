@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 18465d9bc6746194fb914d990176145c
+guid: 71f579617f4ae3f43a1f9fc434bcb000
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5228418732929431913
-    second: BookGameJam_0
+      213: 5590366472012960791
+    second: OpenBookGameJam-export_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,12 +51,12 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 368
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -126,37 +126,33 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BookGameJam_0
+      name: OpenBookGameJam-export_0
       rect:
         serializedVersion: 2
-        x: 488
-        y: 337
-        width: 107
-        height: 78
+        x: 9
+        y: 10
+        width: 356
+        height: 191
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 969b141e2231f8840800000000000000
-      internalID: 5228418732929431913
+      spriteID: 7141690ffa8f49d40800000000000000
+      internalID: 5590366472012960791
       vertices: []
       indices: 
       edges: []
       weights: []
-    outline:
-    - - {x: -526, y: -232}
-      - {x: -327, y: -232}
-      - {x: -327, y: -75}
-      - {x: -526, y: -75}
+    outline: []
     customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -165,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BookGameJam_0: 5228418732929431913
+      OpenBookGameJam-export_0: 5590366472012960791
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

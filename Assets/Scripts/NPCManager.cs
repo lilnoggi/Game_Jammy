@@ -72,6 +72,9 @@ public class NPCManager : MonoBehaviour
         // GAME RULES CHECK
         bool isValid = GameRules.CheckIfRefugeeIsValid(currentRefugee, dayManager.currentDay);
 
+        // === REPORT TO DAY MANAGER ===
+        dayManager.RegisterDecision(isValid);
+
         if (isValid)
         {
             // SUCCESS: They were valid and they were let in.
@@ -103,6 +106,9 @@ public class NPCManager : MonoBehaviour
 
         // GAME RULES CHECK
         bool isValid = GameRules.CheckIfRefugeeIsValid(currentRefugee, dayManager.currentDay);
+
+        // === REPORT TO DAY MANAGER ===
+        dayManager.RegisterDecision(!isValid);
 
         // Inverse logic for rejection
         if (!isValid)
