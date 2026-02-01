@@ -95,7 +95,9 @@ public class NPCManager : MonoBehaviour
         bool isValid = GameRules.CheckIfRefugeeIsValid(currentRefugee, dayManager.currentDay);
 
         // === REPORT TO DAY MANAGER ===
-        dayManager.RegisterDecision(isValid);
+        // 1. isCorrect? Yes, if isValid is true.
+        // 2. addedToQuota? Yes, ONLY if isValid is true.
+        dayManager.RegisterDecision(isValid, isValid);
 
         if (isValid)
         {
@@ -130,7 +132,9 @@ public class NPCManager : MonoBehaviour
         bool isValid = GameRules.CheckIfRefugeeIsValid(currentRefugee, dayManager.currentDay);
 
         // === REPORT TO DAY MANAGER ===
-        dayManager.RegisterDecision(!isValid);
+        // 1. isCorrect? Yes, if !isValid.
+        // 2. addedToQuota? No, since they were rejected.
+        dayManager.RegisterDecision(!isValid, false);
 
         // Inverse logic for rejection
         if (!isValid)

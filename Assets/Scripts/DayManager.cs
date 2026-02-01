@@ -12,21 +12,32 @@ public class DayManager : MonoBehaviour
     private int endHour = 16;
 
     [Header("UI - HUD")]
-    public TextMeshProUGUI clockText;
     public Image fadeImage;
+
+    [Header("UI - DESK")]
+    public TextMeshProUGUI clockText;
+    public TextMeshProUGUI quotaText;
 
     [Header("UI - Summary Screen")]
     public GameObject summaryPanel; // Drag in inspector
     public TextMeshProUGUI summaryStatsText; // Drag in inspector
 
-    [Header("Day Info")]
+    [Header("Day Info / Game Settings")]
     public int currentDay = 1;
+    public int[] dailyQuotas = { 3, 5, 7, 9, 12 };
     private bool dayActive = true;
+    private int currentQuota;
 
     // === TRACKING STATS === //
     private int correctDecisions = 0;
     private int wrongDecisions = 0;
     private bool waitingForNextDay = false;
+    private int currentYield = 0;
+
+    void Start()
+    {
+        StartNewDay();
+    }
 
     void Update()
     {
@@ -58,12 +69,43 @@ public class DayManager : MonoBehaviour
     }
 
     // === NEW FUNCTION: Called by NPC Manager === //
-    public void RegisterDecision(bool isCorrect)
+    public void RegisterDecision(bool isCorrect, bool addedToQuota)
     {
         if (isCorrect) correctDecisions++;
         else wrongDecisions++;
 
+        // Did player do the right thing AND add meat to the pile...
+        if (addedToQuota)
+        {
+            currentYield++;
+        }
+
+        UpdateQuotaUI();
+
         Debug.Log($"Stats Updateed: {correctDecisions} correct, {wrongDecisions} wrong.");
+    }
+
+    void UpdateQuotaUI()
+    {
+        if (quotaText != null)
+        {
+            // Format numbers to look like "03 / 05"
+            string current = currentYield.ToString("D2");
+            string target = currentQuota.ToString("D2");
+
+            if (currentYield >= currentQuota)
+            {
+                // Green indicates safety/completion
+                quotaText.color = Color.green;
+                quotaText.text = $"{current} / {target}";
+            }
+            else
+            {
+                // Red indicates danger/incomplete
+                quotaText.color = Color.red;
+                quotaText.text = $"{current} / {target}";
+            }
+        }
     }
 
     // NEW FUNCTION: Button Event === //
@@ -86,10 +128,18 @@ public class DayManager : MonoBehaviour
         // 1. Show summary ui
         if (summaryPanel != null)
         {
-            // Set the text
+            // Set the text & calculate if passed
+            bool quotaMet = currentYield >= currentQuota;
+            string status = quotaMet ? "<color=green>QUOTA MET</color>" : "<color=red>QUOTA FAILED</color>";
+            string message = quotaMet ? "Performance Adequate." : "Productivity Unsatisfactory.\nWARNING ISSUED.";
+
             summaryStatsText.text = $"SHIFT COMPLETE\n\n" +
+                                    $"----------------\n" +
+                                    $"Quota: {currentQuota}\n" +
                                     $"Correct Processed: {correctDecisions}\n" +
                                     $"Mistakes Made: {wrongDecisions}\n\n" +
+                                    $"----------------\n" +
+                                    $"Status: {status}\n" +
                                     $"Day {currentDay} Concluded.";
             summaryPanel.SetActive(true);
 
@@ -126,13 +176,17 @@ public class DayManager : MonoBehaviour
         // RESET STATS FOR NEW DAY
         correctDecisions = 0;
         wrongDecisions = 0;
+        currentYield = 0;
 
         clockText.text = "07:00 AM";
 
-        Debug.Log("Starting Day " + currentDay);
+        // --- GET TODAY'S QUOTA
+        int quotaIndex = Mathf.Clamp(currentDay - 1, 0, dailyQuotas.Length - 1);
+        currentQuota = dailyQuotas[quotaIndex];
 
-        // Later:
-        // Reset quota
+        UpdateQuotaUI();
+
+        Debug.Log("Starting Day " + currentDay);
     }
 
     IEnumerator Fade(float startAlpha, float endAlpha, float duration)
