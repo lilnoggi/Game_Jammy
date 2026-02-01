@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class DayManager : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class DayManager : MonoBehaviour
 
     [Header("UI - HUD")]
     public Image fadeImage;
+    public GameObject gameOverPanel; // Drag in inspector
+    [Header("Desk Tools")]
+    public GameObject magnifyingGlassButton;
+    public GameObject scannerPickupButton;
 
     [Header("UI - DESK")]
     public TextMeshProUGUI clockText;
@@ -146,7 +151,7 @@ public class DayManager : MonoBehaviour
         yield return StartCoroutine(Fade(0f, 1f, 1.5f));
 
         // --- CALCULATE PAY ---
-        int dailyWage = 15;
+        int dailyWage = 5;
         int foodCost = 3;
         int totalEarned = dailyWage;
 
@@ -164,11 +169,19 @@ public class DayManager : MonoBehaviour
         // Add wage
         MoneyManager.AddMerits(totalEarned);
 
-        // Deduct Food
-        bool couldEat = MoneyManager.SpendMerits(foodCost);
+        // --- GAME OVER ---
+        if (MoneyManager.currentMerits < 0)
+        {
+            Debug.Log("GAME OVER: Insolvency.");
+            if (gameOverPanel != null)
+            {
+                gameOverPanel.SetActive(true);
+                // We stop the routine here so the next day doesn't start
+                yield break;
+            }
+        }
 
         // Construct the Summary Message
-        string foodStatus = couldEat ? "Rations: EATEN (-3)" : "Rations: SKIPPED (STARVING)";
 
         // --- SUMMARY UI --- //
         // 1. Show summary ui
@@ -183,18 +196,17 @@ public class DayManager : MonoBehaviour
             if (bonus > 0) bonusText = $"\nOverproduction Bonus: +{bonus}";
 
             summaryStatsText.text = $"SHIFT COMPLETE\n\n" +
-                                    $"----------------\n" +
-                                    $"Base Wage: +{dailyWage}" +
-                                    $"{bonusText}\n" +
-                                    $"Food Status: +{foodStatus}\n" +
-                                    $"Merits: +{MoneyManager.currentMerits}\n" +
-                                    $"----------------\n" +
-                                    $"Quota: {currentQuota}\n" +
-                                    $"Correct Processed: {correctDecisions}\n" +
-                                    $"Mistakes Made: {wrongDecisions}\n\n" +
-                                    $"----------------\n" +
-                                    $"Status: {status}\n" +
-                                    $"Day {currentDay} Concluded.";
+                                            $"----------------\n" +
+                                            $"Base Wage: +{dailyWage}" +
+                                            $"{bonusText}\n" +
+                                            $"Merits: {MoneyManager.currentMerits}\n" +
+                                            $"----------------\n" +
+                                            $"Quota: {currentQuota}\n" +
+                                            $"Yield: {currentYield}\n" +
+                                            $"Mistakes: {wrongDecisions}\n" +
+                                            $"----------------\n" +
+                                            $"Status: {status}\n" +
+                                            $"Day {currentDay} Concluded.";
             summaryPanel.SetActive(true);
 
             // 2. Wait for player input
@@ -245,6 +257,19 @@ public class DayManager : MonoBehaviour
         currentQuota = dailyQuotas[quotaIndex];
         UpdateQuotaUI();
 
+        // === UNLOCK DESK TOOLS === //
+        // Day 3: Magnifying Glass
+        if (magnifyingGlassButton != null)
+        {
+            magnifyingGlassButton.SetActive(currentDay >= 3);
+        }
+
+        // Day 4: Scanner Tool
+        if (scannerPickupButton != null)
+        {
+            scannerPickupButton.SetActive(currentDay >= 4);
+        }
+
         // === PLAY DAILY BRIEFING DIALOGUE === //
         int briefingIndex = currentDay - 1;
 
@@ -279,7 +304,7 @@ public class DayManager : MonoBehaviour
         // Play Intro Dialogue
         if (dialogueLibrary != null && briefingData != null)
         {
-            yield return StartCoroutine(dialogueLibrary.CreateDialogue(briefingData, 5f));
+            yield return StartCoroutine(dialogueLibrary.CreateDialogue(briefingData, false));
         }
 
         // Unlock button
@@ -305,5 +330,10 @@ public class DayManager : MonoBehaviour
 
         color.a = endAlpha;
         fadeImage.color = color;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

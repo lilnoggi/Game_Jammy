@@ -15,5 +15,6 @@ MonoBehaviour:
   c_name:
   - MANAGEMENT
   c_words:
-  - Welcome, employee. Review the Rulebook on your desk. Open the shutter when you
-    are ready to serve the City.
+  - 'New equipment issued: Magnifying Lens. We have found that surface-level checks
+    are insufficient. Cracks in the mask suggest a compromised vessel. Inspect closely.
+    Reject the broken.'
