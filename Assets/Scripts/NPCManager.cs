@@ -18,14 +18,36 @@ public class NPCManager : MonoBehaviour
     public MaskData[] possibleMasks;
     public DialogueData[] possibleDialogues;
 
+    // AUDIO
+    // public AudioSource audioSource;
+    // public AudioClip approveSound, grinderSFX, errorSFX, callNextSFX;
+
+    // Flag to prevent spamming buttons
+    private bool isBoothOccupied = false;
+
 
     void Start()
     {
+        // if (audioSource == null) audioSource = GetComponent<AudioSource>();
+    }
+
+    // === NEW FUNC: Call next refugee === //
+    public void OnCallNextPressed()
+    {
+        // 1. Don't do ANYTHING if someone is there
+        if (isBoothOccupied || currentRefugee != null) return;
+
+        // 2. Spawn the new person
         SpawnRefugee(.8f);
+
+        // 3. Play sound
+        // if (callNextSFX != null) audioSource.PlayOneShot(callNextSFX);
     }
 
     void SpawnRefugee(float mask_rarity)
     {
+        isBoothOccupied = true; // Mark booth as occupied
+
         GameObject ref_obj = Instantiate(refugeePrefab, spawnRight.position, Quaternion.identity);
         //GameObject ref_mask = GetComponent<SpriteRandomizerLibrary>().InstantiateRandomMask(refugeeMaskPrefab, ref_obj, (spawnRight.position + new Vector3(.012f,1.65f,0)), mask_rarity);
 
@@ -89,7 +111,7 @@ public class NPCManager : MonoBehaviour
         }
 
         // Cleanup
-        StartCoroutine(RemoveCurrentAndSpawnNew());
+        StartCoroutine(RemoveCurrentRefugee());
     }
 
     public void RejectRefugee()
@@ -126,18 +148,20 @@ public class NPCManager : MonoBehaviour
         }
 
         // Cleanup
-        StartCoroutine(RemoveCurrentAndSpawnNew());
+        StartCoroutine(RemoveCurrentRefugee());
     }
 
     // HELPER FUNCTION
-    IEnumerator RemoveCurrentAndSpawnNew()
+    IEnumerator RemoveCurrentRefugee()
     {
+        // Move current refugee away
         currentRefugee.MoveTo(exitLeft.position);
         Destroy(currentRefugee.gameObject, 2f);
         currentRefugee = null;
 
+        // Wait for them to leave
         yield return new WaitForSeconds(2f);
 
-        SpawnRefugee(.8f);
+        isBoothOccupied = false; // Mark booth as free
     }
 }
