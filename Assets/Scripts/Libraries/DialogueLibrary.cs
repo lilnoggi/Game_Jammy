@@ -24,7 +24,7 @@ public class DialogueLibrary : MonoBehaviour
         // 2. Setup Name (Uses the first name in the list, or "Management")
         // If your data has multiple names, you can change this to loop too.
         if (dia_data.c_name.Length > 0)
-            panelScript.nameText.text = dia_data.c_name[0];
+            panelScript.nameText.text = dia_data.c_name[Random.Range(0, dia_data.c_name.Length)];
 
         panelScript.bodyText.text = "";
 
