@@ -18,9 +18,13 @@ public class NPCManager : MonoBehaviour
     public MaskData[] possibleMasks;
     public DialogueData[] possibleDialogues;
 
-    // AUDIO
-    // public AudioSource audioSource;
-    // public AudioClip approveSound, grinderSFX, errorSFX, callNextSFX;
+    [Header("Management Feedback")]
+    public DialogueLibrary dialogueLibrary;
+    public DialogueData mistakeDialogue;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip approveSound, grinderSFX, errorSFX, callNextSFX;
 
     // Flag to prevent spamming buttons
     private bool isBoothOccupied = false;
@@ -28,12 +32,14 @@ public class NPCManager : MonoBehaviour
 
     void Start()
     {
-        // if (audioSource == null) audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
     }
 
     // === NEW FUNC: Call next refugee === //
     public void OnCallNextPressed()
     {
+        if (!dayManager.shiftStarted) return; // No spawning if day is not active
+
         // 1. Don't do ANYTHING if someone is there
         if (isBoothOccupied || currentRefugee != null) return;
 
@@ -41,7 +47,7 @@ public class NPCManager : MonoBehaviour
         SpawnRefugee(.8f);
 
         // 3. Play sound
-        // if (callNextSFX != null) audioSource.PlayOneShot(callNextSFX);
+        if (callNextSFX != null) audioSource.PlayOneShot(callNextSFX);
     }
 
     void SpawnRefugee(float mask_rarity)
@@ -104,12 +110,18 @@ public class NPCManager : MonoBehaviour
             // SUCCESS: They were valid and they were let in.
             Debug.Log("DECISION: Correct! Fresh meat aquired *smirk wink face*");
             // Add score / Money here
+
+            if (callNextSFX != null) audioSource.PlayOneShot(approveSound);
         }
         else
         {
             // FAILURE: They were bad but you let them in D:
             Debug.Log("DECISION: Incorrect! You let in a bad refugee... oops.");
             // Subtract Score
+
+            if (errorSFX != null) audioSource.PlayOneShot(errorSFX);
+
+            StartCoroutine(dialogueLibrary.CreateDialogue(mistakeDialogue, 2.5f));
         }
 
         // Cleanup
@@ -142,12 +154,18 @@ public class NPCManager : MonoBehaviour
             // SUCCESS: They were bad and you rejected them.
             Debug.Log("DECISION: Correct! You rejected a bad refugee.");
             // Add score / Money here
+
+            if (callNextSFX != null) audioSource.PlayOneShot(approveSound);
         }
         else
         {
             // FAILURE: They were good but you rejected them D:
             Debug.Log("DECISION: Incorrect! You rejected a good refugee... oops.");
             // Subtract Score
+
+            if (errorSFX != null) audioSource.PlayOneShot(errorSFX);
+
+            StartCoroutine(dialogueLibrary.CreateDialogue(mistakeDialogue, 2.5f));
 
         }
 

@@ -4,8 +4,10 @@ using TMPro;
 
 public class RulebookManager : MonoBehaviour
 {
-    // Book Panel containing all pages
+    [Header("References")]
     public GameObject ruleBookPanel;
+    public DayManager dayManager;
+    public TextMeshProUGUI todaysRulesText;
 
     [Header("Page Spreads")]
     public GameObject[] pageSpreads; // Array of page spread GameObjects
@@ -15,26 +17,34 @@ public class RulebookManager : MonoBehaviour
     public Button prevButton;
     public Button exitButton;
 
-    [Header("Dynamic Content")]
-    // Update the rules text every day
-    public TextMeshProUGUI todaysRulesText;
-    public DayManager dayManager;
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip pageTurnSound;
 
     private int currentIndex = 0;
 
     private void Start()
     {
 
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
         // Update the dynamic text (Today's Rules)
         UpdateDailyRules();
 
+        currentIndex = 0;
         // Show the first page
         UpdatePageVisibility();
     }
 
     public void OpenBook()
     {
+        UpdateDailyRules();
         ruleBookPanel.SetActive(true);
+        currentIndex = 0;
+        UpdatePageVisibility();
     }
 
     void UpdateDailyRules()
@@ -44,16 +54,45 @@ public class RulebookManager : MonoBehaviour
             switch (dayManager.currentDay)
             {
                 case 1:
-                    todaysRulesText.text = "Reject if:\n- A mask is CRACKED";
+                    // DAY 1: FEEDING TIME
+                    todaysRulesText.text = "SPECIAL ORDER:\n\n" +
+                                           "Total intake required.\n" +
+                                           "IGNORE all defects.\n" +
+                                           "IGNORE all warnings.\n\n" +
+                                           "ACCEPT EVERYONE.";
                     break;
                 case 2:
-                    todaysRulesText.text = "Reject if:\n- A mask is CRACKED\n- Barcode is MISSING";
+                    // DAY 2: VISUAL CHECKS
+                    todaysRulesText.text = "STANDARD PROTOCOL:\n\n" +
+                                           "Reject applicant if:\n" +
+                                           "- Mask is BLOODY\n\n" +
+                                           "(Visual check only)";
                     break;
                 case 3:
-                    todaysRulesText.text = "Reject if:\n- A mask is CRACKED\n- Barcode is MISSING\n- Applicant is SAD";
+                    todaysRulesText.text = // DAY 3: SCANNER NEEDED
+                    todaysRulesText.text = "SECURITY UPDATE:\n\n" +
+                                           "Reject applicant if:\n" +
+                                           "- Mask is BLOODY\n" +
+                                           "- Barcode is SMUDGED\n\n" +
+                                           "(Requires Scanner Tool)"; ;
+                    break;
+                case 4:
+                    // DAY 4: MAGNIFIER NEEDED
+                    todaysRulesText.text = "STRICT PROTOCOL:\n\n" +
+                                           "Reject applicant if:\n" +
+                                           "- Mask is BLOODY\n" +
+                                           "- Barcode is SMUDGED\n" +
+                                           "- Mask is CRACKED\n\n" +
+                                           "(Requires Magnifier)";
                     break;
                 default:
-                    todaysRulesText.text = "Consult standard operating procedures.";
+                    // DAY 5+: HARD MODE
+                    todaysRulesText.text = "MAXIMUM SECURITY:\n\n" +
+                                           "Reject for ANY defect:\n" +
+                                           "- BLOOD\n" +
+                                           "- SMUDGES\n" +
+                                           "- CRACKS\n" +
+                                           "- SADNESS (If applicable)";
                     break;
             }
         }
@@ -63,6 +102,11 @@ public class RulebookManager : MonoBehaviour
     {
         if (currentIndex < pageSpreads.Length - 1)
         {
+            if (pageTurnSound != null)
+            {
+                audioSource.PlayOneShot(pageTurnSound);
+            }
+
             currentIndex++;
             UpdatePageVisibility();
         }
@@ -72,6 +116,10 @@ public class RulebookManager : MonoBehaviour
     {
         if (currentIndex > 0)
         {
+            if (pageTurnSound != null)
+            {
+                audioSource.PlayOneShot(pageTurnSound);
+            }
             currentIndex--;
             UpdatePageVisibility();
         }
@@ -94,6 +142,11 @@ public class RulebookManager : MonoBehaviour
 
     public void CloseBook()
     {
+        if (pageTurnSound != null)
+        {
+            audioSource.PlayOneShot(pageTurnSound);
+        }
+
         ruleBookPanel.SetActive(false); // Hide the rulebook panel
     }
 }

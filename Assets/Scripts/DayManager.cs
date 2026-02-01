@@ -18,6 +18,7 @@ public class DayManager : MonoBehaviour
     public TextMeshProUGUI clockText;
     public TextMeshProUGUI quotaText;
     public ShutterController shutterController;
+    public Button startShiftButton; // Drag in inspector
 
     [Header("UI - Summary Screen")]
     public GameObject summaryPanel; // Drag in inspector
@@ -27,7 +28,12 @@ public class DayManager : MonoBehaviour
     public int currentDay = 1;
     public int[] dailyQuotas = { 3, 5, 7, 9, 12 };
     private bool dayActive = true;
+    public bool shiftStarted = false;
     private int currentQuota;
+
+    [Header("Dialogue Connections")]
+    public DialogueLibrary dialogueLibrary;
+    public DialogueData[] dailyBriefings;
 
     // === TRACKING STATS === //
     private int correctDecisions = 0;
@@ -42,7 +48,8 @@ public class DayManager : MonoBehaviour
 
     void Update()
     {
-        if (!dayActive) return;
+        // Timer only runs if the Day is Active AND the Shift has started
+        if (!dayActive || !shiftStarted) return;
 
         elapsedTime += Time.deltaTime;
 
@@ -55,6 +62,16 @@ public class DayManager : MonoBehaviour
         {
             StartCoroutine(EndDayRoutine());
         }
+    }
+
+    public void StartShift()
+    {
+        if (shiftStarted) return;
+
+        shiftStarted = true;
+
+        // Open the shutters
+        if (shutterController != null) shutterController.OpenShutters();
     }
 
     void UpdateClock(float hourFloat)
@@ -118,6 +135,7 @@ public class DayManager : MonoBehaviour
     IEnumerator EndDayRoutine()
     {
         dayActive = false;
+        shiftStarted = false;
 
         if (shutterController != null) shutterController.CloseShutters();
 
@@ -214,17 +232,61 @@ public class DayManager : MonoBehaviour
         wrongDecisions = 0;
         currentYield = 0;
 
+        // Reset States
+        dayActive = true;
+        shiftStarted = false; // <--- WAIT FOR PLAYER TO OPEN SHUTTERS
+
+        if (shutterController != null) shutterController.CloseShutters();
+
         clockText.text = "07:00 AM";
 
         // --- GET TODAY'S QUOTA
         int quotaIndex = Mathf.Clamp(currentDay - 1, 0, dailyQuotas.Length - 1);
         currentQuota = dailyQuotas[quotaIndex];
-
         UpdateQuotaUI();
 
-        if (shutterController != null) shutterController.OpenShutters();
+        // === PLAY DAILY BRIEFING DIALOGUE === //
+        int briefingIndex = currentDay - 1;
 
-        Debug.Log("Starting Day " + currentDay);
+        if (dailyBriefings != null && briefingIndex < dailyBriefings.Length)
+        {
+            StartCoroutine(PlayDay1IntroSequence(dailyBriefings[briefingIndex]));
+        }
+        else
+        {
+            // Day 7+: You are on your own.
+            if (startShiftButton != null)
+            {
+                startShiftButton.gameObject.SetActive(true);
+                startShiftButton.interactable = true;
+            }
+        }
+            Debug.Log("Starting Day " + currentDay);
+    }
+
+    IEnumerator PlayDay1IntroSequence(DialogueData briefingData)
+    {
+        // Disable the button so they can't click it yet
+        if (startShiftButton != null)
+        {
+            startShiftButton.gameObject.SetActive(true);
+            startShiftButton.interactable = false;
+        }
+
+        // Wait for fade-in to finish
+        yield return new WaitForSeconds(1.5f);
+
+        // Play Intro Dialogue
+        if (dialogueLibrary != null && briefingData != null)
+        {
+            yield return StartCoroutine(dialogueLibrary.CreateDialogue(briefingData, 5f));
+        }
+
+        // Unlock button
+        if (startShiftButton != null)
+        {
+            startShiftButton.interactable = true;
+        }
     }
 
     IEnumerator Fade(float startAlpha, float endAlpha, float duration)

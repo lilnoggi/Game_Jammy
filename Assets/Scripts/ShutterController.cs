@@ -18,13 +18,11 @@ public class ShutterController : MonoBehaviour
     public AudioClip motorSound;
     public AudioClip slamSound;
 
-    void Start()
-    {
-        closedPosition = movingShutterPart.localPosition;
+    [ContextMenu("Set Current Pos as Closed")]
+    void SetClosed() { closedPosition = movingShutterPart.localPosition; }
 
-        // Calculate open position based on closed position
-        openPosition = closedPosition + new Vector3(0, 5.5f, 0);
-    }
+    [ContextMenu("Set Current Pos as Open")]
+    void SetOpen() { openPosition = movingShutterPart.localPosition; }
 
     public void OpenShutters()
     {
