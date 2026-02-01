@@ -20,10 +20,19 @@ public class RulebookManager : MonoBehaviour
     public TextMeshProUGUI todaysRulesText;
     public DayManager dayManager;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip pageTurnSound;
+
     private int currentIndex = 0;
 
     private void Start()
     {
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
 
         // Update the dynamic text (Today's Rules)
         UpdateDailyRules();
@@ -63,6 +72,11 @@ public class RulebookManager : MonoBehaviour
     {
         if (currentIndex < pageSpreads.Length - 1)
         {
+            if (pageTurnSound != null)
+            {
+                audioSource.PlayOneShot(pageTurnSound);
+            }
+
             currentIndex++;
             UpdatePageVisibility();
         }
@@ -72,6 +86,10 @@ public class RulebookManager : MonoBehaviour
     {
         if (currentIndex > 0)
         {
+            if (pageTurnSound != null)
+            {
+                audioSource.PlayOneShot(pageTurnSound);
+            }
             currentIndex--;
             UpdatePageVisibility();
         }
@@ -94,6 +112,11 @@ public class RulebookManager : MonoBehaviour
 
     public void CloseBook()
     {
+        if (pageTurnSound != null)
+        {
+            audioSource.PlayOneShot(pageTurnSound);
+        }
+
         ruleBookPanel.SetActive(false); // Hide the rulebook panel
     }
 }
