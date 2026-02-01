@@ -173,7 +173,7 @@ public class NPCManager : MonoBehaviour
         {
             // SUCCESS (You rejected a bad one)
             Debug.Log("DECISION: Correct! Trash disposed.");
-            if (callNextSFX != null) audioSource.PlayOneShot(approveSound);
+            // Play sound here
         }
         else
         {

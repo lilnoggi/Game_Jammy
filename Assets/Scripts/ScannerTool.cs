@@ -10,8 +10,11 @@ public class ScannerTool : MonoBehaviour
     [Header("UI References")]
     public Image scannerCursorImage; // The one that follows the mouse
     public TextMeshProUGUI barcodeText;// The actual text component
+    public Image monitorScreenImage;
 
     [Header("Sprites")]
+    public Sprite monitorOn;
+    public Sprite monitorOff;
     public Sprite scannerOffSprite; // The grey back
     public Sprite scannerOnSprite; // The red laser one
 
@@ -28,7 +31,13 @@ public class ScannerTool : MonoBehaviour
         // Hide the cursor tool and text by default
         scannerCursorImage.gameObject.SetActive(false);
 
-        if (barcodeText != null) barcodeText.text = "SCANNER READY";
+        // Monitor default state
+        if (monitorScreenImage != null && monitorOff != null)
+        {
+            monitorScreenImage.sprite = monitorOff;
+        }
+
+        if (barcodeText != null) barcodeText.text = "";
     }
 
     void Update()
@@ -55,6 +64,10 @@ public class ScannerTool : MonoBehaviour
         isActive = true;
         scannerCursorImage.gameObject.SetActive(true);
         Cursor.visible = false;
+
+        // --- Monitor ON ---
+        if (monitorScreenImage != null) monitorScreenImage.sprite = monitorOn;
+        if (barcodeText != null) barcodeText.text = "SCANNER READY";
     }
 
     public void DropScanner()
@@ -63,6 +76,8 @@ public class ScannerTool : MonoBehaviour
         scannerCursorImage.gameObject.SetActive(false);
         Cursor.visible = true;
 
+        // --- Monitor OFF ---
+        if (monitorScreenImage != null) monitorScreenImage.sprite = monitorOff;
         if (barcodeText != null) barcodeText.text = "";
     }
 
