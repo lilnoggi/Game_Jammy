@@ -65,8 +65,10 @@ public class NPCManager : MonoBehaviour
 
         currentRefugee = ref_obj.GetComponent<Refugee>();
         currentRefugee.MoveTo(standPoint.position);
-        
-        StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(possibleDialogues[Random.Range(0, possibleDialogues.Length)], 2f));
+
+        StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(
+    possibleDialogues[Random.Range(0, possibleDialogues.Length)],
+    true));
 
         /* DEPRECATED / OLD
         GameObject obj = Instantiate(refugeePrefab,spawnRight.position,Quaternion.identity);
@@ -121,7 +123,10 @@ public class NPCManager : MonoBehaviour
 
             if (errorSFX != null) audioSource.PlayOneShot(errorSFX);
 
-            StartCoroutine(dialogueLibrary.CreateDialogue(mistakeDialogue, 2.5f));
+            StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(
+    possibleDialogues[Random.Range(0, possibleDialogues.Length)],
+    true
+));
         }
 
         // Cleanup
@@ -165,7 +170,10 @@ public class NPCManager : MonoBehaviour
 
             if (errorSFX != null) audioSource.PlayOneShot(errorSFX);
 
-            StartCoroutine(dialogueLibrary.CreateDialogue(mistakeDialogue, 2.5f));
+            StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(
+    possibleDialogues[Random.Range(0, possibleDialogues.Length)],
+    true
+));
 
         }
 

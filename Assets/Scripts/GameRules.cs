@@ -31,38 +31,34 @@ public static class GameRules
         }
 
         // ==========================================================
-        // DAY 3+: SCANNER RULES (Cost 15 Merits to buy tool)
+        // DAY 3+: MAGNIFIER RULES 
         // ==========================================================
-        // New Rule: No Smudged Barcodes. 
+        // New Rule: No cracks in the mask.
         if (currentDay >= 3)
         {
-            // If the barcode is smudged, they are invalid.
-            // (Player needs the Scanner to see this)
+            // Check for cracks
+            if (refugee.isCracked)
+            {
+                Debug.Log("Rule Check: Rejected due to SMUDGED BARCODE.");
+                return false;
+            }
+        }
+
+        // ==========================================================
+        // DAY 4+: SCANNER RULES 
+        // ==========================================================
+        // New Rule: No Cracks.
+        if (currentDay >= 4)
+        {
             if (refugee.isSmudged)
             {
                 Debug.Log("Rule Check: Rejected due to SMUDGED BARCODE.");
                 return false;
             }
 
-            // Optional: You could also check if they are missing a barcode entirely
             if (!refugee.hasBarcode)
             {
                 Debug.Log("Rule Check: Rejected due to MISSING BARCODE.");
-                return false;
-            }
-        }
-
-        // ==========================================================
-        // DAY 4+: MAGNIFIER RULES (Cost 5 Merits to buy tool)
-        // ==========================================================
-        // New Rule: No Cracks.
-        if (currentDay >= 4)
-        {
-            // If the mask is cracked, they are invalid.
-            // (Player needs the Magnifier to see this)
-            if (refugee.isCracked)
-            {
-                Debug.Log("Rule Check: Rejected due to CRACK.");
                 return false;
             }
         }

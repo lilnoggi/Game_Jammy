@@ -15,5 +15,6 @@ MonoBehaviour:
   c_name:
   - MANAGEMENT
   c_words:
-  - Welcome, employee. Review the Rulebook on your desk. Open the shutter when you
-    are ready to serve the City.
+  - 'New equipment issued: ID Scanner. Applicants are attempting to bypass protocol
+    with damaged tags. Use the scanner. If the barcode is smudged or missing, the
+    data is invalid. Trust only the machine.'
