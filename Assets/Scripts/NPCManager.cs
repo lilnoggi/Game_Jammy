@@ -18,6 +18,10 @@ public class NPCManager : MonoBehaviour
     public MaskData[] possibleMasks;
     public DialogueData[] possibleDialogues;
 
+    [Header("Feedback")]
+    public CameraShake cameraShake;
+
+
     [Header("Management Feedback")]
     public DialogueLibrary dialogueLibrary;
     public DialogueData mistakeDialogue;
@@ -137,6 +141,11 @@ public class NPCManager : MonoBehaviour
             Debug.Log("DECISION: Incorrect! Contamination!");
             if (errorSFX != null) audioSource.PlayOneShot(errorSFX);
 
+            if (cameraShake != null)
+            {
+                cameraShake.Shake(0.25f,02f);
+            }
+
             // Use 'mistakeDialogue' and set isNPC to 'false' so it plays the full text.
             if (mistakeDialogue != null)
             {
@@ -181,6 +190,11 @@ public class NPCManager : MonoBehaviour
             Debug.Log("DECISION: Incorrect! Waste of resources.");
             if (errorSFX != null) audioSource.PlayOneShot(errorSFX);
 
+            if (cameraShake != null)
+            {
+            cameraShake.Shake(0.2f, 0.15f);
+            }
+            
             // Use 'mistakeDialogue' and set isNPC to 'false'.
             if (mistakeDialogue != null)
             {
