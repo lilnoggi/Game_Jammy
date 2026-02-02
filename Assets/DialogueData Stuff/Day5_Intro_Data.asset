@@ -15,6 +15,10 @@ MonoBehaviour:
   c_name:
   - MANAGEMENT
   c_words:
+  - 'Security Alert. Intelligence reports high-level forgeries in circulation. The
+    Scanner has been updated to verify digital signatures. '
+  - A visual match is no longer sufficient. If the Scanner reads INVALID (Red), the
+    applicant is a threat. Deny them immediately.
   - 'Performance Notice. Your hesitation has been noted. Do not let empathy impact
     your yield. The City is hungry for progress. Process them faster. '
   - Remember...

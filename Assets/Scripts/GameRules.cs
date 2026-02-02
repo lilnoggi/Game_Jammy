@@ -64,6 +64,19 @@ public static class GameRules
         }
 
         // ==========================================================
+        // DAY 5+: ADVANCED SCANNER RULES
+        // ==========================================================
+        if (currentDay >= 5)
+        {
+            // Reject Invalid/Forgery Barcodes (Red Text)
+            if (!refugee.isValidBarcode)
+            {
+                Debug.Log("Rule Check: Rejected due to INVALID ID (FORGERY).");
+                return false;
+            }
+        }
+
+        // ==========================================================
         // FINAL VERDICT
         // ==========================================================
         // If they survived all the checks above, they are VALID.

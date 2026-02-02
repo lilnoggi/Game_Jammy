@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class DayManager : MonoBehaviour
 {
+    [Header("References")]
+    public SpriteRandomizerLibrary randomiser;
+
     [Header("Time Settings")]
     public float workDayDuration = 180f; // 3 minutes
     private float elapsedTime = 0f;
@@ -247,6 +250,38 @@ public class DayManager : MonoBehaviour
         // Reset States
         dayActive = true;
         shiftStarted = false; // <--- WAIT FOR PLAYER TO OPEN SHUTTERS
+
+        // === DIFFICULT BALANCING ===
+        // This ensures the game stays fair as it gets harder
+
+        if (currentDay == 1)
+        {
+            // Tutorial: No defects
+            randomiser.perfectMaskChance = 10f; // Everyone can be let in
+        }
+        else if (currentDay == 2)
+        {
+            // Visuals only
+            randomiser.perfectMaskChance = 0f;
+            randomiser.bloodChance = 30f; // High chance of blood
+            randomiser.crackChance = 10f;
+            randomiser.forgeryChance = 0f;
+        }
+        else if (currentDay ==3)
+        {
+            // CRACKS
+            randomiser.perfectMaskChance = 10f;
+            randomiser.bloodChance = 15f;
+            randomiser.crackChance = 40f;
+            randomiser.forgeryChance = 0f;
+        }
+        else if (currentDay >= 4)
+        {
+            randomiser.perfectMaskChance = 40f;
+            randomiser.bloodChance = 15f;
+            randomiser.crackChance = 15f;
+            randomiser.forgeryChance = 25f;
+        }
 
         if (shutterController != null) shutterController.CloseShutters();
 

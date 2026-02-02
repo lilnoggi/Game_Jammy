@@ -55,24 +55,53 @@ public class NPCManager : MonoBehaviour
         isBoothOccupied = true; // Mark booth as occupied
 
         GameObject ref_obj = Instantiate(refugeePrefab, spawnRight.position, Quaternion.identity);
-        //GameObject ref_mask = GetComponent<SpriteRandomizerLibrary>().InstantiateRandomMask(refugeeMaskPrefab, ref_obj, (spawnRight.position + new Vector3(.012f,1.65f,0)), mask_rarity);
 
-        // Calculate the offset for the mask
-        Vector3 maskPos = spawnRight.position + new Vector3(.012f, 1.65f, 0);
+        // Pass the offset from SpriteRandomizerLibrary
+        Vector3 maskOffset = new Vector3(0.012f, 1f, 0f);
 
         // Create the mask using the Randomiser Library
-        GameObject ref_mask = GetComponent<SpriteRandomizerLibrary>().InstantiateRandomMask(refugeeMaskPrefab, ref_obj, maskPos, mask_rarity);
+        GetComponent<SpriteRandomizerLibrary>().InstantiateRandomMask(
+            refugeeMaskPrefab, 
+            ref_obj, 
+            maskOffset, mask_rarity);
 
         currentRefugee = ref_obj.GetComponent<Refugee>();
+
+        // ====================================================
+        // === GENERATE BARCODE DATA ===
+        // ====================================================
+
+        // 1. Generate a random ID String
+        currentRefugee.idNumber = GenerateRandomID();
+
+        // 2. Decide if the barcode is Valid or Invalid
+        // 20% chance the barcode is a forgery (Red)
+        // This is independent of smudges. A clean barcode can still be invalid.
+        bool isForgery = (Random.value < 0.2f);
+        currentRefugee.isValidBarcode = !isForgery;
+
+        // ====================================================
+
         currentRefugee.MoveTo(standPoint.position);
 
         StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(
     possibleDialogues[Random.Range(0, possibleDialogues.Length)],
     true));
-
-
     }
 
+    // === HELPER FUNCTION: Generate Random ID === //
+    string GenerateRandomID()
+    {
+        string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        string part1 = "";
+        string part2 = "";
+
+        // Generate format XX-XXX
+        for (int i = 0; i < 2; i++) part1 += chars[Random.Range(0, chars.Length)];
+        for (int i = 0; i < 3; i++) part2 += chars[Random.Range(0, chars.Length)];
+
+        return $"{part1}-{part2}";
+    }
 
     public void ApproveRefugee()
     {
@@ -144,7 +173,7 @@ public class NPCManager : MonoBehaviour
         {
             // SUCCESS (You rejected a bad one)
             Debug.Log("DECISION: Correct! Trash disposed.");
-            if (callNextSFX != null) audioSource.PlayOneShot(approveSound);
+            // Play sound here
         }
         else
         {
