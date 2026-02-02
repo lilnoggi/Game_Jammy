@@ -538,6 +538,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1c67e18843f16674bbb8ed5747a64f09, type: 2}
   possibleDialogues:
   - {fileID: 11400000, guid: 2e58925f994a679478eed6cbbf91cdf0, type: 2}
+  cameraShake: {fileID: 959071908}
   dialogueLibrary: {fileID: 66145122}
   mistakeDialogue: {fileID: 11400000, guid: f59f5114b10f718418be671f0563feca, type: 2}
   audioSource: {fileID: 909901919}
@@ -5394,6 +5395,7 @@ GameObject:
   - component: {fileID: 959071903}
   - component: {fileID: 959071906}
   - component: {fileID: 959071907}
+  - component: {fileID: 959071908}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5540,6 +5542,21 @@ MonoBehaviour:
   exitKey: 27
   approveButton: {fileID: 1595529464}
   rejectButton: {fileID: 2035994482}
+--- !u!114 &959071908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959071902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c26aaa18137d14980e89a8bb475dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShake
+  shakeDuration: 0.2
+  shakeStrength: 0.15
+  dampingSpeed: 20
 --- !u!1 &964387964
 GameObject:
   m_ObjectHideFlags: 0
