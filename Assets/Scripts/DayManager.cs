@@ -13,11 +13,13 @@ public class DayManager : MonoBehaviour
     public float workDayDuration = 180f; // 3 minutes
     private float elapsedTime = 0f;
     private int startHour = 7;
-    private int endHour = 16;
+    private int endHour = 17;
 
     [Header("UI - HUD")]
     public Image fadeImage;
     public GameObject gameOverPanel; // Drag in inspector
+    [Header("UI Transitions")]
+    public TextMeshProUGUI dayTitleText;
     [Header("Desk Tools")]
     public GameObject magnifyingGlassButton;
     public GameObject scannerPickupButton;
@@ -28,16 +30,24 @@ public class DayManager : MonoBehaviour
     public ShutterController shutterController;
     public Button startShiftButton; // Drag in inspector
 
-    [Header("UI - Summary Screen")]
-    public GameObject summaryPanel; // Drag in inspector
-    public TextMeshProUGUI summaryStatsText; // Drag in inspector
-
     [Header("Day Info / Game Settings")]
     public int currentDay = 1;
     public int[] dailyQuotas = { 3, 5, 7, 9, 12 };
     private bool dayActive = true;
     public bool shiftStarted = false;
     private int currentQuota;
+
+    [Header("Economy Settings")]
+    public int wagePerPerson = 5; // 5 credits per correct approval
+    public int rentCost = 20; // Fixed rent
+    public int foodCost = 10; // Fixed food 
+
+    [Header("Econmy UI")]
+    public GameObject endOfDayPanel;
+    public TextMeshProUGUI wageText;
+    public TextMeshProUGUI rentText;
+    public TextMeshProUGUI totalText;
+    public TextMeshProUGUI savingsText;
 
     [Header("Dialogue Connections")]
     public DialogueLibrary dialogueLibrary;
@@ -51,6 +61,8 @@ public class DayManager : MonoBehaviour
 
     void Start()
     {
+        // Ensure day title is off at start
+        if (dayTitleText != null) dayTitleText.gameObject.SetActive(false);
         StartNewDay();
     }
 
@@ -92,6 +104,18 @@ public class DayManager : MonoBehaviour
         if (displayHour == 0) displayHour = 12;
 
         clockText.text = $"{displayHour:00}:{minutes:00} {amPm}";
+
+        // --- FLASH RED IF NEAR END OF DAY ---
+        if (hourFloat >= endHour - 1)
+        {
+            float flashSpeed = 5f;
+
+            // PingPong moves values back and forth between 0 and 1
+            float t = Mathf.PingPong(Time.time * flashSpeed, 1f);
+
+            // Lerp between white and red
+            clockText.color = Color.Lerp(Color.white, Color.red, t);
+        }
     }
 
     // === NEW FUNCTION: Called by NPC Manager === //
@@ -145,107 +169,128 @@ public class DayManager : MonoBehaviour
         dayActive = false;
         shiftStarted = false;
 
+        // Reset clock colour in case it ended on red
+        clockText.color = Color.white;
+
         if (shutterController != null) shutterController.CloseShutters();
 
         // Snap clock
-        clockText.text = "4:00 PM";
+        clockText.text = "5:00 PM";
 
-        // Fade out
+        // Fade out game to show summary
         yield return StartCoroutine(Fade(0f, 1f, 1.5f));
 
-        // --- CALCULATE PAY ---
-        int dailyWage = 5;
-        int foodCost = 3;
-        int totalEarned = dailyWage;
+        // ====================================================
+        // === CALCULATE THE ECONOMY ===
+        // ====================================================
 
-        // --- CALCULATE BONUS ---
-        int bonus = 0;
-        int extraYield = currentYield - currentQuota;
+        // Income: Wage * Correct Approvals
+        int dailyIncome = correctDecisions * wagePerPerson;
 
-        if (extraYield >= 5)
+        // Expenses: Rent + Food
+        int dailyExpenses = rentCost + foodCost;
+
+        // Net Profit/Loss for today
+        int netChange = dailyIncome - dailyExpenses;
+
+        // Apply to player's credits
+        MoneyManager.AddCredits(netChange); // If netChange is negative, this will subtract
+
+        // ====================================================
+        // === UPDATE THE UI ===
+        // ====================================================
+
+        if (endOfDayPanel != null)
         {
-            bonus = (extraYield / 5) * 5;
+            // Set Texts
+            wageText.text = $"+ ${dailyIncome}";
+            rentText.text = $"- ${dailyExpenses} (Rent & Food)";
+
+            // Colour code the daily total (Green for profit, Red for loss)
+            if (netChange >= 0)
+            {
+                totalText.text = $"+ ${netChange}";
+                totalText.color = Color.green;
+            }
+            else
+            {
+                totalText.text = $"- ${-netChange}";
+                totalText.color = Color.red;
+            }
+
+            // Show final savings
+            savingsText.text = $"SAVINGS: ${MoneyManager.currentCredits}";
+
+            // Turn on the panel
+            endOfDayPanel.SetActive(true);
         }
 
-        totalEarned += bonus;
+        // ====================================================
+        // === CHECK GAME OVER===
+        // ====================================================
 
-        // Add wage
-        MoneyManager.AddMerits(totalEarned);
-
-        // --- GAME OVER ---
-        if (MoneyManager.currentMerits < 0)
+        if (MoneyManager.currentCredits < 0)
         {
-            Debug.Log("GAME OVER: Insolvency.");
+            // --- INSOLVENCY ENDING --- //
+            Debug.Log("GAME OVER: Insolvency Reached.");
             if (gameOverPanel != null)
             {
+                endOfDayPanel.SetActive(false);
                 gameOverPanel.SetActive(true);
-                // We stop the routine here so the next day doesn't start
-                yield break;
+                yield break; // STOP THE GAME
             }
         }
 
-        // Construct the Summary Message
-
-        // --- SUMMARY UI --- //
-        // 1. Show summary ui
-        if (summaryPanel != null)
+        // ====================================================
+        // === WAIT FOR USER INPUT ===
+        // ====================================================
+        waitingForNextDay = true;
+        while (waitingForNextDay)
         {
-            // Set the text & calculate if passed
-            bool quotaMet = currentYield >= currentQuota;
-            string status = quotaMet ? "<color=green>QUOTA MET</color>" : "<color=red>QUOTA FAILED</color>";
-            string message = quotaMet ? "Performance Adequate." : "Productivity Unsatisfactory.\nWARNING ISSUED.";
+            yield return null;  // Wait one frame, then check again
 
-            string bonusText = "";
-            if (bonus > 0) bonusText = $"\nOverproduction Bonus: +{bonus}";
-
-            summaryStatsText.text = $"SHIFT COMPLETE\n\n" +
-                                            $"----------------\n" +
-                                            $"Base Wage: +{dailyWage}" +
-                                            $"{bonusText}\n" +
-                                            $"Merits: {MoneyManager.currentMerits}\n" +
-                                            $"----------------\n" +
-                                            $"Quota: {currentQuota}\n" +
-                                            $"Yield: {currentYield}\n" +
-                                            $"Mistakes: {wrongDecisions}\n" +
-                                            $"----------------\n" +
-                                            $"Status: {status}\n" +
-                                            $"Day {currentDay} Concluded.";
-            summaryPanel.SetActive(true);
-
-            // 2. Wait for player input
-            waitingForNextDay = true;
-            while (waitingForNextDay)
-            {
-                yield return null;  // Wait one frame, then check again
-            }
-
-            // Clicked continue...
-            summaryPanel.SetActive(false);
-        }
-        else
-        {
-            Debug.LogWarning("No Summary Panel assigned in DayManager!");
-            yield return new WaitForSeconds(2f);
         }
 
-        // 4. Start Next Day
+        // --- SMOOTH TRANSITION ---
+        // Fade the screen to BLACK while the economy panel is still visible
+        yield return StartCoroutine(Fade(0f, 1f, 1.0f));
+
+        // Disable economy panel
+        if (endOfDayPanel) endOfDayPanel.SetActive(false);
+
+        // Incrememnt day
         currentDay++;
+        // ====================================================
+        // === SHOW DAY TITLE TEXT ===
+        // ====================================================
+        // The screen is currently black
+        // Show the text "DAY X" for a few seconds
+        if (dayTitleText != null)
+        {
+            dayTitleText.text = $"DAY {currentDay}";
+            dayTitleText.gameObject.SetActive(true);
+
+            // Wait for 3 seconds so the player sees the day number
+            yield return new WaitForSeconds(2f);
+
+            dayTitleText.gameObject.SetActive(false);
+        }
+
         StartNewDay();
 
-        // Fade back in
+        // Fade back in 
         yield return StartCoroutine(Fade(1f, 0f, 1.5f));
-
         dayActive = true;
     }
 
     void StartNewDay()
     {
-        elapsedTime = 0f;
-
         // RESET STATS FOR NEW DAY
+        elapsedTime = 0f;
         correctDecisions = 0;
         wrongDecisions = 0;
         currentYield = 0;
+        clockText.color = Color.white; // Ensure clock is white
 
         // Reset States
         dayActive = true;
@@ -354,6 +399,9 @@ public class DayManager : MonoBehaviour
         float time = 0f;
         Color color = fadeImage.color;
 
+        // Ensure the fade image is enabled
+        fadeImage.gameObject.SetActive(true);
+
         while (time < duration)
         {
             time += Time.deltaTime;
@@ -365,6 +413,12 @@ public class DayManager : MonoBehaviour
 
         color.a = endAlpha;
         fadeImage.color = color;
+
+        // Only disable if fading out completely (Alpha 0)
+        if (endAlpha == 0f)
+        {
+            fadeImage.gameObject.SetActive(false);
+        }
     }
 
     public void RestartGame()
