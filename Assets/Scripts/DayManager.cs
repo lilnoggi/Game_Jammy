@@ -42,8 +42,14 @@ public class DayManager : MonoBehaviour
     public int rentCost = 20; // Fixed rent
     public int foodCost = 10; // Fixed food 
 
-    [Header("Econmy UI")]
-    public GameObject endOfDayPanel;
+    [Header("Performance Review")]
+    public GameObject performancePanel;
+    public TextMeshProUGUI quotaResultText; // "QUOTA MET"
+    public TextMeshProUGUI statsText; // "Yield: 5/7"
+    public TextMeshProUGUI managementMessageText; // "Do Better"
+
+    [Header("Payslip UI")]
+    public GameObject payslipPanel;
     public TextMeshProUGUI wageText;
     public TextMeshProUGUI rentText;
     public TextMeshProUGUI totalText;
@@ -56,7 +62,7 @@ public class DayManager : MonoBehaviour
     // === TRACKING STATS === //
     private int correctDecisions = 0;
     private int wrongDecisions = 0;
-    private bool waitingForNextDay = false;
+    private bool waitingForInput = false;
     private int currentYield = 0;
 
     void Start()
@@ -158,10 +164,10 @@ public class DayManager : MonoBehaviour
         }
     }
 
-    // NEW FUNCTION: Button Event === //
+    // Called by the "Continue" buttons on BOTH panels (Payslip & Performance Panels)//
     public void OnContinueButtonPressed()
     {
-        waitingForNextDay = false; // Breaks the loop in EndDayRoutine
+        waitingForInput = false; // Breaks the loop in EndDayRoutine
     }
 
     IEnumerator EndDayRoutine()
@@ -181,26 +187,57 @@ public class DayManager : MonoBehaviour
         yield return StartCoroutine(Fade(0f, 1f, 1.5f));
 
         // ====================================================
-        // === CALCULATE THE ECONOMY ===
+        // === CALCULATE ECO & PERFORMANCE ===
         // ====================================================
 
+        // --- ECONOMY MATH ---
         // Income: Wage * Correct Approvals
         int dailyIncome = correctDecisions * wagePerPerson;
-
         // Expenses: Rent + Food
         int dailyExpenses = rentCost + foodCost;
-
         // Net Profit/Loss for today
         int netChange = dailyIncome - dailyExpenses;
-
         // Apply to player's credits
         MoneyManager.AddCredits(netChange); // If netChange is negative, this will subtract
+
+        // --- PERFORMANCE MATH ---
+        bool quotaMet = currentYield >= currentQuota;
+        string resultString = quotaMet ? "QUOTA MET" : "QUOTA FAILED";
+        Color resultColour = quotaMet ? Color.green : Color.red;
+
+        string managmentMessage = "";
+        if (currentYield == 0) managmentMessage = "ZERO OUTPUT. EXPLAIN YOURSELF.";
+        else if (!quotaMet) managmentMessage = "OUTPUT UNSATISFACTORY. WARNING ISSUED";
+        else if (wrongDecisions > 2) managmentMessage = "QUOTA MET. QUALITY LOW.";
+        else managmentMessage = "PERFORMANCE ADEQUATE.";
 
         // ====================================================
         // === UPDATE THE UI ===
         // ====================================================
 
-        if (endOfDayPanel != null)
+        // --- SHOW PERFORMANCE REVIEW PANEL ---
+        if (performancePanel != null)
+        {
+            if (quotaResultText != null)
+            {
+                quotaResultText.text = resultString;
+                quotaResultText.color = resultColour;
+            }
+            if (statsText != null) statsText.text = $"YIELD: {currentYield}/{currentQuota}\nMISTAKES: {wrongDecisions}";
+            if (managementMessageText != null) managementMessageText.text = managmentMessage;
+
+            performancePanel.SetActive(true);
+        }
+
+        // Wait for player to click "Next" on Performance Panel
+        waitingForInput = true;
+        while (waitingForInput) yield return null;
+
+        // Hide performance panel
+        if (performancePanel != null) performancePanel.SetActive(false);
+
+        // --- SHOW ECO PANEL ---
+        if (payslipPanel != null)
         {
             // Set Texts
             wageText.text = $"+ ${dailyIncome}";
@@ -222,11 +259,18 @@ public class DayManager : MonoBehaviour
             savingsText.text = $"SAVINGS: ${MoneyManager.currentCredits}";
 
             // Turn on the panel
-            endOfDayPanel.SetActive(true);
+            payslipPanel.SetActive(true);
         }
 
+        // Wait for player to click "Next Day" on payslip panel
+        waitingForInput = true;
+        while (waitingForInput) yield return null;
+
+        // Hide payslip panel
+        if (payslipPanel != null) payslipPanel.SetActive(false);
+
         // ====================================================
-        // === CHECK GAME OVER===
+        // === CHECK GAME OVER OR TRANSITION ===
         // ====================================================
 
         if (MoneyManager.currentCredits < 0)
@@ -235,31 +279,14 @@ public class DayManager : MonoBehaviour
             Debug.Log("GAME OVER: Insolvency Reached.");
             if (gameOverPanel != null)
             {
-                endOfDayPanel.SetActive(false);
                 gameOverPanel.SetActive(true);
                 yield break; // STOP THE GAME
             }
         }
 
-        // ====================================================
-        // === WAIT FOR USER INPUT ===
-        // ====================================================
-        waitingForNextDay = true;
-        while (waitingForNextDay)
-        {
-            yield return null;  // Wait one frame, then check again
-
-        }
-
-        // --- SMOOTH TRANSITION ---
-        // Fade the screen to BLACK while the economy panel is still visible
-        yield return StartCoroutine(Fade(0f, 1f, 1.0f));
-
-        // Disable economy panel
-        if (endOfDayPanel) endOfDayPanel.SetActive(false);
-
         // Incrememnt day
         currentDay++;
+
         // ====================================================
         // === SHOW DAY TITLE TEXT ===
         // ====================================================
