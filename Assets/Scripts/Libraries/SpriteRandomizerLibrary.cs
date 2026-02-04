@@ -52,6 +52,7 @@ public class SpriteRandomizerLibrary : MonoBehaviour
     [Range(0, 100)] public float bloodChance = 10f;
     [Range(0, 100)] public float crackChance = 10f;
     [Range(0, 100)] public float frownChance = 20f;
+    [Range(0, 100)] public float smileChance = 20f;
     [Header("Barcode Rarity")]
     [Range(0, 100)] public float missingBarcodeChance = 5f;
     [Range(0, 100)] public float smudgeChance = 10f;
@@ -67,6 +68,7 @@ public class SpriteRandomizerLibrary : MonoBehaviour
     private bool _shouldHaveBarcode;
     private bool _shouldBeSmudged;
     private bool _shouldFrown;
+    private bool _shouldSmile;
     private bool _isForgery;
 
     // Called by NPCManager
@@ -92,6 +94,7 @@ public class SpriteRandomizerLibrary : MonoBehaviour
         List<SpriteRenderer> bloods = new List<SpriteRenderer>();
         List<SpriteRenderer> frowns = new List<SpriteRenderer>();
         List<SpriteRenderer> barcodes = new List<SpriteRenderer>();
+        List<SpriteRenderer> smiles = new List<SpriteRenderer>();
 
         // === APPLY VISUALS ===
         // Loop through children and enable based on dice roll
@@ -102,6 +105,7 @@ public class SpriteRandomizerLibrary : MonoBehaviour
             if (sr.CompareTag("Crack")) cracks.Add(sr);
             else if (sr.CompareTag("Blood")) bloods.Add(sr);
             else if (sr.CompareTag("Frown")) frowns.Add(sr);
+            else if (sr.CompareTag("Smile")) smiles.Add(sr);
             else if (sr.CompareTag("Barcode")) barcodes.Add(sr);
 
             // Ensure everything starts invisible/disabled so we can turn on only what we want
@@ -146,6 +150,13 @@ public class SpriteRandomizerLibrary : MonoBehaviour
             chosenFrown.enabled = true;
         }
 
+        // --- SMILE ---
+        if (_shouldSmile && smiles.Count > 0)
+        {
+            SpriteRenderer chosenSmile = smiles[Random.Range(0, smiles.Count)];
+            chosenSmile.enabled = true;
+        }
+
         // --- BARCODE ---
         if (_shouldHaveBarcode && barcodes.Count > 0)
         {
@@ -179,6 +190,7 @@ public class SpriteRandomizerLibrary : MonoBehaviour
             refugeeScript.isBloody = _shouldBeBloody;
             refugeeScript.isCracked = _shouldBeCracked;
             refugeeScript.isSad = _shouldFrown;
+            refugeeScript.isHappy = _shouldSmile;
             refugeeScript.hasBarcode = _shouldHaveBarcode;
             refugeeScript.isSmudged = _shouldBeSmudged;
 
@@ -214,6 +226,7 @@ public class SpriteRandomizerLibrary : MonoBehaviour
             _shouldBeSmudged = false;
             _shouldHaveBarcode = true;
             _shouldFrown = false;
+            _shouldSmile = true;
             _isForgery = false;
             return;
         }
@@ -222,6 +235,7 @@ public class SpriteRandomizerLibrary : MonoBehaviour
         _shouldBeBloody = Random.Range(0f, 100f) < bloodChance;
         _shouldBeCracked = Random.Range(0f, 100f) < crackChance;
         _shouldFrown = Random.Range(0f, 100f) < frownChance;
+        _shouldSmile = Random.Range(0f, 100f) < smileChance;
 
         // --- Roll for Barcode Presence ---
         // (If chance is 5, roll > 5 means 95% success rate)

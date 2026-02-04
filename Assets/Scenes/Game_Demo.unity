@@ -736,6 +736,7 @@ MonoBehaviour:
   bloodChance: 10
   crackChance: 10
   frownChance: 20
+  smileChance: 10
   missingBarcodeChance: 5
   smudgeChance: 10
   forgeryChance: 20

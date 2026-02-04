@@ -10,6 +10,7 @@ TagManager:
   - Frown
   - MainCanvas
   - Smudge
+  - Smile
   layers:
   - Default
   - TransparentFX

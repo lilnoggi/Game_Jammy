@@ -16,6 +16,7 @@ public class Refugee : MonoBehaviour
     [Header("Generated Stats")]
     public bool isCracked;
     public bool isSad;
+    public bool isHappy;
     public bool hasBarcode;
     public bool isSmudged;
     public bool isBloody;
