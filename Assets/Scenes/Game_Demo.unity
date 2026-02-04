@@ -777,6 +777,12 @@ MonoBehaviour:
   grinderSFX: {fileID: 8300000, guid: 3f1fb72c3f192db48948152e9598e99f, type: 3}
   errorSFX: {fileID: 8300000, guid: c9774e147ff077642ad3f3badb836a29, type: 3}
   callNextSFX: {fileID: 8300000, guid: 7f65710dcb7dcb14e94a64d9f23c252c, type: 3}
+  buttonPressedSFX: {fileID: 8300000, guid: 20f30bb6257bd7240a91cc2517bdcdb6, type: 3}
+  gunshotSounds:
+  - {fileID: 8300000, guid: 419f65946ac4b26478c0a8e2944eae86, type: 3}
+  - {fileID: 8300000, guid: 78510321a156d9d48b3b0e7c635b21bd, type: 3}
+  - {fileID: 8300000, guid: ef1e7b908a88e98409f3f6ec54b7186e, type: 3}
+  - {fileID: 8300000, guid: ef68616f32b4ba345a01dbeade126caf, type: 3}
 --- !u!114 &66145120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,7 +796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayManager
   randomiser: {fileID: 66145118}
-  workDayDuration: 30
+  workDayDuration: 60
   fadeImage: {fileID: 295935377}
   gameOverPanel: {fileID: 1143655704}
   dayTitleText: {fileID: 1194633777}

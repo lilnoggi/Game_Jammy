@@ -21,14 +21,14 @@ public class NPCManager : MonoBehaviour
     [Header("Feedback")]
     public CameraShake cameraShake;
 
-
     [Header("Management Feedback")]
     public DialogueLibrary dialogueLibrary;
     public DialogueData mistakeDialogue;
 
     [Header("Audio")]
     public AudioSource audioSource;
-    public AudioClip approveSound, grinderSFX, errorSFX, callNextSFX;
+    public AudioClip approveSound, grinderSFX, errorSFX, callNextSFX, buttonPressedSFX;
+    public AudioClip[] gunshotSounds;
 
     // Flag to prevent spamming buttons
     private bool isBoothOccupied = false;
@@ -48,7 +48,7 @@ public class NPCManager : MonoBehaviour
         if (isBoothOccupied || currentRefugee != null) return;
 
         // 2. Spawn the new person
-        SpawnRefugee(.8f);
+        SpawnRefugee(1f);
 
         // 3. Play sound
         if (callNextSFX != null) audioSource.PlayOneShot(callNextSFX);
@@ -159,15 +159,7 @@ public class NPCManager : MonoBehaviour
 
     public void RejectRefugee()
     {
-        /*
         if (currentRefugee == null) return;
-
-        currentRefugee.MoveTo(exitLeft.position);
-        Destroy(currentRefugee.gameObject, 2f);
-        currentRefugee = null;
-
-        SpawnRefugee(.8f);
-        */
 
         // GAME RULES CHECK
         bool isValid = GameRules.CheckIfRefugeeIsValid(currentRefugee, dayManager.currentDay);
@@ -177,34 +169,76 @@ public class NPCManager : MonoBehaviour
         // 2. addedToQuota? No, since they were rejected.
         dayManager.RegisterDecision(!isValid, false);
 
-        // Inverse logic for rejection
-        if (!isValid)
+        // Start execution Sequence
+        StartCoroutine(ExecuteOffScreenKill(currentRefugee, isValid));
+
+        // Clear booth reference
+        currentRefugee = null;
+    }
+
+    // === HELPER FUNCTION ===
+    void PlayRandomGunShot()
+    {
+        if (gunshotSounds != null && gunshotSounds.Length > 0)
         {
-            // SUCCESS (You rejected a bad one)
-            Debug.Log("DECISION: Correct! Trash disposed.");
-            // Play sound here
+            // Pick a random index
+            int randomIndex = Random.Range(0, gunshotSounds.Length);
+
+            // Play it
+            audioSource.PlayOneShot(gunshotSounds[randomIndex]);
         }
         else
         {
-            // FAILURE (You rejected a good one)
-            Debug.Log("DECISION: Incorrect! Waste of resources.");
+            Debug.LogWarning("No Gunshot Sounds assigned in NPCManager!");
+        }
+    }
+
+    // COROUTINE: NPC Walks, waits, then is shot
+    IEnumerator ExecuteOffScreenKill(Refugee victim, bool wasActuallyValid)
+    {
+        // 1. Tell NPC to walk away
+        if (victim != null)
+        {
+            victim.MoveTo(exitLeft.position);
+        }
+
+        // 2. WAIT for them to walk off-screen
+        yield return new WaitForSeconds(2f);
+
+        // 3. Play Gunshot
+        PlayRandomGunShot();
+
+        // 4. Feedback
+        if (wasActuallyValid)
+        {
+            Debug.Log("DECISION: Incorrect! You rejected a valid product.");
+
+            // Play error sound
             if (errorSFX != null) audioSource.PlayOneShot(errorSFX);
 
-            if (cameraShake != null)
-            {
-            cameraShake.Shake(0.2f, 0.15f);
-            }
-            
-            // Use 'mistakeDialogue' and set isNPC to 'false'.
+            // Shake the screen violently
+            if (cameraShake != null) cameraShake.Shake(0.2f, 0.15f);
+
             if (mistakeDialogue != null)
             {
                 StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(mistakeDialogue, true));
             }
-
+        }
+        else
+        {
+            // If they were invalid, right choice was made
+            Debug.Log("DECISION: Correct! Trash disposed.");
         }
 
-        // Cleanup
-        StartCoroutine(RemoveCurrentRefugee());
+        // Destroy Evidence
+        if (victim != null)
+        {
+            Destroy(victim.gameObject);
+        }
+
+        // Reset booth
+        yield return new WaitForSeconds(0.5f);
+        isBoothOccupied = false;
     }
 
     // HELPER FUNCTION

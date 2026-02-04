@@ -41,6 +41,10 @@ public class RulebookManager : MonoBehaviour
 
     public void OpenBook()
     {
+        if (pageTurnSound != null)
+        {
+            audioSource.PlayOneShot(pageTurnSound);
+        }
         UpdateDailyRules();
         ruleBookPanel.SetActive(true);
         currentIndex = 0;
