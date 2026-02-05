@@ -41,6 +41,10 @@ public class RulebookManager : MonoBehaviour
 
     public void OpenBook()
     {
+        if (pageTurnSound != null)
+        {
+            audioSource.PlayOneShot(pageTurnSound);
+        }
         UpdateDailyRules();
         ruleBookPanel.SetActive(true);
         currentIndex = 0;
@@ -69,30 +73,40 @@ public class RulebookManager : MonoBehaviour
                                            "(Visual check only)";
                     break;
                 case 3:
-                    todaysRulesText.text = // DAY 3: SCANNER NEEDED
+                    // DAY 3: MAGNIFIER UNLOCK (Blood + Cracks)
+                    todaysRulesText.text = "QUALITY CONTROL:\n\n" +
+                                           "Reject applicant if:\n" +
+                                           "- Mask is BLOODY\n" +
+                                           "- Mask is CRACKED\n\n" +
+                                           "(Use Magnifying Glass)";
+                    break;
+                case 4:
+                    // DAY 4: SCANNER UNLOCK (Blood + Cracks + Smudges)
                     todaysRulesText.text = "SECURITY UPDATE:\n\n" +
                                            "Reject applicant if:\n" +
                                            "- Mask is BLOODY\n" +
-                                           "- Barcode is SMUDGED\n\n" +
-                                           "(Requires Scanner Tool)"; ;
+                                           "- Mask is CRACKED\n" +
+                                           "- Barcode is SMUDGED\n" +
+                                           "(Use ID Scanner)";
                     break;
-                case 4:
-                    // DAY 4: MAGNIFIER NEEDED
-                    todaysRulesText.text = "STRICT PROTOCOL:\n\n" +
+                case 5:
+                     // DAY 5: INVALID BARCODE (Blood + Cracks + Smudges + Invalid)
+                     todaysRulesText.text = "ENHANCED SECURITY:\n\n" +
                                            "Reject applicant if:\n" +
                                            "- Mask is BLOODY\n" +
+                                           "- Mask is CRACKED\n" +
                                            "- Barcode is SMUDGED\n" +
-                                           "- Mask is CRACKED\n\n" +
-                                           "(Requires Magnifier)";
+                                           "- ID is INVALID\n" +
+                                           "(Zero Tolerance Policy)";
                     break;
                 default:
-                    // DAY 5+: HARD MODE
+                    // DAY 5+: HARD MODE (All Rules Active)
                     todaysRulesText.text = "MAXIMUM SECURITY:\n\n" +
                                            "Reject for ANY defect:\n" +
                                            "- BLOOD\n" +
-                                           "- SMUDGES\n" +
                                            "- CRACKS\n" +
-                                           "- SADNESS (If applicable)";
+                                           "- SMUDGED BARCODE\n" +
+                                           "(Zero Tolerance Policy)";
                     break;
             }
         }

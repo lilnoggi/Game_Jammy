@@ -6,12 +6,16 @@ public class ScannerTool : MonoBehaviour
 {
     [Header("Scanner State")]
     private bool isActive = false;
+    private bool isScanningRefugee = false;
 
     [Header("UI References")]
     public Image scannerCursorImage; // The one that follows the mouse
     public TextMeshProUGUI barcodeText;// The actual text component
+    public Image monitorScreenImage;
 
     [Header("Sprites")]
+    public Sprite monitorOn;
+    public Sprite monitorOff;
     public Sprite scannerOffSprite; // The grey back
     public Sprite scannerOnSprite; // The red laser one
 
@@ -28,7 +32,15 @@ public class ScannerTool : MonoBehaviour
         // Hide the cursor tool and text by default
         scannerCursorImage.gameObject.SetActive(false);
 
-        if (barcodeText != null) barcodeText.text = "SCANNER READY";
+        // Monitor default state
+        if (monitorScreenImage != null && monitorOff != null)
+        {
+            monitorScreenImage.sprite = monitorOff;
+        }
+
+        if (barcodeText != null) barcodeText.text = "";
+
+        if (audioSource != null) audioSource.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -55,6 +67,10 @@ public class ScannerTool : MonoBehaviour
         isActive = true;
         scannerCursorImage.gameObject.SetActive(true);
         Cursor.visible = false;
+
+        // --- Monitor ON ---
+        if (monitorScreenImage != null) monitorScreenImage.sprite = monitorOn;
+        if (barcodeText != null) barcodeText.text = "SCANNER READY";
     }
 
     public void DropScanner()
@@ -63,6 +79,8 @@ public class ScannerTool : MonoBehaviour
         scannerCursorImage.gameObject.SetActive(false);
         Cursor.visible = true;
 
+        // --- Monitor OFF ---
+        if (monitorScreenImage != null) monitorScreenImage.sprite = monitorOff;
         if (barcodeText != null) barcodeText.text = "";
     }
 
@@ -88,46 +106,67 @@ public class ScannerTool : MonoBehaviour
                 // YES: Turn Scanner ON (red light)
                 scannerCursorImage.sprite = scannerOnSprite;
 
+                if (!isScanningRefugee)
+                {
+                    audioSource.PlayOneShot(scanBeepSFX);
+                    isScanningRefugee = true;
+                }
+
                 // Show the barcode
                 ShowBarcode(refugee);
             }
             else
             {
-                // NO: Turn Scanner OFF (Grey)
-                scannerCursorImage.sprite = scannerOffSprite;
-                barcodeText.text = "SCANNING...";
-                barcodeText.color = Color.white;
+                ResetScannerVisuals();
             }
         }
         else
         {
-            scannerCursorImage.sprite = scannerOffSprite;
-            barcodeText.text = "SCANNING...";
-            barcodeText.color = Color.white;
+            ResetScannerVisuals();
         }
+    }
+
+    // === Helper function ===
+    void ResetScannerVisuals()
+    {
+        scannerCursorImage.sprite = scannerOffSprite;
+        barcodeText.text = "SCANNING...";
+        barcodeText.color = Color.white;
+
+        isScanningRefugee = false;
     }
 
     void ShowBarcode(Refugee refScript)
     {
-        // What does the text say ????
-        if (refScript.hasBarcode)
+        // Check if barcode exists
+        if (!refScript.hasBarcode)
         {
-            if (refScript.isSmudged)
-            {
-                barcodeText.text = "ERR: SMUDGED";
-                barcodeText.color = Color.red;
-            }
-            else
-            {
-                // Valid barcode
-                barcodeText.text = refScript.idNumber;
-                barcodeText.color = Color.green;
-            }
+            barcodeText.text = "NO TAG FOUND";
+            barcodeText.color = Color.red;
+            return;
+        }
+
+        // Check if Smudged
+        if (refScript.isSmudged)
+        {
+            barcodeText.text = "ERROR: SMUDGED";
+            barcodeText.color = Color.red;
+            return;
+        }
+
+        // Check Validity
+        if (refScript.isValidBarcode)
+        {
+            // VALID -> GREEN
+            barcodeText.text = "ID: " + refScript.idNumber;
+            barcodeText.color = Color.green;
         }
         else
         {
-            barcodeText.text = "NO TAG FOUND";
-            barcodeText.color = Color.yellow;
+            // INVALID -> RED
+            barcodeText.text = "ID: " + refScript.idNumber;
+            barcodeText.color = Color.red;
+
         }
     }
 }

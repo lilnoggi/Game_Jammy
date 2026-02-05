@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0b678d054e0484c979bf6ee4d14f73, type: 3}
+  m_Name: DialogueData_Generic
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  c_words:
+  - They'll eat me....
+  - I can't wait for paradise!!!
+  - Why is the sky yellow today?
+  - Just get it over with.
+  - What's with the stupid mask?
+  - Glory to the City.
+  - I am clean. I am ready.
+  - Process me.
+  - I heard the grinder... is that true?
+  - Do they feed us inside? I'm so hungry.
+  - Please... I haven't eaten in days.
+  - My mask is fine! It's just dirt!
+  - Don't look at my eyes. Look at the barcode.
+  - I can work. I swear I can work.
+  - They are chasing me. Please let me in.
+  - I can work double shifts. Just let me in.
+  - I have family inside.
+  - I am not sick. I promise.
+  - Do you smell...burning?
+  - Why is the sky green today?
+  - I don't remember my name...
+  - The smog... it tastes like copper.
+  - Don't send me back to the wasteland.
+  - Please, my daughter is already inside.
+  - Stop staring.
+  - Just let me through.
+  - I found this mask. It fits perfectly.
+  - You look tired, inspector.
+  - My ID is old, but it's valid. Check it.
+  - Don't look at me like that. I'm clean.

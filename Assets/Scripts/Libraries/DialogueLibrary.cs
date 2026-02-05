@@ -14,7 +14,7 @@ public class DialogueLibrary : MonoBehaviour
     public float typingSpeed = 0.05f; // Made slightly faster default
 
     // We changed the signature slightly to remove 'timer' because we now use clicking to advance
-    public IEnumerator CreateDialogue(DialogueData dia_data, bool isNPC = false)
+    public IEnumerator CreateDialogue(DialogueData dia_data, bool isNPC, string speakerName = "")
     {
         // 1. Instantiate Prefab
         GameObject d_Instance = Instantiate(dialoguePrefab, ui_canvas.transform);
@@ -23,8 +23,19 @@ public class DialogueLibrary : MonoBehaviour
 
         // 2. Setup Name (Uses the first name in the list, or "Management")
         // If your data has multiple names, you can change this to loop too.
-        if (dia_data.c_name.Length > 0)
-            panelScript.nameText.text = dia_data.c_name[Random.Range(0, dia_data.c_name.Length)];
+        if (!isNPC)
+        {
+            // If not NPC, force the name to MANAGEMENT
+            panelScript.nameText.text = "MANAGEMENT";
+        }
+        else
+        {
+            // Is an NPC.
+            if (string.IsNullOrEmpty(speakerName))
+                panelScript.nameText.text = "Unknown";
+            else
+                panelScript.nameText.text = speakerName;
+        }
 
         panelScript.bodyText.text = "";
 

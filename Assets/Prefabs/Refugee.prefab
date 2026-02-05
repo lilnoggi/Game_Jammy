@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846db7b823defa14e8cda380c66234fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Refugee
-  moveSpeed: 2
+  moveSpeed: 4
   maskRenderer: {fileID: 0}
   currentMask: {fileID: 0}
   maskTransform: {fileID: 2912447589874318640, guid: fa15cce97fdf4e14da1e43366d5af32a, type: 3}
@@ -114,6 +114,8 @@ MonoBehaviour:
   hasBarcode: 0
   isSmudged: 0
   isBloody: 0
+  idNumber: 
+  isValidBarcode: 1
 --- !u!61 &5750147120686515749
 BoxCollider2D:
   m_ObjectHideFlags: 0

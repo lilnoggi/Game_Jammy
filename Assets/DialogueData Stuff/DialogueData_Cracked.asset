@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0b678d054e0484c979bf6ee4d14f73, type: 3}
+  m_Name: DialogueData_Cracked
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  c_words:
+  - A crack in the mask doesn't mean I'm sick!
+  - I dropped my mask running from them. It's just a scratch.
+  - I fell on the way here, I promise!
+  - Don't look at me like that. I'm clean.
+  - It's just paint on my mask, I swear!
+  - I found this mask. It fits perfectly.
+  - It's just a small scratch. It doesn't matter!
+  - I can work. I swear I can work.
+  - I have no cracks. I am perfect.
