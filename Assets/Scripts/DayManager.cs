@@ -18,6 +18,7 @@ public class DayManager : MonoBehaviour
     [Header("UI - HUD")]
     public Image fadeImage;
     public GameObject gameOverPanel; // Drag in inspector
+    public TextMeshProUGUI gameOverReasonText;
     [Header("UI Transitions")]
     public TextMeshProUGUI dayTitleText;
     [Header("Desk Tools")]
@@ -39,8 +40,8 @@ public class DayManager : MonoBehaviour
 
     [Header("Economy Settings")]
     public int wagePerPerson = 5; // 5 credits per correct approval
-    public int rentCost = 20; // Fixed rent
-    public int foodCost = 10; // Fixed food 
+    public int weeklyRentCost = 100; // Fixed rent
+    public int dailyFoodCost = 10; // Fixed food 
 
     [Header("Performance Review")]
     public GameObject performancePanel;
@@ -65,10 +66,22 @@ public class DayManager : MonoBehaviour
     private bool waitingForInput = false;
     private int currentYield = 0;
 
+    // === FAIL STATS === //
+    private int strikes = 0;
+    private int maxStrikes = 3;
+    private int daysInDebt = 0;
+
     void Start()
     {
         // Ensure day title is off at start
         if (dayTitleText != null) dayTitleText.gameObject.SetActive(false);
+
+        // Reset Money on day 1
+        if (currentDay == 1)
+        {
+            MoneyManager.currentCredits = 50;
+        }
+
         StartNewDay();
     }
 
@@ -114,7 +127,7 @@ public class DayManager : MonoBehaviour
         // --- FLASH RED IF NEAR END OF DAY ---
         if (hourFloat >= endHour - 1)
         {
-            float flashSpeed = 5f;
+            float flashSpeed = 3f;
 
             // PingPong moves values back and forth between 0 and 1
             float t = Mathf.PingPong(Time.time * flashSpeed, 1f);
@@ -124,7 +137,7 @@ public class DayManager : MonoBehaviour
         }
     }
 
-    // === NEW FUNCTION: Called by NPC Manager === //
+    // === Called by NPC Manager === //
     public void RegisterDecision(bool isCorrect, bool addedToQuota)
     {
         if (isCorrect) correctDecisions++;
@@ -190,26 +203,65 @@ public class DayManager : MonoBehaviour
         // === CALCULATE ECO & PERFORMANCE ===
         // ====================================================
 
+        // --- QUOTA CHECK ---
+        bool quotaMet = currentYield >= currentQuota;
+        if (!quotaMet)
+        {
+            strikes++; // PENATLY APPLIED
+        }
+
         // --- ECONOMY MATH ---
         // Income: Wage * Correct Approvals
         int dailyIncome = correctDecisions * wagePerPerson;
-        // Expenses: Rent + Food
-        int dailyExpenses = rentCost + foodCost;
+        // Always pay for food
+        int todaysExpenses = dailyFoodCost;
+        // Check if Rent is due (every 7 days)
+        bool isRentDay = (currentDay % 7 == 0);
+        if (isRentDay)
+        {
+            todaysExpenses += weeklyRentCost;
+        }
+
         // Net Profit/Loss for today
-        int netChange = dailyIncome - dailyExpenses;
+        int netChange = dailyIncome - todaysExpenses;
+        
         // Apply to player's credits
         MoneyManager.AddCredits(netChange); // If netChange is negative, this will subtract
 
-        // --- PERFORMANCE MATH ---
-        bool quotaMet = currentYield >= currentQuota;
-        string resultString = quotaMet ? "QUOTA MET" : "QUOTA FAILED";
-        Color resultColour = quotaMet ? Color.green : Color.red;
+        // --- RENT CHECK ---
+        if (isRentDay && MoneyManager.currentCredits < 0)
+        {
+            TriggerGameOver("TERMINATION REASON:\nEVICTION.\n(FAILURE TO PAY WEEKLY RENT)");
+            yield break;
+        }
 
-        string managmentMessage = "";
-        if (currentYield == 0) managmentMessage = "ZERO OUTPUT. EXPLAIN YOURSELF.";
-        else if (!quotaMet) managmentMessage = "OUTPUT UNSATISFACTORY. WARNING ISSUED";
-        else if (wrongDecisions > 2) managmentMessage = "QUOTA MET. QUALITY LOW.";
-        else managmentMessage = "PERFORMANCE ADEQUATE.";
+        // --- DEBT CHECK ---
+        if (MoneyManager.currentCredits < 0)
+        {
+            daysInDebt++;
+        }
+        else
+        {
+            daysInDebt = 0;
+        }
+
+        // ====================================================
+        // === GAME OVER CHECK ===
+        // ====================================================
+
+        // Fail State A: Incompetence (Strikes)
+        if (strikes >= maxStrikes)
+        {
+            TriggerGameOver("TERMINATION REASON:\nREPEATED FAILURE TO MEET QUOTAS.");
+            yield break;
+        }
+
+        // Fail State B: Insolvency (Debt)
+        if (daysInDebt >= 2)
+        {
+             TriggerGameOver("TERMINATION REASON:\nYOU COULD NOT REPAY YOUR DEBT IN TIME.");
+            yield break;
+        }
 
         // ====================================================
         // === UPDATE THE UI ===
@@ -218,6 +270,16 @@ public class DayManager : MonoBehaviour
         // --- SHOW PERFORMANCE REVIEW PANEL ---
         if (performancePanel != null)
         {
+            string resultString = quotaMet ? "QUOTA MET" : "QUOTA FAILED";
+            Color resultColour = quotaMet ? Color.green : Color.red;
+
+            // Management Message
+            string managmentMessage = "";
+            if (currentYield == 0) managmentMessage = $"ZERO OUTPUT. EXPLAIN YOURSELF.\n(STRIKES: {strikes}/{maxStrikes})";
+            else if (!quotaMet) managmentMessage = $"OUTPUT UNSATISFACTORY. WARNING ISSUED.\n(STRIKES: {strikes}/{maxStrikes})";
+            else if (wrongDecisions > 2) managmentMessage = "QUOTA MET. QUALITY LOW.";
+            else managmentMessage = "PERFORMANCE ADEQUATE.";
+
             if (quotaResultText != null)
             {
                 quotaResultText.text = resultString;
@@ -236,13 +298,24 @@ public class DayManager : MonoBehaviour
         // Hide performance panel
         if (performancePanel != null) performancePanel.SetActive(false);
 
-        // --- SHOW ECO PANEL ---
+        // --- SHOW PAYSLIP PANEL ---
         if (payslipPanel != null)
         {
             // Set Texts
             wageText.text = $"+ ${dailyIncome}";
-            rentText.text = $"- ${dailyExpenses} (Rent & Food)";
 
+            // Expense Text 
+            if (isRentDay)
+            {
+                rentText.text = $"- ${todaysExpenses} (Food + WEEKLY RENT)";
+            }
+            else
+            {
+                int daysUntilRent = 7 - (currentDay % 7);
+                rentText.text = $"{todaysExpenses} (Food Only)\n<size=60%>Rent due in {daysUntilRent} days</size>";
+            }
+
+            // Total Text
             // Colour code the daily total (Green for profit, Red for loss)
             if (netChange >= 0)
             {
@@ -255,11 +328,20 @@ public class DayManager : MonoBehaviour
                 totalText.color = Color.red;
             }
 
-            // Show final savings
-            savingsText.text = $"SAVINGS: ${MoneyManager.currentCredits}";
+            // Show final savings + Debt Warning
+            if (daysInDebt > 0)
+            {
+                savingsText.text = $"WARNING Debt: ${MoneyManager.currentCredits}";
+                savingsText.color = Color.red;
+            }
+            else
+            {
+                savingsText.text = $"SAVINGS: ${MoneyManager.currentCredits}";
+                savingsText.color = Color.white;
+            }
 
-            // Turn on the panel
-            payslipPanel.SetActive(true);
+                // Turn on the panel
+                payslipPanel.SetActive(true);
         }
 
         // Wait for player to click "Next Day" on payslip panel
@@ -268,21 +350,6 @@ public class DayManager : MonoBehaviour
 
         // Hide payslip panel
         if (payslipPanel != null) payslipPanel.SetActive(false);
-
-        // ====================================================
-        // === CHECK GAME OVER OR TRANSITION ===
-        // ====================================================
-
-        if (MoneyManager.currentCredits < 0)
-        {
-            // --- INSOLVENCY ENDING --- //
-            Debug.Log("GAME OVER: Insolvency Reached.");
-            if (gameOverPanel != null)
-            {
-                gameOverPanel.SetActive(true);
-                yield break; // STOP THE GAME
-            }
-        }
 
         // Incrememnt day
         currentDay++;
@@ -308,6 +375,18 @@ public class DayManager : MonoBehaviour
         // Fade back in 
         yield return StartCoroutine(Fade(1f, 0f, 1.5f));
         dayActive = true;
+    }
+
+    void TriggerGameOver(string reason)
+    {
+        Debug.Log("GAME OVER: " + reason);
+        if (gameOverPanel != null)
+        {
+            if (gameOverReasonText != null) gameOverReasonText.text = reason;
+
+            gameOverPanel.SetActive(true);
+
+        }
     }
 
     void StartNewDay()
