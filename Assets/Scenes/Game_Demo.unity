@@ -6336,8 +6336,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoomController
   normalOrthoSize: 5
-  zoomOffset: {x: -0.15, y: 0.4}
-  zoomOrthoSize: 1.2
+  zoomOffset: {x: -0.15, y: 5}
+  zoomOrthoSize: 1.15
   moveSmooth: 10
   zoomSmooth: 10
   allowExitWithEscOrRightClick: 1
@@ -9286,8 +9286,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MagnifyButtonHandler
   zoomController: {fileID: 959071907}
   npcManager: {fileID: 66145119}
-  audioSource: {fileID: 0}
-  zoom: {fileID: 0}
+  audioSource: {fileID: 909901919}
+  zoom: {fileID: 8300000, guid: 1b310560f47b2794eab6d4343c63af6f, type: 3}
 --- !u!212 &1458030237
 SpriteRenderer:
   serializedVersion: 2
