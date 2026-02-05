@@ -202,7 +202,7 @@ public class NPCManager : MonoBehaviour
 
             if (cameraShake != null)
             {
-                cameraShake.Shake(0.25f,02f);
+                cameraShake.Shake(1f,1.5f);
             }
 
             // Use 'mistakeDialogue' and set isNPC to 'false' so it plays the full text.

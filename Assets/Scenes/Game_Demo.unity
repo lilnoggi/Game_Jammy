@@ -810,7 +810,7 @@ MonoBehaviour:
   quotaText: {fileID: 1388866548}
   shutterController: {fileID: 1543535779}
   startShiftButton: {fileID: 1178097423}
-  currentDay: 1
+  currentDay: 5
   dailyQuotas: 030000000500000007000000090000000c000000
   shiftStarted: 0
   wagePerPerson: 5
