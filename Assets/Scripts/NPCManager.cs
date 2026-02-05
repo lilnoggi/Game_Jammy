@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NPCManager : MonoBehaviour
 {
     [Header("References")]
     public DayManager dayManager; // <--- DRAG DAYMANAGER HERE IN INSPECTOR!
+    public NameDatabase masterNameList;
 
     [Header("Prefabs & Spawning")]
     public GameObject refugeePrefab;
@@ -15,8 +17,15 @@ public class NPCManager : MonoBehaviour
 
     [Header("Current State")]
     public Refugee currentRefugee;
-    public MaskData[] possibleMasks;
-    public DialogueData[] possibleDialogues;
+    //public MaskData[] possibleMasks;
+
+    [Header("Dialogue Database")]
+    public DialogueData[] genericDialogues;
+    public DialogueData[] bloodyDialogues;
+    public DialogueData[] crackedDialogues;
+    public DialogueData[] smudgedDialogues;
+    public DialogueData[] noBarcodeDialogues;
+    public DialogueData[] sadDialogues;
 
     [Header("Feedback")]
     public CameraShake cameraShake;
@@ -39,7 +48,7 @@ public class NPCManager : MonoBehaviour
         if (audioSource == null) audioSource = GetComponent<AudioSource>();
     }
 
-    // === NEW FUNC: Call next refugee === //
+    // === Call next refugee === //
     public void OnCallNextPressed()
     {
         if (!dayManager.shiftStarted) return; // No spawning if day is not active
@@ -65,33 +74,91 @@ public class NPCManager : MonoBehaviour
 
         // Create the mask using the Randomiser Library
         GetComponent<SpriteRandomizerLibrary>().InstantiateRandomMask(
-            refugeeMaskPrefab, 
-            ref_obj, 
+            refugeeMaskPrefab,
+            ref_obj,
             maskOffset, mask_rarity);
 
         currentRefugee = ref_obj.GetComponent<Refugee>();
 
         // ====================================================
-        // === GENERATE BARCODE DATA ===
+        // === GENERATE NAME DATA ===
         // ====================================================
 
-        // 1. Generate a random ID String
-        currentRefugee.idNumber = GenerateRandomID();
-
-        // 2. Decide if the barcode is Valid or Invalid
-        // 20% chance the barcode is a forgery (Red)
-        // This is independent of smudges. A clean barcode can still be invalid.
-        bool isForgery = (Random.value < 0.2f);
-        currentRefugee.isValidBarcode = !isForgery;
+        // 1. Generate name
+        if (masterNameList != null)
+        {
+            currentRefugee.refugeeName = masterNameList.GetRandomName();
+        }
+        else
+        {
+            currentRefugee.refugeeName = "Unkown";
+        }
 
         // ====================================================
 
         currentRefugee.MoveTo(standPoint.position);
 
-        StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(
-    possibleDialogues[Random.Range(0, possibleDialogues.Length)],
-    true));
+        // ====================================================
+        // === SELECT CONTEXTUAL DIALOGUE ===
+        // ====================================================
+
+        DialogueData selectedDialogue = GetContextualDialogue();
+
+        if (selectedDialogue != null)
+        {
+            // Pass the name
+            StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(selectedDialogue,
+                true,
+                currentRefugee.refugeeName));
+        }
     }
+
+    // === PICK DIALOGUE BASED ON LOOKS ===
+    DialogueData GetContextualDialogue()
+    {
+        // Create a list of potential lists
+        // If refugee has a crack, add 'crackedDialogues' array to potential pool
+        List<DialogueData[]> validPools = new List<DialogueData[]>();
+
+        // 1. Check for defects
+        if (currentRefugee.isBloody && bloodyDialogues.Length > 0)
+            validPools.Add(bloodyDialogues);
+
+        if (currentRefugee.isCracked && crackedDialogues.Length > 0)
+            validPools.Add(crackedDialogues);
+
+        if (currentRefugee.isSmudged && smudgedDialogues.Length > 0)
+            validPools.Add(smudgedDialogues);
+
+        if (!currentRefugee.hasBarcode && noBarcodeDialogues.Length > 0)
+            validPools.Add(noBarcodeDialogues);
+
+        if (currentRefugee.isSad && sadDialogues.Length > 0)
+            validPools.Add(sadDialogues);
+
+        // 2. Decide what to return
+        if (validPools.Count > 0)
+        {
+            // If NPC has defects, pick a random defect to talk about
+            DialogueData[] chosenArray = validPools[Random.Range(0, validPools.Count)];
+            return chosenArray[Random.Range(0, chosenArray.Length)];
+        }
+        else
+        {
+            // 3. If no defects use Generic
+            if (genericDialogues.Length > 0)
+            {
+                return genericDialogues[Random.Range(0, genericDialogues.Length)];
+            }
+        }
+
+        // Fallback to prevent crash if lists are empty
+        Debug.LogWarning("No dialogue found! Returning to default.");
+        if (genericDialogues.Length > 0) return genericDialogues[0];
+
+        return null;
+    }
+
 
     // === HELPER FUNCTION: Generate Random ID === //
     string GenerateRandomID()
@@ -110,14 +177,6 @@ public class NPCManager : MonoBehaviour
     public void ApproveRefugee()
     {
         if (currentRefugee == null) return;
-
-        /*
-        currentRefugee.MoveTo(exitLeft.position);
-        Destroy(currentRefugee.gameObject, 2f);
-        currentRefugee = null;
-
-        SpawnRefugee(.8f);
-        */
 
         // GAME RULES CHECK
         bool isValid = GameRules.CheckIfRefugeeIsValid(currentRefugee, dayManager.currentDay);
@@ -149,7 +208,9 @@ public class NPCManager : MonoBehaviour
             // Use 'mistakeDialogue' and set isNPC to 'false' so it plays the full text.
             if (mistakeDialogue != null)
             {
-                StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(mistakeDialogue, true));
+                // Pass TRUE (so it picks a random line)
+                // Pass "MANAGEMENT" (so it uses the correct name!
+                StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(mistakeDialogue, true, "MANAGEMENT"));
             }
         }
 
@@ -221,7 +282,8 @@ public class NPCManager : MonoBehaviour
 
             if (mistakeDialogue != null)
             {
-                StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(mistakeDialogue, true));
+                // Pass true for one line + "MANAGEMENT"
+                StartCoroutine(GetComponent<DialogueLibrary>().CreateDialogue(mistakeDialogue, true, "MANAGEMENT"));
             }
         }
         else

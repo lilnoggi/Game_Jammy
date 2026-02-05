@@ -4,6 +4,9 @@ public class Refugee : MonoBehaviour
 {
     public float moveSpeed = 2f;
 
+    [Header("Identity")]
+    public string refugeeName;
+
     [Header("Mask")]
     public SpriteRenderer maskRenderer;
     public MaskData currentMask;
