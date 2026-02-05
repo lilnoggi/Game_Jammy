@@ -812,7 +812,7 @@ MonoBehaviour:
   shutterController: {fileID: 1543535779}
   startShiftButton: {fileID: 1178097423}
   currentDay: 1
-  dailyQuotas: 030000000500000007000000090000000c000000
+  dailyQuotas: 030000000500000007000000090000000c0000000e00000010000000
   shiftStarted: 0
   maxDailyMistakes: 5
   wagePerPerson: 5
@@ -5681,7 +5681,7 @@ GameObject:
   - component: {fileID: 917056030}
   - component: {fileID: 917056029}
   m_Layer: 5
-  m_Name: RentText
+  m_Name: RentFoodText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
