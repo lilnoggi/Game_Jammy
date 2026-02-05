@@ -1,3 +1,5 @@
+<img width="960" height="400" alt="Civil Service Banner" src="https://github.com/user-attachments/assets/cf6fddd4-6757-4ecd-a88d-e2a17b00b077" />
+
 # Civil Service
 
 ![Unity](https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white)
@@ -18,7 +20,7 @@ Heavily inspired by *Papers, Please*, this game challenges players' attention to
     * **Shutter System:** Manually control the flow of the day.
     * **Magnifying Glass:** Inspect masks for cracks.
     * **ID Scanner:** Verify barcode authenticity and detect smudges.
-* **Economy & Survival:** Manage your "Merits." If you run out of money for food, you are terminated.
+* **Economy & Survival:** Manage your "Credits." If you run out of credits for food, you are terminated.
 * **Reactive Narrative:** "Management" watches your every move, offering different feedback based on your performance.
 
 ## How to Play
@@ -43,15 +45,9 @@ Heavily inspired by *Papers, Please*, this game challenges players' attention to
 
 ## Installation
 
-1.  Clone the repository:
-    ```bash
-    git clone [https://github.com/lilnoggi/Game_Jammy.git](https://github.com/lilnoggi/Game_Jammy.git)
-    ```
-2.  Open **Unity Hub**.
-3.  Click **Add** and select the cloned folder.
-4.  Open the project (Recommended version: Unity 6000.3.2f1).
-5.  Open the scene located in `Assets/Scenes/MainMenu`.
-6.  Press **Play**.
+[![Download on Itch.io](https://img.shields.io/badge/Download-Itch.io-fa5c5c?style=for-the-badge&logo=itch.io&logoColor=white)](https://taintedwhite.itch.io/civil-service)
+
+**[Click here to play or download Civil Service on Itch.io](https://taintedwhite.itch.io/civil-service)**
 
 ## Credits
 
@@ -60,4 +56,4 @@ Heavily inspired by *Papers, Please*, this game challenges players' attention to
 * **Audio:** Florin, Mani
 
 ---
-*Status: Vertical Slice*
+*In Development*
