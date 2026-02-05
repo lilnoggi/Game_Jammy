@@ -814,6 +814,7 @@ MonoBehaviour:
   currentDay: 1
   dailyQuotas: 030000000500000007000000090000000c000000
   shiftStarted: 0
+  maxDailyMistakes: 5
   wagePerPerson: 5
   weeklyRentCost: 100
   dailyFoodCost: 10

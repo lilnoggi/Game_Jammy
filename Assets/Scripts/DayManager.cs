@@ -37,6 +37,7 @@ public class DayManager : MonoBehaviour
     private bool dayActive = true;
     public bool shiftStarted = false;
     private int currentQuota;
+    public int maxDailyMistakes = 2;
 
     [Header("Economy Settings")]
     public int wagePerPerson = 5; // 5 credits per correct approval
@@ -209,6 +210,12 @@ public class DayManager : MonoBehaviour
         {
             strikes++; // PENATLY APPLIED
         }
+        // --- QUALITY CHECK ---
+        bool qualityMet = wrongDecisions <= maxDailyMistakes;
+        if (!qualityMet)
+        {
+            strikes++;
+        }
 
         // --- ECONOMY MATH ---
         // Income: Wage * Correct Approvals
@@ -275,9 +282,24 @@ public class DayManager : MonoBehaviour
 
             // Management Message
             string managmentMessage = "";
-            if (currentYield == 0) managmentMessage = $"ZERO OUTPUT. EXPLAIN YOURSELF.\n(STRIKES: {strikes}/{maxStrikes})";
-            else if (!quotaMet) managmentMessage = $"OUTPUT UNSATISFACTORY. WARNING ISSUED.\n(STRIKES: {strikes}/{maxStrikes})";
-            else if (wrongDecisions > 2) managmentMessage = "QUOTA MET. QUALITY LOW.";
+            if (currentYield == 0)
+            {
+                managmentMessage = $"ZERO OUTPUT. EXPLAIN YOURSELF.\n(STRIKES: {strikes}/{maxStrikes})";
+            }
+            else if (!quotaMet && !qualityMet)
+            {
+                // Worst case: Slow AND Wrong
+                managmentMessage = $"QUOTA MISSED & QUALITY LOW. TWO STRIKES ISSUES.\n(STRIKES: {strikes}/{maxStrikes})";
+            }
+            else if (!quotaMet)
+            {
+                managmentMessage = $"OUTPUT UNSATISFACTORY. WARNING ISSUED.\n(STRIKES: {strikes}/{maxStrikes})";
+            }
+            else if (!qualityMet)
+            {
+                // Bad Accuracy
+                managmentMessage = $"TOO MANY ERRORS ({wrongDecisions}). QUALITY STRIKE ISSUED.\n(STRIKES: {strikes}/{maxStrikes})";
+            }
             else managmentMessage = "PERFORMANCE ADEQUATE.";
 
             if (quotaResultText != null)
