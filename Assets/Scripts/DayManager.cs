@@ -10,7 +10,7 @@ public class DayManager : MonoBehaviour
     public SpriteRandomizerLibrary randomiser;
 
     [Header("Time Settings")]
-    public float workDayDuration = 180f; // 3 minutes
+    public float workDayDuration = 120f; // <--- Now testing 2 minutes, 3 is too long and makes the game easy
     private float elapsedTime = 0f;
     private int startHour = 7;
     private int endHour = 17;
@@ -33,7 +33,7 @@ public class DayManager : MonoBehaviour
 
     [Header("Day Info / Game Settings")]
     public int currentDay = 1;
-    public int[] dailyQuotas = { 3, 5, 7, 9, 12 };
+    public int[] dailyQuotas = { 3, 5, 7, 9, 12, 14, 16 };
     private bool dayActive = true;
     public bool shiftStarted = false;
     private int currentQuota;
@@ -334,7 +334,7 @@ public class DayManager : MonoBehaviour
             else
             {
                 int daysUntilRent = 7 - (currentDay % 7);
-                rentText.text = $"{todaysExpenses} (Food Only)\n<size=60%>Rent due in {daysUntilRent} days</size>";
+                rentText.text = $"${todaysExpenses} (Food Only)\n<size=60%>Rent due in {daysUntilRent} days</size>";
             }
 
             // Total Text
@@ -373,7 +373,17 @@ public class DayManager : MonoBehaviour
         // Hide payslip panel
         if (payslipPanel != null) payslipPanel.SetActive(false);
 
-        // Incrememnt day
+        // === CHECK FOR DEMO COMPLETION ===
+        // If day 7 finished, they have paid rent and survived the week
+        if (currentDay >= 7)
+        {
+            // Re-use Game over panel but with a VICTORY message
+            // Make specific vic panel later
+            TriggerGameOver("WEEK COMPLETED.\nRENT PAID.\n RETAINED FOR NEXT CYCLE.\n\n(THANKS FOR PLAYING THE DEMO!)");
+            yield break;
+        }
+
+        // Increment day
         currentDay++;
 
         // ====================================================
