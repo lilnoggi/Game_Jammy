@@ -6,6 +6,7 @@ public class ScannerTool : MonoBehaviour
 {
     [Header("Scanner State")]
     private bool isActive = false;
+    private bool isScanningRefugee = false;
 
     [Header("UI References")]
     public Image scannerCursorImage; // The one that follows the mouse
@@ -38,6 +39,8 @@ public class ScannerTool : MonoBehaviour
         }
 
         if (barcodeText != null) barcodeText.text = "";
+
+        if (audioSource != null) audioSource.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -103,25 +106,34 @@ public class ScannerTool : MonoBehaviour
                 // YES: Turn Scanner ON (red light)
                 scannerCursorImage.sprite = scannerOnSprite;
 
-                //audioSource.PlayOneShot(scanBeepSFX);
+                if (!isScanningRefugee)
+                {
+                    audioSource.PlayOneShot(scanBeepSFX);
+                    isScanningRefugee = true;
+                }
 
                 // Show the barcode
                 ShowBarcode(refugee);
             }
             else
             {
-                // NO: Turn Scanner OFF (Grey)
-                scannerCursorImage.sprite = scannerOffSprite;
-                barcodeText.text = "SCANNING...";
-                barcodeText.color = Color.white;
+                ResetScannerVisuals();
             }
         }
         else
         {
-            scannerCursorImage.sprite = scannerOffSprite;
-            barcodeText.text = "SCANNING...";
-            barcodeText.color = Color.white;
+            ResetScannerVisuals();
         }
+    }
+
+    // === Helper function ===
+    void ResetScannerVisuals()
+    {
+        scannerCursorImage.sprite = scannerOffSprite;
+        barcodeText.text = "SCANNING...";
+        barcodeText.color = Color.white;
+
+        isScanningRefugee = false;
     }
 
     void ShowBarcode(Refugee refScript)
