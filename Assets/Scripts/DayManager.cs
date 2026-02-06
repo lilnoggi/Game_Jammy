@@ -61,6 +61,10 @@ public class DayManager : MonoBehaviour
     public DialogueLibrary dialogueLibrary;
     public DialogueData[] dailyBriefings;
 
+    [Header("Audio")]
+    public AudioSource musicAudio; // <--- drag the music audio source here
+    public AudioClip standardMusic, gameOverMusic;
+
     // === TRACKING STATS === //
     private int correctDecisions = 0;
     private int wrongDecisions = 0;
@@ -411,6 +415,11 @@ public class DayManager : MonoBehaviour
 
     void TriggerGameOver(string reason)
     {
+        musicAudio.Stop();
+        musicAudio.clip = gameOverMusic;
+        musicAudio.loop = true;
+        musicAudio.Play();
+
         Debug.Log("GAME OVER: " + reason);
         if (gameOverPanel != null)
         {

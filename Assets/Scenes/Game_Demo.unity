@@ -811,10 +811,10 @@ MonoBehaviour:
   quotaText: {fileID: 1388866548}
   shutterController: {fileID: 1543535779}
   startShiftButton: {fileID: 1178097423}
-  currentDay: 6
+  currentDay: 1
   dailyQuotas: 030000000500000007000000090000000c0000000e00000010000000
   shiftStarted: 0
-  maxDailyMistakes: 5
+  maxDailyMistakes: 3
   wagePerPerson: 5
   weeklyRentCost: 100
   dailyFoodCost: 10
@@ -836,6 +836,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4df10608488868d47aa0dae213f86f61, type: 2}
   - {fileID: 11400000, guid: 0942b9a11ce154747a6fcd4b48f52c7b, type: 2}
   - {fileID: 11400000, guid: f9952c52364210a44901705e709ab7e3, type: 2}
+  musicAudio: {fileID: 1665239347}
+  standardMusic: {fileID: 8300000, guid: 5d1818f03feaddd4ba92bb39c858fcb5, type: 3}
+  gameOverMusic: {fileID: 8300000, guid: bfbde661345bf3e449a4588e158b7406, type: 3}
 --- !u!4 &66145121
 Transform:
   m_ObjectHideFlags: 0
