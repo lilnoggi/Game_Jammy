@@ -457,16 +457,30 @@ public class DayManager : MonoBehaviour
         {
             case 1:
                 // Day 1: Visual Barcode Check only
-                randomiser.perfectMaskChance = 50f;
+                randomiser.perfectMaskChance = 45f;
                 randomiser.missingBarcodeChance = 50f;
-                
+
+                // Flavor defects (Player ignores these today)
+                randomiser.bloodChance = 2f;
+                randomiser.crackChance = 7f;
+                randomiser.frownChance = 20f;
+                randomiser.smileChance = 10f;
+                randomiser.smudgeChance = 3f;
+                randomiser.forgeryChance = 0f;
+
                 break;
             
             case 2:
                 // Day 2: Add Blood + Unlock Mag Glass
                 randomiser.perfectMaskChance = 40f;
+                randomiser.bloodChance = 30f; // The main threat
                 randomiser.missingBarcodeChance = 30f;
-                randomiser.bloodChance = 30f;
+
+                randomiser.crackChance = 9f;
+                randomiser.frownChance = 21f;
+                randomiser.smileChance = 11f;
+                randomiser.smudgeChance = 7f;
+                randomiser.forgeryChance = 0f;
 
                 if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(true);
 
@@ -475,10 +489,15 @@ public class DayManager : MonoBehaviour
             case 3:
                 // Day 3: Add cracks
                 randomiser.perfectMaskChance = 30f;
-                randomiser.missingBarcodeChance = 20f;
+                randomiser.crackChance = 30f; // The main threat
                 randomiser.bloodChance = 20f;
-                randomiser.crackChance = 30f;
-                
+
+                randomiser.frownChance = 21f;
+                randomiser.smileChance = 11f;
+                randomiser.missingBarcodeChance = 20f;
+                randomiser.smudgeChance = 20f;
+                randomiser.forgeryChance = 0f;
+
                 if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(true);
                 
                 break;
@@ -486,10 +505,14 @@ public class DayManager : MonoBehaviour
             case 4:
                 // Day 4: Unlock Scanner (Invalid Barcoes) 
                 randomiser.perfectMaskChance = 30f;
+                randomiser.forgeryChance = 30f; // The main threat
                 randomiser.missingBarcodeChance = 20f;
-                randomiser.forgeryChance = 30f;
+                randomiser.smudgeChance = 20f;
+
                 randomiser.bloodChance = 15f;
                 randomiser.crackChance = 15f;
+                randomiser.frownChance = 30f;
+                randomiser.smileChance = 20f;
 
                 if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(true);
                 if (scannerPickupButton != null) scannerPickupButton.SetActive(true);
@@ -499,11 +522,14 @@ public class DayManager : MonoBehaviour
             case 5:
                 // Day 5: reject Frowns only, neutral is okay
                 randomiser.perfectMaskChance = 30f;
-                randomiser.frownChance = 20f;
-                randomiser.missingBarcodeChance = 20f;
-                randomiser.forgeryChance = 30f;
+                randomiser.frownChance = 30f; // Increased threat
+
                 randomiser.bloodChance = 15f;
                 randomiser.crackChance = 15f;
+                randomiser.smileChance = 20f;
+                randomiser.missingBarcodeChance = 20f;
+                randomiser.smudgeChance = 20f;
+                randomiser.forgeryChance = 30f;
 
                 if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(true);
                 if (scannerPickupButton != null) scannerPickupButton.SetActive(true);
@@ -512,15 +538,18 @@ public class DayManager : MonoBehaviour
 
             case 6:
                 // Day 6: SMILES ONLY (Reject Neutral + Frown)
-                // reduce perfect chance (Smiles) to make it harder
-                randomiser.perfectMaskChance = 15f; // Only 15% are perfect/smiling
-                randomiser.frownChance = 25f;       // Reject
-                randomiser.forgeryChance = 20f;  // Reject
-                randomiser.bloodChance = 20f;       // Reject
-                                                    // The remaining % will likely be Neutral/Other defects, which are now REJECTS
-                randomiser.smileChance = 30f;
+                randomiser.perfectMaskChance = 20f;
+                randomiser.smileChance = 50f; // High chance of smile, but might have other defects!
 
-               
+                randomiser.frownChance = 20f;
+                randomiser.bloodChance = 20f;
+                randomiser.crackChance = 15f;
+                randomiser.missingBarcodeChance = 10f; // Lower obvious errors
+                randomiser.smudgeChance = 20f;
+                randomiser.forgeryChance = 20f;
+
+
+
                 if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(true);
                 if (scannerPickupButton != null) scannerPickupButton.SetActive(true);
                 
@@ -528,7 +557,9 @@ public class DayManager : MonoBehaviour
 
             default:
                 // Day 7: HELL
-                randomiser.perfectMaskChance = 10f; // Very rare to find a good one
+                randomiser.perfectMaskChance = 10f; // Almost no free passes
+
+                randomiser.smileChance = 30f; // Lower smiles than day 6 = harder to find valid people
                 randomiser.frownChance = 20f;
                 randomiser.forgeryChance = 30f;
                 randomiser.bloodChance = 20f;

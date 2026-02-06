@@ -14,7 +14,7 @@ public static class GameRules
         // ==========================================================
         // Rulebook: "CHECK BARCODE EXISTENCE... If Missing: REJECT"
         // This is the only rule active on Day 1, but it stays active forever.
-        if (!refugee.hasBarcode)
+        if (!refugee.hasBarcode || refugee.isSmudged)
         {
             Debug.Log($"[Day {currentDay}] Rejected: MISSING BARCODE.");
             return false;

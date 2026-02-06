@@ -234,8 +234,21 @@ public class SpriteRandomizerLibrary : MonoBehaviour
         // === Roll for Visuals ===
         _shouldBeBloody = Random.Range(0f, 100f) < bloodChance;
         _shouldBeCracked = Random.Range(0f, 100f) < crackChance;
+        
+        // === EXPRESSION LOGIC ===
+        // Roll for Frown first, if frown, CANNOT smile
         _shouldFrown = Random.Range(0f, 100f) < frownChance;
-        _shouldSmile = Random.Range(0f, 100f) < smileChance;
+
+        if (_shouldFrown)
+        {
+            _shouldSmile = false; // Cannot smile if frowning
+        }
+        else
+        {
+            _shouldSmile = Random.Range(0f, 100f) < smileChance;
+        }
+        // If both are false, face is neutral
+
 
         // --- Roll for Barcode Presence ---
         // (If chance is 5, roll > 5 means 95% success rate)
