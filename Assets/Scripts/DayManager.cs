@@ -434,36 +434,111 @@ public class DayManager : MonoBehaviour
         dayActive = true;
         shiftStarted = false; // <--- WAIT FOR PLAYER TO OPEN SHUTTERS
 
-        // === DIFFICULT BALANCING ===
+        // === DIFFICULT & RULES CONFIG ===
         // This ensures the game stays fair as it gets harder
 
-        if (currentDay == 1)
+        // Default everything to OFF first
+        randomiser.bloodChance = 0f;
+        randomiser.crackChance = 0f;
+        randomiser.frownChance = 0f;
+        randomiser.smileChance = 0f;
+        randomiser.missingBarcodeChance = 0f;
+        randomiser.smudgeChance = 0f;
+        randomiser.forgeryChance = 0f;
+        randomiser.perfectMaskChance = 0f;
+
+        // Default Tools to OFF
+        if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(false);
+        if (scannerPickupButton != null) scannerPickupButton.SetActive(false);
+
+        // Configure based on day
+
+        switch (currentDay)
         {
-            // Tutorial: No defects
-            randomiser.perfectMaskChance = 10f; // Everyone can be let in
-        }
-        else if (currentDay == 2)
-        {
-            // Visuals only
-            randomiser.perfectMaskChance = 0f;
-            randomiser.bloodChance = 30f; // High chance of blood
-            randomiser.crackChance = 10f;
-            randomiser.forgeryChance = 0f;
-        }
-        else if (currentDay ==3)
-        {
-            // CRACKS
-            randomiser.perfectMaskChance = 10f;
-            randomiser.bloodChance = 15f;
-            randomiser.crackChance = 40f;
-            randomiser.forgeryChance = 0f;
-        }
-        else if (currentDay >= 4)
-        {
-            randomiser.perfectMaskChance = 40f;
-            randomiser.bloodChance = 15f;
-            randomiser.crackChance = 15f;
-            randomiser.forgeryChance = 25f;
+            case 1:
+                // Day 1: Visual Barcode Check only
+                randomiser.perfectMaskChance = 50f;
+                randomiser.missingBarcodeChance = 50f;
+                
+                break;
+            
+            case 2:
+                // Day 2: Add Blood + Unlock Mag Glass
+                randomiser.perfectMaskChance = 40f;
+                randomiser.missingBarcodeChance = 30f;
+                randomiser.bloodChance = 30f;
+
+                if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(true);
+
+                break;
+
+            case 3:
+                // Day 3: Add cracks
+                randomiser.perfectMaskChance = 30f;
+                randomiser.missingBarcodeChance = 20f;
+                randomiser.bloodChance = 20f;
+                randomiser.crackChance = 30f;
+                
+                if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(true);
+                
+                break;
+
+            case 4:
+                // Day 4: Unlock Scanner (Invalid Barcoes) 
+                randomiser.perfectMaskChance = 30f;
+                randomiser.missingBarcodeChance = 20f;
+                randomiser.forgeryChance = 30f;
+                randomiser.bloodChance = 15f;
+                randomiser.crackChance = 15f;
+
+                if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(true);
+                if (scannerPickupButton != null) scannerPickupButton.SetActive(true);
+                
+                break;
+
+            case 5:
+                // Day 5: reject Frowns only, neutral is okay
+                randomiser.perfectMaskChance = 30f;
+                randomiser.frownChance = 20f;
+                randomiser.missingBarcodeChance = 20f;
+                randomiser.forgeryChance = 30f;
+                randomiser.bloodChance = 15f;
+                randomiser.crackChance = 15f;
+
+                if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(true);
+                if (scannerPickupButton != null) scannerPickupButton.SetActive(true);
+
+                break;
+
+            case 6:
+                // Day 6: SMILES ONLY (Reject Neutral + Frown)
+                // reduce perfect chance (Smiles) to make it harder
+                randomiser.perfectMaskChance = 15f; // Only 15% are perfect/smiling
+                randomiser.frownChance = 25f;       // Reject
+                randomiser.forgeryChance = 20f;  // Reject
+                randomiser.bloodChance = 20f;       // Reject
+                                                    // The remaining % will likely be Neutral/Other defects, which are now REJECTS
+                randomiser.smileChance = 30f;
+
+               
+                if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(true);
+                if (scannerPickupButton != null) scannerPickupButton.SetActive(true);
+                
+                break;
+
+            default:
+                // Day 7: HELL
+                randomiser.perfectMaskChance = 10f; // Very rare to find a good one
+                randomiser.frownChance = 20f;
+                randomiser.forgeryChance = 30f;
+                randomiser.bloodChance = 20f;
+                randomiser.crackChance = 20f;
+                randomiser.smudgeChance = 20f;
+
+                if (magnifyingGlassButton != null) magnifyingGlassButton.SetActive(true);
+                if (scannerPickupButton != null) scannerPickupButton.SetActive(true);
+                
+                break;
         }
 
         if (shutterController != null) shutterController.CloseShutters();

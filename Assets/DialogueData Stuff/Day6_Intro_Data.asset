@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0b678d054e0484c979bf6ee4d14f73, type: 3}
   m_Name: Day6_Intro_Data
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  c_name:
-  - MANAGEMENT
   c_words:
-  - Final Warning. This is your probationary review. We demand perfection. Allow
-    no defects. Fill the quota, or we will find a Processor who can.
+  - We have eradicated hunger. We have eradicated crime. The City is perfection.
+  - Yet, we see citizens approaching your desk with... blank faces.
+  - Ambivalence is the seed of dissent. A neutral expression hides a treasonous mind.
+  - 'New Protocol: Mandatory Joy.'
+  - Reject the frowns. But you must also reject the Neutral ones.
+  - If they cannot smile for their admission, they do not deserve it.

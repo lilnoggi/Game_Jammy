@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0b678d054e0484c979bf6ee4d14f73, type: 3}
   m_Name: Day3_Intro_Data
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  c_name:
-  - MANAGEMENT
   c_words:
-  - 'New equipment issued: Magnifying Lens. We have found that surface-level checks
-    are insufficient. Cracks in the mask suggest a compromised vessel. Inspect closely.
-    Reject the broken.'
+  - We have reports of structural failures in the outer manufactoring zones.
+  - 'New Protocol: Integrity.'
+  - Inspect masks for Cracks. Use your Magnifying Glass.
+  - A cracked mask is a security breach. Reject them.

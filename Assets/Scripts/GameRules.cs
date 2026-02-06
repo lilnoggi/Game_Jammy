@@ -10,68 +10,88 @@ public static class GameRules
     public static bool CheckIfRefugeeIsValid(Refugee refugee, int currentDay)
     {
         // ==========================================================
-        // DAY 1: THE FEEDING (Tutorial / Easy Mode)
+        // UNIVERSAL RULE (Applies from Day 1 onwards)
         // ==========================================================
-        // Rule: Let everyone in. The billionaires are hungry.
-        if (currentDay == 1)
+        // Rulebook: "CHECK BARCODE EXISTENCE... If Missing: REJECT"
+        // This is the only rule active on Day 1, but it stays active forever.
+        if (!refugee.hasBarcode)
         {
-            return true; // Auto-pass everyone
-        }
-
-        // ==========================================================
-        // ABSOLUTE RULES (Apply from Day 2 onwards)
-        // ==========================================================
-
-        // RULE: NO BLOOD
-        // This is visible to the naked eye, so it applies immediately from Day 2.
-        if (refugee.isBloody)
-        {
-            Debug.Log("Rule Check: Rejected due to BLOOD.");
+            Debug.Log($"[Day {currentDay}] Rejected: MISSING BARCODE.");
             return false;
         }
 
         // ==========================================================
-        // DAY 3+: MAGNIFIER RULES 
+        // DAY 2+: HYGIENE (Blood)
         // ==========================================================
-        // New Rule: No cracks in the mask.
+        // Rulebook: "CHECK HYGIENE... If Bloody: REJECT."
+        if (currentDay >= 2)
+        {
+            if (refugee.isBloody)
+            {
+                Debug.Log($"[Day {currentDay}] Rejected: BLOOD DETECTED.");
+                return false;
+            }
+        }
+
+        // ==========================================================
+        // DAY 3+: INTEGRITY (Cracks)
+        // ==========================================================
+        // Rulebook: "CHECK INTEGRITY... If Cracked: REJECT."
         if (currentDay >= 3)
         {
-            // Check for cracks
             if (refugee.isCracked)
             {
-                Debug.Log("Rule Check: Rejected due to SMUDGED BARCODE.");
+                Debug.Log($"[Day {currentDay}] Rejected: MASK CRACKED.");
                 return false;
             }
         }
 
         // ==========================================================
-        // DAY 4+: SCANNER RULES 
+        // DAY 4+: SCANNER (Invalid Barcodes)
         // ==========================================================
-        // New Rule: No Cracks.
+        // Rulebook: "SCAN EVERY BARCODE... If Invalid: REJECT."
+        // Note: The player must use the tool to see this, but the Logic simply checks the bool.
         if (currentDay >= 4)
         {
-            if (refugee.isSmudged)
+            if (!refugee.isValidBarcode)
             {
-                Debug.Log("Rule Check: Rejected due to SMUDGED BARCODE.");
+                Debug.Log($"[Day {currentDay}] Rejected: INVALID ID / FORGERY.");
                 return false;
             }
 
-            if (!refugee.hasBarcode)
+            // but usually Smudged = Invalid in the code logic.
+            if (refugee.isSmudged)
             {
-                Debug.Log("Rule Check: Rejected due to MISSING BARCODE.");
+                Debug.Log($"[Day {currentDay}] Rejected: SMUDGED BARCODE.");
                 return false;
             }
         }
 
         // ==========================================================
-        // DAY 5+: ADVANCED SCANNER RULES
+        // DAY 5+: MORALE (Frowns)
         // ==========================================================
+        // Rulebook: "If Frowning: REJECT."
         if (currentDay >= 5)
         {
-            // Reject Invalid/Forgery Barcodes (Red Text)
-            if (!refugee.isValidBarcode)
+            if (refugee.isSad)
             {
-                Debug.Log("Rule Check: Rejected due to INVALID ID (FORGERY).");
+                Debug.Log($"[Day {currentDay}] Rejected: FROWNING (Low Morale).");
+                return false;
+            }
+        }
+
+        // ==========================================================
+        // DAY 6+: MANDATORY JOY (Reject Neutrals)
+        // ==========================================================
+        // Rulebook: "ONLY SMILES PERMITTED... Reject Neutral."
+        if (currentDay >= 6)
+        {
+            // Already rejected "isSad" (Frowns) in the block above.
+            // Now check if they are NOT happy. 
+            // If they are not happy (and not sad), they must be Neutral.
+            if (!refugee.isHappy)
+            {
+                Debug.Log($"[Day {currentDay}] Rejected: NEUTRAL EXPRESSION (Mandatory Joy Act).");
                 return false;
             }
         }
@@ -79,7 +99,8 @@ public static class GameRules
         // ==========================================================
         // FINAL VERDICT
         // ==========================================================
-        // If they survived all the checks above, they are VALID.
+        // If they survived all the gauntlets above, they are VALID.
         return true;
+
     }
 }

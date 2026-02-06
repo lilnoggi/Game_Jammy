@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayManager
   randomiser: {fileID: 66145118}
-  workDayDuration: 90
+  workDayDuration: 75
   fadeImage: {fileID: 295935377}
   gameOverPanel: {fileID: 1143655704}
   gameOverReasonText: {fileID: 936032492}
@@ -835,6 +835,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6c05e9fc152866e4781ded49f44b3b7b, type: 2}
   - {fileID: 11400000, guid: 4df10608488868d47aa0dae213f86f61, type: 2}
   - {fileID: 11400000, guid: 0942b9a11ce154747a6fcd4b48f52c7b, type: 2}
+  - {fileID: 11400000, guid: f9952c52364210a44901705e709ab7e3, type: 2}
 --- !u!4 &66145121
 Transform:
   m_ObjectHideFlags: 0
@@ -1598,8 +1599,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 406, y: 84.423}
-  m_SizeDelta: {x: 585.9435, y: 531.3035}
+  m_AnchoredPosition: {x: 400.72546, y: 132.22534}
+  m_SizeDelta: {x: 717.3944, y: 614.8528}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &244556205
 MonoBehaviour:
@@ -1652,8 +1653,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 48.5
+  m_fontSizeBase: 48.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
