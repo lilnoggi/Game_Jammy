@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db0b678d054e0484c979bf6ee4d14f73, type: 3}
-  m_Name: Day5_Intro_Data
+  m_Name: Day7_Intro_Data
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   c_words:
-  - The City is a paradise. Sadness is a sign of ingratitude.
-  - 'New Protocol: Morale.'
-  - Reject any applicant who is Frowning.
-  - Only happy citizens are compliant citizens.
-  - Ensure they smile.
-  - Remember processor...
-  - We are watching.
+  - This is your final assessment.
+  - Rent collection is at 17:00. 100 Credits is due.
+  - If you do not have the funds, your residency will be...
+  - Revoked.
+  - Process quickly. Your life depends on it.

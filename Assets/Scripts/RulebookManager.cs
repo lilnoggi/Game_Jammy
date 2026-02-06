@@ -41,6 +41,7 @@ public class RulebookManager : MonoBehaviour
 
     public void OpenBook()
     {
+        Time.timeScale = 0;
         if (pageTurnSound != null)
         {
             audioSource.PlayOneShot(pageTurnSound);
@@ -59,54 +60,72 @@ public class RulebookManager : MonoBehaviour
             {
                 case 1:
                     // DAY 1: FEEDING TIME
-                    todaysRulesText.text = "SPECIAL ORDER:\n\n" +
-                                           "Total intake required.\n" +
-                                           "IGNORE all defects.\n" +
-                                           "IGNORE all warnings.\n\n" +
-                                           "ACCEPT EVERYONE.";
+                    todaysRulesText.text = "DAY 1 PROTOCOLS:\n\n" +
+                                           "1. CHECK BARCODE EXISTENCE.\n" +
+                                           "   - If Missing: REJECT.\n" +
+                                           "   - If Present: APPROVE.\n" +
+                                           "NOTE: Ignore other defects today.\n +" +
+                                           "Focus on speed.";
                     break;
                 case 2:
-                    // DAY 2: VISUAL CHECKS
-                    todaysRulesText.text = "STANDARD PROTOCOL:\n\n" +
-                                           "Reject applicant if:\n" +
-                                           "- Mask is BLOODY\n\n" +
-                                           "(Visual check only)";
+                    // DAY 2: HYGIENE (Blood) + MAGNIFIER
+                    todaysRulesText.text = "DAY 2 PROTOCOLS:\n\n" +
+                                           "1. CHECK BARCODE.\n" +
+                                           "2. CHECK HYGIENE (Blood).\n" +
+                                           "TOOL UNLOCKED: MAGNIFYING GLASS.\n"+
+                                           "Use it to inspect closely.";
                     break;
                 case 3:
-                    // DAY 3: MAGNIFIER UNLOCK (Blood + Cracks)
-                    todaysRulesText.text = "QUALITY CONTROL:\n\n" +
-                                           "Reject applicant if:\n" +
-                                           "- Mask is BLOODY\n" +
-                                           "- Mask is CRACKED\n\n" +
-                                           "(Use Magnifying Glass)";
+                    // DAY 3: INTEGRITY (Cracks)
+                    todaysRulesText.text = "DAY 3 PROTOCOLS:\n\n" +
+                                           "1. CHECK BARCODE (Must exist).\n" +
+                                           "2. CHECK HYGIENE (Blood).\n" +
+                                           "3. CHECK INTEGRITY (Cracks).\n" +
+                                           "   - If Cracked: REJECT.\n\n" +
+                                           "WARNING: Cracks may be small.\n" +
+                                           "Use your Magnifier.";
                     break;
                 case 4:
-                    // DAY 4: SCANNER UNLOCK (Blood + Cracks + Smudges)
-                    todaysRulesText.text = "SECURITY UPDATE:\n\n" +
-                                           "Reject applicant if:\n" +
-                                           "- Mask is BLOODY\n" +
-                                           "- Mask is CRACKED\n" +
-                                           "- Barcode is SMUDGED\n" +
-                                           "(Use ID Scanner)";
+                    // DAY 4: SCANNER UNLOCK (Invalid Barcodes)
+                    todaysRulesText.text = "DAY 4 PROTOCOLS:\n\n" +
+                                           "SECURITY BREACH DETECTED.\n\n" +
+                                           "1. SCAN EVERY BARCODE.\n" +
+                                           "   - If Scanner says 'INVALID': REJECT.\n" +
+                                           "   - If 'VALID': Continue.\n" +
+                                           "2. CHECK BLOOD & CRACKS.\n\n" +
+                                           "TOOL UNLOCKED: ID SCANNER.";
                     break;
                 case 5:
-                     // DAY 5: INVALID BARCODE (Blood + Cracks + Smudges + Invalid)
-                     todaysRulesText.text = "ENHANCED SECURITY:\n\n" +
-                                           "Reject applicant if:\n" +
-                                           "- Mask is BLOODY\n" +
-                                           "- Mask is CRACKED\n" +
-                                           "- Barcode is SMUDGED\n" +
-                                           "- ID is INVALID\n" +
-                                           "(Zero Tolerance Policy)";
+                    // DAY 5: MORALE (Frowns)
+                    todaysRulesText.text = "DAY 5 PROTOCOLS:\n\n" +
+                                           "CITIZEN MORALE INITIATIVE.\n\n" +
+                                           "1. CHECK FACIAL EXPRESSION.\n" +
+                                           "   - If Frowning: REJECT.\n" +
+                                           "2. SCAN BARCODES.\n" +
+                                           "3. CHECK BLOOD & CRACKS.\n\n" +
+                                           "Only happy citizens may enter.";
+                    break;
+                case 6:
+                    // DAY 6: PROPAGANDA (Rejects Neutral)
+                    todaysRulesText.text = "DAY 6: MANDATORY JOY ACT\n\n" +
+                                           "Neutrality is complicity.\n\n" +
+                                           "REJECT APPLICANT IF:\n" +
+                                           "- Face is FROWNING.\n" +
+                                           "- Face is NEUTRAL.\n\n" +
+                                           "ONLY SMILES PERMITTED.\n" +
+                                           "A blank face is a blank mind.\n" +
+                                           "(Also Check: Blood, Cracks, Scan ID)";
                     break;
                 default:
-                    // DAY 5+: HARD MODE (All Rules Active)
-                    todaysRulesText.text = "MAXIMUM SECURITY:\n\n" +
-                                           "Reject for ANY defect:\n" +
-                                           "- BLOOD\n" +
-                                           "- CRACKS\n" +
-                                           "- SMUDGED BARCODE\n" +
-                                           "(Zero Tolerance Policy)";
+                    // DAY 7: EVERYTHING
+                    todaysRulesText.text = "DAY 7: FINAL JUDGEMENT\n\n" +
+                                           "RENT IS DUE: 5:00 PM ($100).\n\n" +
+                                           "REJECT FOR ANY DEFECT:\n" +
+                                           "- Invalid Barcode.\n" +
+                                           "- Blood or Cracks.\n" +
+                                           "- Frown OR Neutral Face.\n\n" +
+                                           "ZERO TOLERANCE.\n" +
+                                           "Survival is mandatory.";
                     break;
             }
         }
@@ -156,6 +175,7 @@ public class RulebookManager : MonoBehaviour
 
     public void CloseBook()
     {
+        Time.timeScale = 1;
         if (pageTurnSound != null)
         {
             audioSource.PlayOneShot(pageTurnSound);

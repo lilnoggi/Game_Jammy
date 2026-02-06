@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0b678d054e0484c979bf6ee4d14f73, type: 3}
   m_Name: Day4_Intro_Data
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  c_name:
-  - MANAGEMENT
   c_words:
-  - 'New equipment issued: ID Scanner. Applicants are attempting to bypass protocol
-    with damaged tags. Use the scanner. If the barcode is smudged or missing, the
-    data is invalid. Trust only the machine.'
+  - Attention. Counterfeiters have breached the perimeter.
+  - Visual checks are no longer sufficient.
+  - We have activated your Barcode Scanner. Pick it up.
+  - Scan every Barcode. If the machine reads INVALID, rejcet them immediately.

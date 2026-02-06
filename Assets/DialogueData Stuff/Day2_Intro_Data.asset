@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0b678d054e0484c979bf6ee4d14f73, type: 3}
   m_Name: Day2_Intro_Data
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  c_name:
-  - MANAGEMENT
   c_words:
-  - Attention. We have reports of contamination in the outer zones. Visual inspection
-    is now mandatory. If an applicant is bleeding, they are unfit for entry. Reject
-    them immediately.
+  - Good morning Unit 774.
+  - Day 1 performance was...
+  - Adequate.
+  - 'New Protocol: Hygiene.'
+  - The city must remain sterile.
+  - Reject any applicants with blood on their masks.
+  - We have issued a Magnifying Glass. Pick it up to inspect closer. Do not let the
+    infected in.
