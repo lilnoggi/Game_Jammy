@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayManager
   randomiser: {fileID: 66145118}
-  workDayDuration: 75
+  workDayDuration: 120
   fadeImage: {fileID: 295935377}
   gameOverPanel: {fileID: 1143655704}
   gameOverReasonText: {fileID: 936032492}
@@ -811,7 +811,7 @@ MonoBehaviour:
   quotaText: {fileID: 1388866548}
   shutterController: {fileID: 1543535779}
   startShiftButton: {fileID: 1178097423}
-  currentDay: 1
+  currentDay: 6
   dailyQuotas: 030000000500000007000000090000000c0000000e00000010000000
   shiftStarted: 0
   maxDailyMistakes: 5

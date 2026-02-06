@@ -41,6 +41,7 @@ public class RulebookManager : MonoBehaviour
 
     public void OpenBook()
     {
+        Time.timeScale = 0;
         if (pageTurnSound != null)
         {
             audioSource.PlayOneShot(pageTurnSound);
@@ -174,6 +175,7 @@ public class RulebookManager : MonoBehaviour
 
     public void CloseBook()
     {
+        Time.timeScale = 1;
         if (pageTurnSound != null)
         {
             audioSource.PlayOneShot(pageTurnSound);
